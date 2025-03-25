@@ -36,5 +36,6 @@ namespace ClockV2.Presenter
             // Update the View with the new time
             view.Invoke(new Action(() => view.UpdateClock(currentTime)));
         }
+
     }
 }
