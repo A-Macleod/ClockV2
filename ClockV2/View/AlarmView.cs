@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ClockV2
 {
-    public partial class Form2: Form
+    public partial class AlarmView: Form
     {
-        public Form2()
+        public AlarmView()
         {
             InitializeComponent();
         }

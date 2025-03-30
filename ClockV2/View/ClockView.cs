@@ -51,7 +51,7 @@ namespace ClockV2
 
         private void ButtonOpenForm2_Click(object sender, EventArgs e)
         {
-            Form2 form2 = new Form2();
+            AlarmView form2 = new AlarmView();
             form2.Show();
         }
     }
