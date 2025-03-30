@@ -48,5 +48,11 @@ namespace ClockV2
             var g = e.Graphics;
             drawingHelper.DrawClock(g, currentTime, Panel_Clock.Width, Panel_Clock.Height);
         }
+
+        private void ButtonOpenForm2_Click(object sender, EventArgs e)
+        {
+            Form2 form2 = new Form2();
+            form2.Show();
+        }
     }
 }
