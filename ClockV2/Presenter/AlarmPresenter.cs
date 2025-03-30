@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace ClockV2
 {
-    class AlarmPresenter
+    public class AlarmPresenter
     {
+        // Businesss Logic. Priority Queue. 
     }
 }
