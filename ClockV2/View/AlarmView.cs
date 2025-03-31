@@ -28,13 +28,29 @@ namespace ClockV2
             this.presenter = presenter;
         }
 
-        public void Add()
-        {
 
+        private void Button_Add_Click(object sender, EventArgs e)
+        {
+            string alarmName = textBox_AlarmName.Text.ToString();
+            string priorityHour = numericUpDown_Hours.Value.ToString();      // convert numericUpDown to string from decimal
+            string priorityMinute = numericUpDown_Minutes.Value.ToString();  // convert numericUpDown to string from decimal
+
+            presenter.AddAlarm(alarmName, priorityHour, priorityMinute);     
+        }
+
+
+        public void ShowError(string message)
+        {
+            MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);  // Popup to display Error
         }
 
 
 
 
+
+        private void Button_Remove_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
