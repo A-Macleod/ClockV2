@@ -16,11 +16,9 @@ namespace ClockV2
         //PriorityQueue<Alarm> alarms;
         //alarms = new SortedArrayPriorityQueue<Alarm>(8);
         //public SortedArrayPriorityQueue<Alarm> _alarms ;
-        //private SortedArrayPriorityQueue<Alarm> _alarms = new SortedArrayPriorityQueue<Alarm>(8);
+        private SortedArrayPriorityQueue<Alarm> _alarms = new SortedArrayPriorityQueue<Alarm>(8);
 
-        private PriorityQueue<Alarm> alarms;
-
-
+        //private PriorityQueue<Alarm> alarms;
 
 
         /// <summary>
@@ -28,13 +26,25 @@ namespace ClockV2
         /// </summary>
         public AlarmModel()
         {
-            alarms = new SortedArrayPriorityQueue<Alarm>(8);
+            //_alarms = new SortedArrayPriorityQueue<Alarm>(8);
         
         }
 
 
-        public void Add()
+        public void AddAlarm(string alarmName, string priorityHours, string priorityMinutes)
         {
+
+            int hoursToSeconds = int.Parse(priorityHours);
+            hoursToSeconds = hoursToSeconds * 3600;             // converting to seconds
+
+            int minutesToSeconds = int.Parse(priorityMinutes);
+            minutesToSeconds = minutesToSeconds * 60;           // converting to seconds
+
+            int seconds = hoursToSeconds + minutesToSeconds;
+
+            Alarm newAlarm = new Alarm(alarmName, seconds);
+
+            _alarms.Add(newAlarm, seconds);
             
         }
 
