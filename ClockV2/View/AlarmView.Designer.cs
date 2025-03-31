@@ -52,7 +52,7 @@
             this.button_Add.TabIndex = 0;
             this.button_Add.Text = "button_Add";
             this.button_Add.UseVisualStyleBackColor = true;
-            this.button_Add.Click += new System.EventHandler(this.button_Add_Click);
+            this.button_Add.Click += new System.EventHandler(this.Button_Add_Click);
             // 
             // button_Remove
             // 
@@ -62,7 +62,7 @@
             this.button_Remove.TabIndex = 1;
             this.button_Remove.Text = "button_Remove";
             this.button_Remove.UseVisualStyleBackColor = true;
-            this.button_Remove.Click += new System.EventHandler(this.button_Remove_Click);
+            this.button_Remove.Click += new System.EventHandler(this.Button_Remove_Click);
             // 
             // button3
             // 
