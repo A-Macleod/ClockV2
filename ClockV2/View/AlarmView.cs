@@ -14,18 +14,19 @@ namespace ClockV2
     public partial class AlarmView : Form, IView
     {
 
-        private AlarmPresenter presenter;
+        private AlarmPresenter _presenter;
 
 
         public AlarmView()
         {
             InitializeComponent();
+               
         }
 
 
-        public void SetPresenter(AlarmPresenter presenter)
+        public void SetPresenter(AlarmPresenter _presenter)
         {
-            this.presenter = presenter;
+            this._presenter = _presenter;
         }
 
 
@@ -35,8 +36,14 @@ namespace ClockV2
             string priorityHour = numericUpDown_Hours.Value.ToString();      // convert numericUpDown to string from decimal
             string priorityMinute = numericUpDown_Minutes.Value.ToString();  // convert numericUpDown to string from decimal
 
-            presenter.AddAlarm(alarmName, priorityHour, priorityMinute);     
+            _presenter.AddAlarm(alarmName,priorityHour,priorityMinute);     
         }
+
+
+        //public void ShowAlarms(string toString)
+        //{
+        //    label_Output.Text = toString;
+        //}
 
 
         public void ShowError(string message)
