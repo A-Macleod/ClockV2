@@ -28,39 +28,41 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.button_Add = new System.Windows.Forms.Button();
+            this.button_Remove = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox_AlarmName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_Hours = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_Minutes = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
             this.button4 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            this.label_Output = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Hours)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Minutes)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // button_Add
             // 
-            this.button1.Location = new System.Drawing.Point(12, 128);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(80, 25);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button_Add.Location = new System.Drawing.Point(12, 128);
+            this.button_Add.Name = "button_Add";
+            this.button_Add.Size = new System.Drawing.Size(80, 25);
+            this.button_Add.TabIndex = 0;
+            this.button_Add.Text = "button_Add";
+            this.button_Add.UseVisualStyleBackColor = true;
+            this.button_Add.Click += new System.EventHandler(this.button_Add_Click);
             // 
-            // button2
+            // button_Remove
             // 
-            this.button2.Location = new System.Drawing.Point(98, 128);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(80, 25);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button_Remove.Location = new System.Drawing.Point(98, 128);
+            this.button_Remove.Name = "button_Remove";
+            this.button_Remove.Size = new System.Drawing.Size(80, 25);
+            this.button_Remove.TabIndex = 1;
+            this.button_Remove.Text = "button_Remove";
+            this.button_Remove.UseVisualStyleBackColor = true;
+            this.button_Remove.Click += new System.EventHandler(this.button_Remove_Click);
             // 
             // button3
             // 
@@ -71,12 +73,12 @@
             this.button3.Text = "button3";
             this.button3.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // textBox_AlarmName
             // 
-            this.textBox1.Location = new System.Drawing.Point(28, 71);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(156, 20);
-            this.textBox1.TabIndex = 3;
+            this.textBox_AlarmName.Location = new System.Drawing.Point(28, 71);
+            this.textBox_AlarmName.Name = "textBox_AlarmName";
+            this.textBox_AlarmName.Size = new System.Drawing.Size(156, 20);
+            this.textBox_AlarmName.TabIndex = 3;
             // 
             // label1
             // 
@@ -96,19 +98,19 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "Alarm Time";
             // 
-            // numericUpDown1
+            // numericUpDown_Hours
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(222, 72);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(50, 20);
-            this.numericUpDown1.TabIndex = 6;
+            this.numericUpDown_Hours.Location = new System.Drawing.Point(222, 72);
+            this.numericUpDown_Hours.Name = "numericUpDown_Hours";
+            this.numericUpDown_Hours.Size = new System.Drawing.Size(50, 20);
+            this.numericUpDown_Hours.TabIndex = 6;
             // 
-            // numericUpDown2
+            // numericUpDown_Minutes
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(285, 72);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(50, 20);
-            this.numericUpDown2.TabIndex = 7;
+            this.numericUpDown_Minutes.Location = new System.Drawing.Point(285, 72);
+            this.numericUpDown_Minutes.Name = "numericUpDown_Minutes";
+            this.numericUpDown_Minutes.Size = new System.Drawing.Size(50, 20);
+            this.numericUpDown_Minutes.TabIndex = 7;
             // 
             // label3
             // 
@@ -128,14 +130,6 @@
             this.label4.TabIndex = 9;
             this.label4.Text = "M:";
             // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(12, 191);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(346, 108);
-            this.listBox1.TabIndex = 10;
-            // 
             // button4
             // 
             this.button4.Location = new System.Drawing.Point(278, 128);
@@ -145,27 +139,36 @@
             this.button4.Text = "button4";
             this.button4.UseVisualStyleBackColor = true;
             // 
+            // label_Output
+            // 
+            this.label_Output.Location = new System.Drawing.Point(12, 182);
+            this.label_Output.Name = "label_Output";
+            this.label_Output.Size = new System.Drawing.Size(346, 110);
+            this.label_Output.TabIndex = 12;
+            this.label_Output.Text = "label_Output";
+            this.label_Output.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // AlarmView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(370, 311);
+            this.Controls.Add(this.label_Output);
             this.Controls.Add(this.button4);
-            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.numericUpDown2);
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.numericUpDown_Minutes);
+            this.Controls.Add(this.numericUpDown_Hours);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBox_AlarmName);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.button_Remove);
+            this.Controls.Add(this.button_Add);
             this.Name = "AlarmView";
             this.Text = "AlarmView";
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Hours)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Minutes)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -173,17 +176,17 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button_Add;
+        private System.Windows.Forms.Button button_Remove;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox_AlarmName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.NumericUpDown numericUpDown_Hours;
+        private System.Windows.Forms.NumericUpDown numericUpDown_Minutes;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Label label_Output;
     }
 }
