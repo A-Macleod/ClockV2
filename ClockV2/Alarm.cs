@@ -11,7 +11,7 @@ namespace ClockV2
     /// </summary>
     public class Alarm
     {
-        public string AlarmName { get; set; }
+        public string Name { get; set; }
         public int Time { get; set; }
 
 
@@ -22,7 +22,7 @@ namespace ClockV2
         /// <param name="time">The time of the alarm in seconds</param>
         public Alarm(string alarmName, int time)
         {
-            AlarmName = alarmName;
+           Name = alarmName;
             Time = time;
         }
 
@@ -31,9 +31,9 @@ namespace ClockV2
         /// Method to return the name of the alarm
         /// </summary>
         /// <returns></returns>
-        public string getAlarmName()
+        public string GetAlarmName()
         {
-            return AlarmName;
+            return Name;
         }
 
 
@@ -41,7 +41,7 @@ namespace ClockV2
         /// Method to return the time of the alarm
         /// </summary>
         /// <returns></returns>
-        public int getAlarmTime()
+        public int GetAlarmTime()
         {
             return Time;
         }
