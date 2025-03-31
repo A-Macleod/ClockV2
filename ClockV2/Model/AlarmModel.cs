@@ -8,5 +8,6 @@ namespace ClockV2
 {
     public class AlarmModel
     {
+        // Businesss Logic.
     }
 }
