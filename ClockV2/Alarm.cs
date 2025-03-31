@@ -12,15 +12,15 @@ namespace ClockV2
     public class Alarm
     {
         public string AlarmName { get; set; }
-        public DateTime Time { get; set; }
+        public int Time { get; set; }
 
 
         /// <summary>
-        /// Constructor to instantiate an Alarm object with a name and time
+        /// Constructor to instantiate an Alarm object with a name and time in seconds
         /// </summary>
         /// <param name="alarmName">The name of the alarm</param>
-        /// <param name="time">The time of the alarm</param>
-        public Alarm(string alarmName, DateTime time)
+        /// <param name="time">The time of the alarm in seconds</param>
+        public Alarm(string alarmName, int time)
         {
             AlarmName = alarmName;
             Time = time;
@@ -41,7 +41,7 @@ namespace ClockV2
         /// Method to return the time of the alarm
         /// </summary>
         /// <returns></returns>
-        public DateTime getAlarmTime()
+        public int getAlarmTime()
         {
             return Time;
         }
