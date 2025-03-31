@@ -51,8 +51,15 @@ namespace ClockV2
 
         private void ButtonOpenForm2_Click(object sender, EventArgs e)
         {
-            AlarmView form2 = new AlarmView();
-            form2.Show();
+
+
+
+            //AlarmView form2 = new AlarmView(); // Might be Presenter instead of AlarmView. The Presenter should call the View.
+                //AlarmView form2 = new AlarmView();
+            var alarmView = new AlarmView();
+            var alarmModel = new AlarmModel();
+            var AlarmPresenter = new AlarmPresenter(alarmView, alarmModel);
+            alarmView.Show();
         }
     }
 }
