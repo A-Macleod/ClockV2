@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Alarm.cs" />
+    <Compile Include="Interfaces\IView.cs" />
     <Compile Include="Model\AlarmModel.cs" />
     <Compile Include="Presenter\AlarmPresenter.cs" />
     <Compile Include="View\AlarmView.cs">

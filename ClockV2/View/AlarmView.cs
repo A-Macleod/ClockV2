@@ -1,4 +1,4 @@
-﻿using ClockV2.Interface;
+﻿
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,7 +20,7 @@ namespace ClockV2
         public AlarmView()
         {
             InitializeComponent();
-               
+
         }
 
 
@@ -36,23 +36,20 @@ namespace ClockV2
             string priorityHour = numericUpDown_Hours.Value.ToString();      // convert numericUpDown to string from decimal
             string priorityMinute = numericUpDown_Minutes.Value.ToString();  // convert numericUpDown to string from decimal
 
-            _presenter.AddAlarm(alarmName,priorityHour,priorityMinute);     
+            _presenter.AddAlarm(alarmName, priorityHour, priorityMinute);
         }
 
 
-        //public void ShowAlarms(string toString)
-        //{
-        //    label_Output.Text = toString;
-        //}
+        public void ShowAlarms(string alarms)
+        {
+            label_Output.Text = alarms;
+        }
 
 
         public void ShowError(string message)
         {
             MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);  // Popup to display Error
         }
-
-
-
 
 
         private void Button_Remove_Click(object sender, EventArgs e)

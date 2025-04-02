@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,7 +28,7 @@ namespace ClockV2
         public AlarmModel()
         {
             //_alarms = new SortedArrayPriorityQueue<Alarm>(8);
-        
+
         }
 
 
@@ -41,14 +42,19 @@ namespace ClockV2
             minutesToSeconds = minutesToSeconds * 60;           // converting to seconds
 
             int seconds = hoursToSeconds + minutesToSeconds;
-
             Alarm newAlarm = new Alarm(alarmName, seconds);
 
             _alarms.Add(newAlarm, seconds);
-            
+
         }
 
 
-            
+        public string ShowAlarms()
+        {
+            return _alarms.ToString();
+        }
+
+
+
     }
 }

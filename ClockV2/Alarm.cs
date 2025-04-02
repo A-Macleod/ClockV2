@@ -22,7 +22,7 @@ namespace ClockV2
         /// <param name="time">The time of the alarm in seconds</param>
         public Alarm(string alarmName, int time)
         {
-           Name = alarmName;
+            Name = alarmName;
             Time = time;
         }
 
@@ -44,6 +44,16 @@ namespace ClockV2
         public int GetAlarmTime()
         {
             return Time;
+        }
+
+
+        /// <summary>
+        /// Method to return the name of the alarm, overriding the PriorityQueue ToString Method
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return $"{Name}";
         }
     }
 }

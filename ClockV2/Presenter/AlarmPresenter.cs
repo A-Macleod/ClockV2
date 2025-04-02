@@ -1,4 +1,4 @@
-﻿using ClockV2.Interface;
+﻿
 using ClockV2.Model;
 using System;
 using System.Collections.Generic;
@@ -13,19 +13,19 @@ namespace ClockV2
     public class AlarmPresenter
     {
         private readonly AlarmView _view;
-        private readonly AlarmModel _model; 
+        private readonly AlarmModel _model;
 
         public AlarmPresenter(AlarmView _view, AlarmModel _model)
         {
             this._view = _view;
             this._model = _model;
-            
+
             // Link the View to this Presenter
             _view.SetPresenter(this);
         }
 
 
-        public void AddAlarm(string alarmName,string priorityHour,string priorityMinute)
+        public void AddAlarm(string alarmName, string priorityHour, string priorityMinute)
         {
 
             try
@@ -35,31 +35,39 @@ namespace ClockV2
                 {
 
                     _view.ShowError("Not Valid");
+
                 }
 
 
-                if (!int.TryParse(priorityHour, out _)){    // discard the output
+                if (!int.TryParse(priorityHour, out _))
+                {    // discard the output
 
                     _view.ShowError("Not a number");
+
                 }
 
 
-                if(!int.TryParse(priorityMinute, out _))    // discard the output
+                if (!int.TryParse(priorityMinute, out _))    // discard the output
                 {
                     _view.ShowError("Not a number");
                 }
 
-                _model.AddAlarm(alarmName,priorityHour,priorityMinute);
+                _model.AddAlarm(alarmName, priorityHour, priorityMinute);
+                ShowAlarms();
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _view.ShowError(ex.Message); // Call the ShowError Popup function in the UI View
             }
 
         }
 
-
+        public void ShowAlarms()
+        {
+            string alarms = _model.ShowAlarms();
+            _view.ShowAlarms(alarms);
+        }
 
     }
 }
