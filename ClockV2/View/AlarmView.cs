@@ -49,12 +49,21 @@ namespace ClockV2
         public void ShowError(string message)
         {
             MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);  // Popup to display Error
+            ClearAlarmNameAndHoursSecondsInputs();
         }
 
 
         private void Button_Remove_Click(object sender, EventArgs e)
         {
 
+        }
+
+
+        private void ClearAlarmNameAndHoursSecondsInputs()
+        {
+            textBox_AlarmName.Text = null;
+            numericUpDown_Hours.Text = null;
+            numericUpDown_Minutes.Text = null;
         }
     }
 }
