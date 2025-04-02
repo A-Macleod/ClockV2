@@ -1,10 +1,13 @@
 ﻿
 using ClockV2.Model;
+using PriorityQueue;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Xml.Linq;
 
 namespace ClockV2
@@ -32,7 +35,6 @@ namespace ClockV2
 
             try
             {
-
                 if (string.IsNullOrWhiteSpace(alarmName))
                 {
 
@@ -71,7 +73,6 @@ namespace ClockV2
             {
                 _view.ShowError(ex.Message);
             }
-
         }
 
         public void ShowAlarms()

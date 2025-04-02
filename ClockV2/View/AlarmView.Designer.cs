@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.button_Add = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.button_Remove = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.textBox_AlarmName = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.numericUpDown_Hours = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown_Minutes = new System.Windows.Forms.NumericUpDown();
@@ -53,6 +53,15 @@
             this.button_Add.Text = "button_Add";
             this.button_Add.UseVisualStyleBackColor = true;
             this.button_Add.Click += new System.EventHandler(this.Button_Add_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(65, 23);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(64, 13);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Alarm Name";
             // 
             // button_Remove
             // 
@@ -79,15 +88,6 @@
             this.textBox_AlarmName.Name = "textBox_AlarmName";
             this.textBox_AlarmName.Size = new System.Drawing.Size(156, 20);
             this.textBox_AlarmName.TabIndex = 3;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(65, 23);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(64, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Alarm Name";
             // 
             // label2
             // 
@@ -177,10 +177,10 @@
         #endregion
 
         private System.Windows.Forms.Button button_Add;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button_Remove;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TextBox textBox_AlarmName;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown numericUpDown_Hours;
         private System.Windows.Forms.NumericUpDown numericUpDown_Minutes;

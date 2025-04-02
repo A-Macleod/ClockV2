@@ -1,4 +1,5 @@
 ﻿
+using PriorityQueue;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 
 namespace ClockV2
 {
@@ -34,21 +36,22 @@ namespace ClockV2
         {
             string alarmName = textBox_AlarmName.Text.ToString();
             string priorityHour = numericUpDown_Hours.Value.ToString();      // convert numericUpDown to string from decimal
-            string priorityMinute = numericUpDown_Minutes.Value.ToString();  // convert numericUpDown to string from decimal
+            string priorityMinute = numericUpDown_Minutes.Value.ToString();  
 
             _presenter.AddAlarm(alarmName, priorityHour, priorityMinute);
+            ClearAlarmNameAndHoursSecondsInputs();
         }
 
 
         public void ShowAlarms(string alarms)
         {
-            label_Output.Text = alarms;
+            label_Output.Text = alarms;  
         }
 
 
         public void ShowError(string message)
         {
-            MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);  // Popup to display Error
+            MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             ClearAlarmNameAndHoursSecondsInputs();
         }
 
@@ -62,8 +65,9 @@ namespace ClockV2
         private void ClearAlarmNameAndHoursSecondsInputs()
         {
             textBox_AlarmName.Text = null;
-            numericUpDown_Hours.Text = null;
-            numericUpDown_Minutes.Text = null;
+            numericUpDown_Hours.Text = "0";
+            numericUpDown_Minutes.Text = "0";
         }
+
     }
 }
