@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.Panel_Clock = new System.Windows.Forms.Panel();
+            this.ButtonOpenForm2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Panel_Clock
@@ -39,11 +40,22 @@
             this.Panel_Clock.TabIndex = 1;
             this.Panel_Clock.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel_Clock_Paint);
             // 
+            // ButtonOpenForm2
+            // 
+            this.ButtonOpenForm2.Location = new System.Drawing.Point(293, 242);
+            this.ButtonOpenForm2.Name = "ButtonOpenForm2";
+            this.ButtonOpenForm2.Size = new System.Drawing.Size(65, 57);
+            this.ButtonOpenForm2.TabIndex = 2;
+            this.ButtonOpenForm2.Text = "Alarm+";
+            this.ButtonOpenForm2.UseVisualStyleBackColor = true;
+            this.ButtonOpenForm2.Click += new System.EventHandler(this.ButtonOpenForm2_Click);
+            // 
             // ClockView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(334, 311);
+            this.ClientSize = new System.Drawing.Size(370, 311);
+            this.Controls.Add(this.ButtonOpenForm2);
             this.Controls.Add(this.Panel_Clock);
             this.Name = "ClockView";
             this.Text = "Form1";
@@ -54,6 +66,7 @@
         #endregion
 
         private System.Windows.Forms.Panel Panel_Clock;
+        private System.Windows.Forms.Button ButtonOpenForm2;
     }
 }
 
