@@ -51,15 +51,20 @@ namespace ClockV2
 
         private void ButtonOpenForm2_Click(object sender, EventArgs e)
         {
+            
+            ButtonOpenForm2.Visible = false;    // hide the Button to prevent other forms being created
 
-
-
-            //AlarmView form2 = new AlarmView(); // Might be Presenter instead of AlarmView. The Presenter should call the View.
-                //AlarmView form2 = new AlarmView();
             var alarmView = new AlarmView();
             var alarmModel = new AlarmModel();
-            var AlarmPresenter = new AlarmPresenter(alarmView, alarmModel);
+            var alarmPresenter = new AlarmPresenter(alarmView, alarmModel);
             alarmView.Show();
+ 
+            alarmView.FormClosed += (s, args) =>    // show the button again when the alarmView has been hidden
+            {
+                ButtonOpenForm2.Visible = true;
+            };
+
+
         }
     }
 }
