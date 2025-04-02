@@ -38,5 +38,13 @@ namespace ClockV2
             return _alarms.ToString();
         }
 
+
+        //public DateTime ifequal()
+        //{
+        //    if (DateTime.Now == DateTime.)
+        //    {
+
+        //    }
+        //}
     }
 }

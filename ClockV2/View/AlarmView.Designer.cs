@@ -40,8 +40,11 @@
             this.label4 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.label_Output = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Hours)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Minutes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // button_Add
@@ -100,14 +103,14 @@
             // 
             // numericUpDown_Hours
             // 
-            this.numericUpDown_Hours.Location = new System.Drawing.Point(222, 72);
+            this.numericUpDown_Hours.Location = new System.Drawing.Point(190, 71);
             this.numericUpDown_Hours.Name = "numericUpDown_Hours";
             this.numericUpDown_Hours.Size = new System.Drawing.Size(50, 20);
             this.numericUpDown_Hours.TabIndex = 6;
             // 
             // numericUpDown_Minutes
             // 
-            this.numericUpDown_Minutes.Location = new System.Drawing.Point(285, 72);
+            this.numericUpDown_Minutes.Location = new System.Drawing.Point(246, 72);
             this.numericUpDown_Minutes.Name = "numericUpDown_Minutes";
             this.numericUpDown_Minutes.Size = new System.Drawing.Size(50, 20);
             this.numericUpDown_Minutes.TabIndex = 7;
@@ -115,7 +118,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(219, 56);
+            this.label3.Location = new System.Drawing.Point(187, 55);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(18, 13);
             this.label3.TabIndex = 8;
@@ -124,7 +127,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(284, 56);
+            this.label4.Location = new System.Drawing.Point(244, 56);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(19, 13);
             this.label4.TabIndex = 9;
@@ -148,11 +151,29 @@
             this.label_Output.Text = "label_Output";
             this.label_Output.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(302, 72);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(50, 20);
+            this.numericUpDown1.TabIndex = 13;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(299, 55);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(17, 13);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "S:";
+            // 
             // AlarmView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(370, 311);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.label_Output);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.label4);
@@ -169,6 +190,7 @@
             this.Text = "AlarmView";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Hours)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Minutes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -188,5 +210,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label_Output;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Label label5;
     }
 }

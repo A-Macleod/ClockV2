@@ -69,5 +69,9 @@ namespace ClockV2
             numericUpDown_Minutes.Text = "0";
         }
 
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
