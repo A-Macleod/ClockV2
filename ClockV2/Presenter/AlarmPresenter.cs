@@ -27,6 +27,8 @@ namespace ClockV2
 
         public void AddAlarm(string alarmName, string priorityHour, string priorityMinute)
         {
+            int hours = 0;
+            int minutes = 0;
 
             try
             {
@@ -34,22 +36,31 @@ namespace ClockV2
                 if (string.IsNullOrWhiteSpace(alarmName))
                 {
 
-                    _view.ShowError("Not Valid");
+                    _view.ShowError("Name not Valid");
+                    return;
+                }
+
+
+                if (!int.TryParse(priorityHour, out hours))
+                { 
+
+                    _view.ShowError("Number not Valid");
+                    return;
 
                 }
 
 
-                if (!int.TryParse(priorityHour, out _))
-                {    // discard the output
-
-                    _view.ShowError("Not a number");
-
-                }
-
-
-                if (!int.TryParse(priorityMinute, out _))    // discard the output
+                if (!int.TryParse(priorityMinute, out minutes))
                 {
-                    _view.ShowError("Not a number");
+                    _view.ShowError("Number not Valid");
+                    return;
+                }
+
+
+                if (hours == 0 && minutes == 0 )
+                {
+                    _view.ShowError("Time not Valid");
+                    return;
                 }
 
                 _model.AddAlarm(alarmName, priorityHour, priorityMinute);
@@ -58,7 +69,7 @@ namespace ClockV2
             }
             catch (Exception ex)
             {
-                _view.ShowError(ex.Message); // Call the ShowError Popup function in the UI View
+                _view.ShowError(ex.Message);
             }
 
         }
