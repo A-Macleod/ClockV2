@@ -27,16 +27,15 @@ namespace ClockV2
             //TimeSpan timeToAdd = new TimeSpan(hours, minutes, seconds);         // The amount of time to add to current time
             //TimeSpan alarmTime = currentTime.Add(timeToAdd);                    // add the currentTime to the timeToAdd
 
+            //newAlarm.StartCountdown();
+            //AlarmTimer(AlarmTimeInSeconds);
+
 
 
             Alarm newAlarm = new Alarm(alarmName, AlarmTimeInSeconds);
             _alarms.Add(newAlarm, AlarmTimeInSeconds);
 
-            newAlarm.StartCountdown();
 
-            //newAlarm.startCountdown();
-            
-            //AlarmTimer(AlarmTimeInSeconds);
 
         }
 
@@ -45,6 +44,24 @@ namespace ClockV2
         {
             return _alarms.ToString();
         }
+
+
+        public void StartAlarm()
+        {
+            _alarms.Head().StartCountdown();
+            //_alarms.Head().AlarmTimer_Tick();
+        }
+
+
+        public void RemoveAlarm()
+        {
+            _alarms.Head().StopCountdown();
+            _alarms.Remove();               // Remove the Head of the Queue    
+        }
+
+
+
+
 
 
 

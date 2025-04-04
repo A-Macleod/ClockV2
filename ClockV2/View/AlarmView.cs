@@ -51,10 +51,25 @@ namespace ClockV2
         }
 
 
+        private void Button_Remove_Click(object sender, EventArgs e)
+        {
+            _presenter.RemoveAlarm();
+        }
+
+
+
+        private void button_Start_Click(object sender, EventArgs e)
+        {
+            _presenter.StartAlarm();
+        }
+
+
+
         public void ShowAlarms(string alarms)
         {
             label_Output.Text = alarms;  
         }
+
 
 
         public void ShowError(string message)
@@ -64,11 +79,6 @@ namespace ClockV2
         }
 
 
-        private void Button_Remove_Click(object sender, EventArgs e)
-        {
-
-        }
-
 
         private void ClearAlarmNameAndHoursSecondsInputs()
         {
@@ -77,6 +87,10 @@ namespace ClockV2
             numericUpDown_Minutes.Text = "0";
             numericUpDown_Seconds.Text = "0";
         }
+
+
+
+
 
 
 
@@ -95,7 +109,7 @@ namespace ClockV2
         //    timer1.Start();
         //}
 
-        
+
         //private void timer1_Tick_1(object sender, EventArgs e)
         //{
         //    if (timeLeft > 0)
@@ -111,7 +125,7 @@ namespace ClockV2
         //        // Maybe show the add alarm button
         //    }
         //}
-        
+
 
 
 

@@ -72,22 +72,43 @@ namespace ClockV2
                     return;
                 }
 
+
                 int AlarmTimeInSeconds = (hours * 3600) + (minutes * 60) + seconds; // converting to seconds
 
+
                 _model.AddAlarm(alarmName, AlarmTimeInSeconds);
-                //_view.startTimer(AlarmTimeInSeconds);
-
-                ShowAlarms();
-
-
-                //AlarmTimer(AlarmTimeInSeconds);
-
+                ShowAlarms();                                                       // Updates the view with the Alarms
             }
             catch (Exception ex)
             {
                 _view.ShowError(ex.Message);
             }
         }
+
+
+
+        public void RemoveAlarm()
+        {
+            try
+            {
+                _model.RemoveAlarm();
+                ShowAlarms();   // Update the view with the Alarms
+            }
+            catch (Exception ex)
+            {
+
+                _view.ShowAlarms(ex.Message);
+            }
+        }
+
+
+
+        public void StartAlarm()
+        {
+
+        }
+
+
 
         public void ShowAlarms()
         {
@@ -113,13 +134,13 @@ namespace ClockV2
         //}
 
 
-        
+
         //private void CountdownTimer_Tick(object sender, EventArgs e)
         //{
 
         //    if (counter >= 0)
         //    {
-                
+
         //        _view.Countdown(counter);
         //        counter--;
         //    }

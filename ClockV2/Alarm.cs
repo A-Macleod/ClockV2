@@ -40,7 +40,7 @@ namespace ClockV2
 
 
         /// <summary>
-        /// Method to Start the Timer
+        /// Method to Start the Timer of the Alarm object
         /// </summary>
         public void StartCountdown()
         {
@@ -49,7 +49,7 @@ namespace ClockV2
 
 
         /// <summary>
-        /// Method to Stop the timer and then Dispose of it
+        /// Method to Stop the Timer of the Alarm object and then Dispose of the Timer
         /// </summary>
         public void StopCountdown()
         {
@@ -70,7 +70,7 @@ namespace ClockV2
 
             if (AlarmTime <= 0)
             {
-                Timer.Stop();
+                StopCountdown();
                 MessageBox.Show("ALARM CLASS - Times Up!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
@@ -79,7 +79,7 @@ namespace ClockV2
         /// <summary>
         /// Method to override the SortedArrayPriorityQueue ToString Method and Return the AlarmName ToString
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Returns the AlarmName</returns>
         public override string ToString()
         {
             return AlarmName.ToString();
