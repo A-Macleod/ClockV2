@@ -75,7 +75,7 @@ namespace ClockV2
                 int AlarmTimeInSeconds = (hours * 3600) + (minutes * 60) + seconds; // converting to seconds
 
                 _model.AddAlarm(alarmName, AlarmTimeInSeconds);
-                _view.startTimer(AlarmTimeInSeconds);
+                //_view.startTimer(AlarmTimeInSeconds);
 
                 ShowAlarms();
 

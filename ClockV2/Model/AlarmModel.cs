@@ -31,6 +31,10 @@ namespace ClockV2
 
             Alarm newAlarm = new Alarm(alarmName, AlarmTimeInSeconds);
             _alarms.Add(newAlarm, AlarmTimeInSeconds);
+
+            newAlarm.StartCountdown();
+
+            //newAlarm.startCountdown();
             
             //AlarmTimer(AlarmTimeInSeconds);
 

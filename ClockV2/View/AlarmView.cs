@@ -46,6 +46,8 @@ namespace ClockV2
             ClearAlarmNameAndHoursSecondsInputs();
             //_presenter.startTimer();
 
+
+
         }
 
 
@@ -86,29 +88,29 @@ namespace ClockV2
         //}
 
 
-        // https://learn.microsoft.com/en-us/dotnet/api/system.timers.timer?redirectedfrom=MSDN&view=netframework-4.8
-        public void startTimer(int AlarmTimeInSeconds)
-        {
-            timeLeft = AlarmTimeInSeconds;
-            timer1.Start();
-        }
+        //// https://learn.microsoft.com/en-us/dotnet/api/system.timers.timer?redirectedfrom=MSDN&view=netframework-4.8
+        //public void startTimer(int AlarmTimeInSeconds)
+        //{
+        //    timeLeft = AlarmTimeInSeconds;
+        //    timer1.Start();
+        //}
 
         
-        private void timer1_Tick_1(object sender, EventArgs e)
-        {
-            if (timeLeft > 0)
-            {
-                timeLeft = timeLeft - 1;
-                label6.Text = timeLeft + " seconds";
-            }
-            else
-            {
-                timer1.Stop();
-                label6.Text = "Times up";
-                MessageBox.Show("Times Up!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                // Maybe show the add alarm button
-            }
-        }
+        //private void timer1_Tick_1(object sender, EventArgs e)
+        //{
+        //    if (timeLeft > 0)
+        //    {
+        //        timeLeft = timeLeft - 1;
+        //        label6.Text = timeLeft + " seconds";
+        //    }
+        //    else
+        //    {
+        //        timer1.Stop();
+        //        label6.Text = "Times up";
+        //        MessageBox.Show("Times Up!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //        // Maybe show the add alarm button
+        //    }
+        //}
         
 
 

@@ -3,58 +3,88 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ClockV2
 {
     /// <summary>
-    /// A Class to represent an Alarm with a name and time
+    /// A Class to represent an Alarm. With a Name, an Integer value representing Time (in seconds), and a Timer.
+    /// Each Alarm has a Timer class instantiated in its Constructor that handles a Tick Eventhandler. At each 1 second
+    /// interval the AlarmTime is decremented by 1 and when AlarmTime reaches zero a Dialog messagebox is called to alert
+    /// the user
     /// </summary>
     public class Alarm
     {
-        public string Name { get; set; }
-        public int Time { get; set; }
+
+        public string AlarmName { get; set; }
+        public int AlarmTime { get; set; }
+        static System.Windows.Forms.Timer Timer;
 
 
         /// <summary>
-        /// Constructor to instantiate an Alarm object with a name and time in seconds
+        /// Constructor, takes in name and time and creates the alarm object with a Timer, that has a 1 second interval.
+        /// At each interval the AlarmTimer_Tick eventhandler is called, which handles the alarm countdown. 
         /// </summary>
         /// <param name="alarmName">The name of the alarm</param>
-        /// <param name="time">The time of the alarm in seconds</param>
-        public Alarm(string alarmName, int time)
+        /// <param name="alarmTime">The total time of the alarm</param>
+        public Alarm(string alarmName, int alarmTime)
         {
-            Name = alarmName;
-            Time = time;
+            AlarmName = alarmName;
+            AlarmTime = alarmTime;
+            Timer = new System.Windows.Forms.Timer();
+            Timer.Interval = 1000;
+            Timer.Tick += AlarmTimer_Tick;                                                                 
         }
 
 
         /// <summary>
-        /// Method to return the name of the alarm
+        /// Method to Start the Timer
         /// </summary>
-        /// <returns></returns>
-        public string GetAlarmName()
+        public void StartCountdown()
         {
-            return Name;
+            Timer.Start();
         }
 
 
         /// <summary>
-        /// Method to return the time of the alarm
+        /// Method to Stop the timer and then Dispose of it
         /// </summary>
-        /// <returns></returns>
-        public int GetAlarmTime()
+        public void StopCountdown()
         {
-            return Time;
+            Timer.Stop();
+            Timer.Dispose();
         }
 
 
         /// <summary>
-        /// Method to return the name of the alarm, overriding the PriorityQueue ToString Method
+        /// Eventhandler that CountsDown with each TimerTick. The AlarmTime is decremented and when
+        /// it reaches zero a message box will be called displaying that the alarm has now sounded
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void AlarmTimer_Tick(object sender, EventArgs e)
+        {
+            AlarmTime--;
+
+            if (AlarmTime <= 0)
+            {
+                Timer.Stop();
+                MessageBox.Show("ALARM CLASS - Times Up!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+
+        /// <summary>
+        /// Method to override the SortedArrayPriorityQueue ToString Method and Return the AlarmName ToString
         /// </summary>
         /// <returns></returns>
         public override string ToString()
         {
-            return $"{Name}";
+            return AlarmName.ToString();
         }
+
+
     }
 }
