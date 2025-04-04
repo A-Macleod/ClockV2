@@ -18,6 +18,7 @@ namespace ClockV2
     {
 
         private SortedArrayPriorityQueue<Alarm> _alarms = new SortedArrayPriorityQueue<Alarm>(8);
+        //private Alarm newAlarm;
 
         public void AddAlarm(string alarmName, int AlarmTimeInSeconds)
         {
@@ -32,12 +33,13 @@ namespace ClockV2
 
 
 
-            Alarm newAlarm = new Alarm(alarmName, AlarmTimeInSeconds);
+             Alarm newAlarm = new Alarm(alarmName, AlarmTimeInSeconds);
             _alarms.Add(newAlarm, AlarmTimeInSeconds);
 
-
+            
 
         }
+
 
 
         public string ShowAlarms()
@@ -46,11 +48,19 @@ namespace ClockV2
         }
 
 
-        public void StartAlarm()
+
+        public void StartAlarm()        
         {
+
+            //int time = _alarms.Head().AlarmTime;    // TESTING THIS 
+            //int timeInInts = time;
+            //_alarms.Head().StartCountdown(timeInInts);
+
             _alarms.Head().StartCountdown();
-            //_alarms.Head().AlarmTimer_Tick();
+            
+
         }
+
 
 
         public void RemoveAlarm()
@@ -58,6 +68,7 @@ namespace ClockV2
             _alarms.Head().StopCountdown();
             _alarms.Remove();               // Remove the Head of the Queue    
         }
+
 
 
 

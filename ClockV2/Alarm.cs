@@ -35,8 +35,11 @@ namespace ClockV2
             AlarmTime = alarmTime;
             Timer = new System.Windows.Forms.Timer();
             Timer.Interval = 1000;
-            Timer.Tick += AlarmTimer_Tick;                                                                 
+            Timer.Tick += AlarmTimer_Tick;
         }
+
+
+
 
 
         /// <summary>
@@ -66,12 +69,16 @@ namespace ClockV2
         /// <param name="e"></param>
         public void AlarmTimer_Tick(object sender, EventArgs e)
         {
+            
+
             AlarmTime--;
+            
 
             if (AlarmTime <= 0)
             {
                 StopCountdown();
                 MessageBox.Show("ALARM CLASS - Times Up!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                
             }
         }
 

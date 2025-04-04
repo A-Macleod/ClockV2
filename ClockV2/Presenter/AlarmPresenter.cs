@@ -78,6 +78,9 @@ namespace ClockV2
 
                 _model.AddAlarm(alarmName, AlarmTimeInSeconds);
                 ShowAlarms();                                                       // Updates the view with the Alarms
+
+                
+
             }
             catch (Exception ex)
             {
@@ -95,8 +98,7 @@ namespace ClockV2
                 ShowAlarms();   // Update the view with the Alarms
             }
             catch (Exception ex)
-            {
-
+            {             
                 _view.ShowAlarms(ex.Message);
             }
         }
@@ -105,7 +107,15 @@ namespace ClockV2
 
         public void StartAlarm()
         {
-
+            try
+            {
+                _model.StartAlarm();
+            }
+            catch (Exception ex)
+            {
+                _view.ShowAlarms(ex.Message);
+            }
+            
         }
 
 

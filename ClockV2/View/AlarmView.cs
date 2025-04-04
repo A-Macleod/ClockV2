@@ -58,7 +58,7 @@ namespace ClockV2
 
 
 
-        private void button_Start_Click(object sender, EventArgs e)
+        private void Button_StartTimer_Click(object sender, EventArgs e)
         {
             _presenter.StartAlarm();
         }
@@ -77,6 +77,10 @@ namespace ClockV2
             MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             ClearAlarmNameAndHoursSecondsInputs();
         }
+
+
+        
+
 
 
 

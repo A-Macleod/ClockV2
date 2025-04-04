@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.button_Add = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.button_Remove = new System.Windows.Forms.Button();
@@ -45,7 +44,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label_Output_Countdown = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Hours)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Minutes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Seconds)).BeginInit();
@@ -157,7 +155,7 @@
             this.button_Start.TabIndex = 11;
             this.button_Start.Text = "button_Start";
             this.button_Start.UseVisualStyleBackColor = true;
-            this.button_Start.Click += new System.EventHandler(this.button_Start_Click);
+            this.button_Start.Click += new System.EventHandler(this.Button_StartTimer_Click);
             // 
             // label_Output
             // 
@@ -254,6 +252,5 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label_Output_Countdown;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Timer timer1;
     }
 }
