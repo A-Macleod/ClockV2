@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.button_Add = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.button_Remove = new System.Windows.Forms.Button();
@@ -40,11 +41,14 @@
             this.label4 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.label_Output = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_Seconds = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
+            this.label_Output_Countdown = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Hours)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Minutes)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Seconds)).BeginInit();
             this.SuspendLayout();
             // 
             // button_Add
@@ -104,6 +108,12 @@
             // numericUpDown_Hours
             // 
             this.numericUpDown_Hours.Location = new System.Drawing.Point(190, 71);
+            this.numericUpDown_Hours.Maximum = new decimal(new int[] {
+            23,
+            0,
+            0,
+            0});
+            this.numericUpDown_Hours.MaximumSize = new System.Drawing.Size(59, 0);
             this.numericUpDown_Hours.Name = "numericUpDown_Hours";
             this.numericUpDown_Hours.Size = new System.Drawing.Size(50, 20);
             this.numericUpDown_Hours.TabIndex = 6;
@@ -111,6 +121,12 @@
             // numericUpDown_Minutes
             // 
             this.numericUpDown_Minutes.Location = new System.Drawing.Point(246, 72);
+            this.numericUpDown_Minutes.Maximum = new decimal(new int[] {
+            59,
+            0,
+            0,
+            0});
+            this.numericUpDown_Minutes.MaximumSize = new System.Drawing.Size(59, 0);
             this.numericUpDown_Minutes.Name = "numericUpDown_Minutes";
             this.numericUpDown_Minutes.Size = new System.Drawing.Size(50, 20);
             this.numericUpDown_Minutes.TabIndex = 7;
@@ -144,19 +160,24 @@
             // 
             // label_Output
             // 
-            this.label_Output.Location = new System.Drawing.Point(12, 182);
+            this.label_Output.Location = new System.Drawing.Point(9, 192);
             this.label_Output.Name = "label_Output";
-            this.label_Output.Size = new System.Drawing.Size(346, 110);
+            this.label_Output.Size = new System.Drawing.Size(172, 110);
             this.label_Output.TabIndex = 12;
             this.label_Output.Text = "label_Output";
             this.label_Output.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // numericUpDown1
+            // numericUpDown_Seconds
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(302, 72);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(50, 20);
-            this.numericUpDown1.TabIndex = 13;
+            this.numericUpDown_Seconds.Location = new System.Drawing.Point(302, 72);
+            this.numericUpDown_Seconds.Maximum = new decimal(new int[] {
+            59,
+            0,
+            0,
+            0});
+            this.numericUpDown_Seconds.Name = "numericUpDown_Seconds";
+            this.numericUpDown_Seconds.Size = new System.Drawing.Size(50, 20);
+            this.numericUpDown_Seconds.TabIndex = 13;
             // 
             // label5
             // 
@@ -167,13 +188,36 @@
             this.label5.TabIndex = 15;
             this.label5.Text = "S:";
             // 
+            // label_Output_Countdown
+            // 
+            this.label_Output_Countdown.Location = new System.Drawing.Point(0, 0);
+            this.label_Output_Countdown.Name = "label_Output_Countdown";
+            this.label_Output_Countdown.Size = new System.Drawing.Size(100, 23);
+            this.label_Output_Countdown.TabIndex = 0;
+            // 
+            // label6
+            // 
+            this.label6.Location = new System.Drawing.Point(196, 192);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(162, 110);
+            this.label6.TabIndex = 16;
+            this.label6.Text = "label6";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick_1);
+            // 
             // AlarmView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(370, 311);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label_Output_Countdown);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.numericUpDown_Seconds);
             this.Controls.Add(this.label_Output);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.label4);
@@ -190,7 +234,7 @@
             this.Text = "AlarmView";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Hours)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Minutes)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Seconds)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -210,7 +254,10 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label_Output;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown numericUpDown_Seconds;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label_Output_Countdown;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Timer timer1;
     }
 }
