@@ -18,8 +18,8 @@ namespace ClockV2
     {
 
         private SortedArrayPriorityQueue<Alarm> _alarms = new SortedArrayPriorityQueue<Alarm>(8);
-        private Alarm newAlarm;
-        public bool isDone = false;
+        //private Alarm newAlarm;
+
 
         public void AddAlarm(string alarmName, int AlarmTimeInSeconds)
         {
@@ -61,20 +61,22 @@ namespace ClockV2
 
             // IT SHOULD BE REMOVED WHEN THE POPUP GOES OFF, WE SHOULD NOT HAVE TO PRESS "STARTALARM" AGAIN TO REMOVE IT 
 
-            if (_alarms.Head().AlarmTime == 0)     // If the timer has all ready been run and that alarm is at zero, delete it and then star the next
-            {
+            //if (_alarms.Head().AlarmTime == 0)     // If the timer has all ready been run and that alarm is at zero, delete it and then star the next
+            //{
 
-                RemoveAlarm();
+            //    RemoveAlarm();
                 
                 
-            }
-            else
-            {
-                ShowAlarms(); // Update the UI
-                _alarms.Head().StartCountdown(_alarms.Head().AlarmTime);    // Start the countdown for the length of the heads time
+            //}
+            //else
+            //{
+            //    //ShowAlarms(); // Update the UI
+            //    _alarms.Head().StartCountdown(_alarms.Head().AlarmTime);    // Start the countdown for the length of the heads time
 
-            }
+            //}
 
+
+            _alarms.Head().StartCountdown(_alarms.Head().AlarmTime);    // Start the countdown for the length of the heads time
 
             string head = _alarms.Head().ToString();
             Console.WriteLine($"Head Name: {head}");    // Show Head of Queue Name
@@ -104,31 +106,28 @@ namespace ClockV2
         }
 
 
+        //// https://learn.microsoft.com/en-us/dotnet/api/system.timers.timer?redirectedfrom=msdn&view=netframework-4.8
+        //public void alarmcountdowntimer(int alarmtimeinseconds)
+        //{
+        //    // create the timer in seconds 
+        //    System.Timers.Timer timer;
+        //    timer = new System.Timers.Timer(alarmtimeinseconds * 1000);
 
-    //    public void AlarmCountdownTimer(int AlarmTimeInSeconds)
-    //    {
-
-
-    //        // https://learn.microsoft.com/en-us/dotnet/api/system.timers.timer?redirectedfrom=MSDN&view=netframework-4.8
-    //        // Create the timer in seconds 
-    //        System.Timers.Timer timer;
-    //        timer = new System.Timers.Timer(AlarmTimeInSeconds * 1000);
-
-    //        // Hook up the Elapsed event for the timer
-    //        timer.Elapsed += OnTimedEvent;
-    //        timer.AutoReset = false;
-    //        timer.Enabled = true;
-    //    }
-
-    //    private static void OnTimedEvent(Object source, ElapsedEventArgs e)
-    //    {
-
-    //    }
-
-    //}
-
-            
+        //    // hook up the elapsed event for the timer
+        //    timer.Elapsed += ontimedevent;
+        //    timer.AutoReset = false;
+        //    timer.Enabled = true;
         //}
+
+        //private static void ontimedevent(object source, ElapsedEventArgs e)
+        //{
+
+        //}
+
+    
+
+
+
 
     }
 }

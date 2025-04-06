@@ -20,6 +20,7 @@ namespace ClockV2
 
         public string AlarmName { get; set; }
         public int AlarmTime { get; set; }
+        private int _initialAlarmTime { get; }
         public System.Windows.Forms.Timer Timer;
         //private SortedArrayPriorityQueue<Alarm> _alarms;   /////////// FOR TESTING ACCESSING ALARMMODEL FUNCTIONS
 
@@ -34,6 +35,7 @@ namespace ClockV2
         {
             AlarmName = alarmName;
             AlarmTime = alarmTime;
+            _initialAlarmTime = AlarmTime;
             Timer = new System.Windows.Forms.Timer();
             Timer.Interval = 1000;
             Timer.Tick += Timer_Tick;
@@ -62,7 +64,8 @@ namespace ClockV2
 
         /// <summary>
         /// Eventhandler that CountsDown with each TimerTick. The AlarmTime is decremented and when
-        /// it reaches zero a message box will be called displaying that the alarm has now sounded
+        /// it reaches zero a message box will be called displaying that the alarm has now sounded.
+        /// Resets the AlarmTime to its initial integer value upon reaching zero.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -74,9 +77,8 @@ namespace ClockV2
             if (AlarmTime <= 0)
             {
                 StopCountdown();
-                MessageBox.Show("ALARM CLASS - Times Up!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //_alarms.Remove();
-
+                MessageBox.Show($"Alarm : {AlarmName}\r\nis Ready!", "Alarm", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                AlarmTime = _initialAlarmTime;
             }
         }
 
