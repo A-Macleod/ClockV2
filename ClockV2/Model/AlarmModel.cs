@@ -18,7 +18,8 @@ namespace ClockV2
     {
 
         private SortedArrayPriorityQueue<Alarm> _alarms = new SortedArrayPriorityQueue<Alarm>(8);
-        //private Alarm newAlarm;
+        private Alarm newAlarm;
+        public bool isDone = false;
 
         public void AddAlarm(string alarmName, int AlarmTimeInSeconds)
         {
@@ -28,39 +29,10 @@ namespace ClockV2
             //TimeSpan timeToAdd = new TimeSpan(hours, minutes, seconds);         // The amount of time to add to current time
             //TimeSpan alarmTime = currentTime.Add(timeToAdd);                    // add the currentTime to the timeToAdd
 
-            //newAlarm.StartCountdown();
-            //AlarmTimer(AlarmTimeInSeconds);
-
-
-
              Alarm newAlarm = new Alarm(alarmName, AlarmTimeInSeconds);
-            _alarms.Add(newAlarm, AlarmTimeInSeconds);
-
-            
+            _alarms.Add(newAlarm, AlarmTimeInSeconds); // The Alarm with the longest time will be the Highest Priority and the Head of the Queue
 
         }
-
-
-
-        public string ShowAlarms()
-        {
-            return _alarms.ToString();
-        }
-
-
-
-        public void StartAlarm()        
-        {
-
-            //int time = _alarms.Head().AlarmTime;    // TESTING THIS 
-            //int timeInInts = time;
-            //_alarms.Head().StartCountdown(timeInInts);
-
-            _alarms.Head().StartCountdown();
-            
-
-        }
-
 
 
         public void RemoveAlarm()
@@ -70,10 +42,66 @@ namespace ClockV2
         }
 
 
+        public string ShowAlarms()
+        {
+
+            return _alarms.ToString();
+        }
 
 
+        public void StartAlarm()        
+        {
+
+            // THE TIMER IS CREATING A NEW INSTANCE OF THE TIMER, AND COUNTING DOWN THE TIME FIELD TO ZERO
+            // WE NEED TO REMOVE THE ALARM FROM THE QUEUE AFTER IT REACHES ZERO
+
+            // Check if the Head Time is Zero, If so remove Alarm from the queue. If we try to run alarm
+            // twice, after it has Countdown to zero, the message pop-up will alert immedately. On each
+            // tick of the Countdown we are minusing that Alarms field time.
+
+            // IT SHOULD BE REMOVED WHEN THE POPUP GOES OFF, WE SHOULD NOT HAVE TO PRESS "STARTALARM" AGAIN TO REMOVE IT 
+
+            if (_alarms.Head().AlarmTime == 0)     // If the timer has all ready been run and that alarm is at zero, delete it and then star the next
+            {
+
+                RemoveAlarm();
+                
+                
+            }
+            else
+            {
+                ShowAlarms(); // Update the UI
+                _alarms.Head().StartCountdown(_alarms.Head().AlarmTime);    // Start the countdown for the length of the heads time
+
+            }
 
 
+            string head = _alarms.Head().ToString();
+            Console.WriteLine($"Head Name: {head}");    // Show Head of Queue Name
+
+            Console.WriteLine("=======");
+
+            int time = _alarms.Head().AlarmTime;
+            Console.WriteLine($"Head Time: {time}");    // Show Head of Queue Time
+
+            Console.WriteLine("=======");
+
+            string queue = _alarms.ToString();
+            Console.WriteLine(queue);                   // Print the Queue
+
+            Console.WriteLine("=======");
+
+            Console.WriteLine("Started Countdown:" + _alarms.Head());   // Start Countdown on Head
+            _alarms.Head().StartCountdown(time);
+
+            Console.WriteLine("=======");
+
+            var remainingAfterTimerHasTicked = _alarms.Head().AlarmTime;
+            Console.WriteLine($"Remanining After Tick: {remainingAfterTimerHasTicked}");    //  Remaining Time on Alarm. after Alarm has sounded on Alarm Object
+
+            Console.WriteLine("== END ==");
+
+        }
 
 
 
