@@ -16,9 +16,21 @@ namespace ClockV2
     /// </summary>
     public class AlarmModel
     {
+        private SortedArrayPriorityQueue<Alarm> _alarms;
+        
 
-        private SortedArrayPriorityQueue<Alarm> _alarms = new SortedArrayPriorityQueue<Alarm>(8);
-        //private Alarm newAlarm;
+
+        /// <summary>
+        /// Constructor, so that when the Model is created, there is a SAPQ ready to use
+        /// </summary>
+        public AlarmModel()
+        {
+            _alarms = new SortedArrayPriorityQueue<Alarm>(8);
+        }
+
+
+
+
 
 
         public void AddAlarm(string alarmName, int AlarmTimeInSeconds)
@@ -30,7 +42,7 @@ namespace ClockV2
             //TimeSpan alarmTime = currentTime.Add(timeToAdd);                    // add the currentTime to the timeToAdd
 
              Alarm newAlarm = new Alarm(alarmName, AlarmTimeInSeconds);
-            _alarms.Add(newAlarm, AlarmTimeInSeconds); // The Alarm with the longest time will be the Highest Priority and the Head of the Queue
+            _alarms.Add(newAlarm, AlarmTimeInSeconds);
 
         }
 
@@ -38,7 +50,7 @@ namespace ClockV2
         public void RemoveAlarm()
         {
             _alarms.Head().StopCountdown();
-            _alarms.Remove();               // Remove the Head of the Queue    
+            _alarms.Remove();   
         }
 
 
@@ -53,7 +65,7 @@ namespace ClockV2
         {
 
             // THE TIMER IS CREATING A NEW INSTANCE OF THE TIMER, AND COUNTING DOWN THE TIME FIELD TO ZERO
-            // WE NEED TO REMOVE THE ALARM FROM THE QUEUE AFTER IT REACHES ZERO
+            // WE NEED TO REMOVE THE ALARM FROM THE QUEUE AFTER IT REACHES ZERO 
 
             // Check if the Head Time is Zero, If so remove Alarm from the queue. If we try to run alarm
             // twice, after it has Countdown to zero, the message pop-up will alert immedately. On each
@@ -75,6 +87,10 @@ namespace ClockV2
 
             //}
 
+
+            //////
+            // DEBUGGING 
+            //////
 
             _alarms.Head().StartCountdown(_alarms.Head().AlarmTime);    // Start the countdown for the length of the heads time
 

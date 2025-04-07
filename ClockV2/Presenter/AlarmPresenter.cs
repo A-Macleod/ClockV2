@@ -28,6 +28,12 @@ namespace ClockV2
             _view.SetPresenter(this);
         }
 
+        public void ShowAlarms()
+        {
+            string alarms = _model.ShowAlarms();
+            _view.ShowAlarms(alarms);
+        }
+
 
         public void AddAlarm(string alarmName, string priorityHour, string priorityMinute, string priortiySecond)
         {
@@ -43,7 +49,6 @@ namespace ClockV2
                     return;
                 }
 
-
                 if (!int.TryParse(priorityHour, out hours))
                 { 
                     _view.ShowError("Number not Valid");
@@ -51,13 +56,11 @@ namespace ClockV2
 
                 }
 
-
                 if (!int.TryParse(priorityMinute, out minutes))
                 {
                     _view.ShowError("Number not Valid");
                     return;
                 }
-
 
                 if (!int.TryParse(priortiySecond, out seconds))
                 {
@@ -65,22 +68,16 @@ namespace ClockV2
                     return;
                 }
 
-
                 if (hours == 0 && minutes == 0 && seconds == 0 )
                 {
                     _view.ShowError("Time not Valid");
                     return;
                 }
 
-
-                int AlarmTimeInSeconds = (hours * 3600) + (minutes * 60) + seconds; // converting to seconds
-
+                int AlarmTimeInSeconds = (hours * 3600) + (minutes * 60) + seconds; 
 
                 _model.AddAlarm(alarmName, AlarmTimeInSeconds);
-                ShowAlarms();                                                       // Updates the view with the Alarms
-
-                
-
+                ShowAlarms();                                                       
             }
             catch (Exception ex)
             {
@@ -89,13 +86,12 @@ namespace ClockV2
         }
 
 
-
         public void RemoveAlarm()
         {
             try
             {
                 _model.RemoveAlarm();
-                ShowAlarms();   // Update the view with the Alarms
+                ShowAlarms();
             }
             catch (Exception ex)
             {             
@@ -114,17 +110,12 @@ namespace ClockV2
             catch (Exception ex)
             {
                 _view.ShowAlarms(ex.Message);
-            }
-            
+            }           
         }
 
 
 
-        public void ShowAlarms()
-        {
-            string alarms = _model.ShowAlarms();
-            _view.ShowAlarms(alarms);
-        }
+
 
 
 
