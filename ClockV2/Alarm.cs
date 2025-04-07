@@ -87,8 +87,7 @@ namespace ClockV2
             {
                 StopCountdown();
                 MessageBox.Show($"Alarm : {AlarmName}\r\nis Ready!", "Alarm", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                ResetAlarm();
-
+                //ResetAlarm();
             }
         }
 

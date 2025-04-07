@@ -20,7 +20,7 @@ namespace ClockV2
     {
 
         private AlarmPresenter _presenter;
-        int countdownTime;
+
         
 
         public AlarmView()
@@ -45,20 +45,15 @@ namespace ClockV2
             _presenter.AddAlarm(alarmName, priorityHour, priorityMinute, priortiySecond);
 
 
-            //_presenter.HeadCountdownTime(); // MAYBE REMOVE IF WE CANT GET EVENT HANDLER TO CALL BACK TIME
-
-
-            ClearAlarmNameAndHoursSecondsInputs();
-            
-
-
-
+            ClearAlarmNameAndHoursSecondsInputs();       
         }
+
 
 
         private void Button_Remove_Click(object sender, EventArgs e)
         {
             _presenter.RemoveAlarm();
+            _presenter.HeadTime();
         }
 
 
@@ -66,7 +61,9 @@ namespace ClockV2
         private void Button_StartTimer_Click(object sender, EventArgs e)
         {
             _presenter.StartAlarm();
-            
+            _presenter.ShowAlarms();
+            _presenter.HeadTime();
+
         }
 
 
@@ -85,10 +82,6 @@ namespace ClockV2
         }
 
 
-        
-
-
-
 
         private void ClearAlarmNameAndHoursSecondsInputs()
         {
@@ -100,18 +93,16 @@ namespace ClockV2
 
 
 
-
-
-
-        // TESTING MAYBE REMOVE IF WE CAN NOT GET EVENT HANDLER TO CALL BACK TIME
         public void ViewCountdownTime(int countdownTime)
         {
-
             label6.Text = countdownTime.ToString();
-
         }
 
 
+        public void ViewCountdownNull(string noItem)
+        {
+            label6.Text = "No Time to Countdown";
+        }
 
 
 

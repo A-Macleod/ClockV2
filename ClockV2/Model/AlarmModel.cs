@@ -84,19 +84,19 @@ namespace ClockV2
 
             // IT SHOULD BE REMOVED WHEN THE POPUP GOES OFF, WE SHOULD NOT HAVE TO PRESS "STARTALARM" AGAIN TO REMOVE IT 
 
-            //if (_alarms.Head().AlarmTime == 0)     // If the timer has all ready been run and that alarm is at zero, delete it and then star the next
-            //{
+            if (_alarms.Head().AlarmTime == 0)     // If the timer has all ready been run and that alarm is at zero, delete it and then start the next
+            {
 
-            //    RemoveAlarm();
-                
-                
-            //}
-            //else
-            //{
-            //    //ShowAlarms(); // Update the UI
-            //    _alarms.Head().StartCountdown(_alarms.Head().AlarmTime);    // Start the countdown for the length of the heads time
+                RemoveAlarm();
 
-            //}
+
+            }
+            else
+            {
+                //ShowAlarms(); // Update the UI
+                _alarms.Head().StartCountdown(_alarms.Head().AlarmTime);    // Start the countdown for the length of the heads time
+
+            }
 
 
             //////

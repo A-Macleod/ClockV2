@@ -81,8 +81,9 @@ namespace ClockV2
 
                 _model.AddAlarm(alarmName, AlarmTimeInSeconds);
                 ShowAlarms();
-                
-                
+                HeadTime();
+
+
             }
             catch (Exception ex)
             {
@@ -97,6 +98,7 @@ namespace ClockV2
             {
                 _model.RemoveAlarm();
                 ShowAlarms();
+                HeadTime();
             }
             catch (Exception ex)
             {             
@@ -122,25 +124,50 @@ namespace ClockV2
 
 
 
+        public void HeadTime()
+        {
+
+            try
+            {
+                int headAlarmTime = _model.HeadCountdownTime();
+
+                if (headAlarmTime == null)
+                {
+
+                    _view.ViewCountdownNull(headAlarmTime.ToString());
+                }
+
+                _view.ViewCountdownTime(headAlarmTime);
+
+            }
+            catch (Exception ex)
+            {               
+                _view.ViewCountdownNull(ex.Message);
+            }
+
+            
+        }
+
+
+
 
         public void HeadCountdownTime()
         {
             headTime = _model.HeadCountdownTime();          
 
             _counter = new System.Windows.Forms.Timer();
-
             _counter.Interval = 1000;
-
             _counter.Tick += CountdownToUI_Tick;
 
-            _counter.Start();
-            
+            _counter.Start();            
         }
+
 
 
         private void CountdownToUI_Tick(object sender, EventArgs e)
         {
             int initialValue = headTime;
+
             headTime--;
 
             _view.ViewCountdownTime(headTime);
