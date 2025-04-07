@@ -77,7 +77,8 @@ namespace ClockV2
                 int AlarmTimeInSeconds = (hours * 3600) + (minutes * 60) + seconds; 
 
                 _model.AddAlarm(alarmName, AlarmTimeInSeconds);
-                ShowAlarms();                                                       
+                ShowAlarms();
+                
             }
             catch (Exception ex)
             {
@@ -106,6 +107,7 @@ namespace ClockV2
             try
             {
                 _model.StartAlarm();
+                
             }
             catch (Exception ex)
             {
@@ -115,6 +117,33 @@ namespace ClockV2
 
 
 
+
+        //   TESTING MAYBE REMOVE UNLESS WE CAN GET EVENT HANDLER TO WORK 
+        public void HeadCountdownTime()
+        {
+            int time = _model.HeadCountdownTime();
+            _view.HeadCountdownTime(time);
+        }
+
+
+
+        //// https://learn.microsoft.com/en-us/dotnet/api/system.timers.timer?redirectedfrom=msdn&view=netframework-4.8
+        public void ViewAlarmCounter(int AlarmTimeInSeconds)
+        {
+
+            int counter = AlarmTimeInSeconds;
+
+
+            Timer Timer = new System.Windows.Forms.Timer();
+            Timer.Interval = 1000;
+            Timer.Tick += CountdownToUI;
+
+        }
+
+        public void CountdownToUI(object sender, EventArgs e)
+        {
+            
+        }
 
 
 
@@ -130,8 +159,8 @@ namespace ClockV2
 
         //    countdownTimer.Start();
 
-        //    //_model.AlarmCountdownTimer(AlarmTimeInSeconds);
-        //    //_view.Countdown(AlarmTimeInSeconds);
+        //    _model.AlarmCountdownTimer(AlarmTimeInSeconds);
+        //    _view.Countdown(AlarmTimeInSeconds);
         //}
 
 
@@ -155,6 +184,8 @@ namespace ClockV2
         //        return;
         //    }
         //}
+
+
 
 
 

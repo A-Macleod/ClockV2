@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
+using System.Windows.Forms;
 
 namespace ClockV2
 {
@@ -30,9 +31,6 @@ namespace ClockV2
 
 
 
-
-
-
         public void AddAlarm(string alarmName, int AlarmTimeInSeconds)
         {
 
@@ -41,7 +39,10 @@ namespace ClockV2
             //TimeSpan timeToAdd = new TimeSpan(hours, minutes, seconds);         // The amount of time to add to current time
             //TimeSpan alarmTime = currentTime.Add(timeToAdd);                    // add the currentTime to the timeToAdd
 
-             Alarm newAlarm = new Alarm(alarmName, AlarmTimeInSeconds);
+             var newAlarm = new Alarm(alarmName, AlarmTimeInSeconds);
+            
+            
+            
             _alarms.Add(newAlarm, AlarmTimeInSeconds);
 
         }
@@ -122,25 +123,18 @@ namespace ClockV2
         }
 
 
-        //// https://learn.microsoft.com/en-us/dotnet/api/system.timers.timer?redirectedfrom=msdn&view=netframework-4.8
-        //public void alarmcountdowntimer(int alarmtimeinseconds)
-        //{
-        //    // create the timer in seconds 
-        //    System.Timers.Timer timer;
-        //    timer = new System.Timers.Timer(alarmtimeinseconds * 1000);
 
-        //    // hook up the elapsed event for the timer
-        //    timer.Elapsed += ontimedevent;
-        //    timer.AutoReset = false;
-        //    timer.Enabled = true;
-        //}
 
-        //private static void ontimedevent(object source, ElapsedEventArgs e)
-        //{
+        public int HeadCountdownTime()
+        {
+            var countdownTime = _alarms.Head().AlarmTime;
 
-        //}
+            return countdownTime;
+            
+        }
 
-    
+
+
 
 
 

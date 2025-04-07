@@ -20,7 +20,7 @@ namespace ClockV2
     {
 
         private AlarmPresenter _presenter;
-        int timeLeft;
+        int countdownTime;
         
 
         public AlarmView()
@@ -43,8 +43,13 @@ namespace ClockV2
             string priortiySecond = numericUpDown_Seconds.Value.ToString();
 
             _presenter.AddAlarm(alarmName, priorityHour, priorityMinute, priortiySecond);
+
+
+            _presenter.HeadCountdownTime(); // MAYBE REMOVE IF WE CANT GET EVENT HANDLER TO CALL BACK TIME
+
+
             ClearAlarmNameAndHoursSecondsInputs();
-            //_presenter.startTimer();
+            
 
 
 
@@ -61,6 +66,7 @@ namespace ClockV2
         private void Button_StartTimer_Click(object sender, EventArgs e)
         {
             _presenter.StartAlarm();
+            
         }
 
 
@@ -97,13 +103,19 @@ namespace ClockV2
 
 
 
+        // TESTING MAYBE REMOVE IF WE CAN NOT GET EVENT HANDLER TO CALL BACK TIME
+        public void HeadCountdownTime(int countdownTime)
+        {
 
-        //public void Countdown(int counter)
-        //{
+            label6.Text = countdownTime.ToString();
 
-        //    label6.Text = counter.ToString();
+        }
 
-        //}
+
+
+
+
+
 
 
         //// https://learn.microsoft.com/en-us/dotnet/api/system.timers.timer?redirectedfrom=MSDN&view=netframework-4.8

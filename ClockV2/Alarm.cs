@@ -17,11 +17,12 @@ namespace ClockV2
     /// </summary>
     public class Alarm
     {
-
+        
         public string AlarmName { get; set; }
         public int AlarmTime { get; set; }
         private int _initialAlarmTime { get; }
         public System.Windows.Forms.Timer Timer;
+
         //private SortedArrayPriorityQueue<Alarm> _alarms;   /////////// FOR TESTING ACCESSING ALARMMODEL FUNCTIONS
 
 
@@ -38,9 +39,9 @@ namespace ClockV2
             _initialAlarmTime = AlarmTime;
             Timer = new System.Windows.Forms.Timer();
             Timer.Interval = 1000;
-            Timer.Tick += Timer_Tick;
+            Timer.Tick += Timer_Tick_Countdown;
+            
         }
-
 
 
         /// <summary>
@@ -58,7 +59,14 @@ namespace ClockV2
         public void StopCountdown()
         {
             Timer.Stop();
+            Timer.Tick -= Timer_Tick_Countdown; // Unsubscribe from TickEvent
             Timer.Dispose();
+        }
+
+
+        public void ResetAlarm()
+        {
+            AlarmTime = _initialAlarmTime;
         }
 
 
@@ -69,24 +77,21 @@ namespace ClockV2
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void Timer_Tick(object sender, EventArgs e)
+        public void Timer_Tick_Countdown(object sender, EventArgs e)
         {
 
             AlarmTime--;
+            
 
             if (AlarmTime <= 0)
             {
                 StopCountdown();
                 MessageBox.Show($"Alarm : {AlarmName}\r\nis Ready!", "Alarm", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ResetAlarm();
+
             }
         }
 
-
-        public void ResetAlarm()
-        {
-            AlarmTime = _initialAlarmTime;
-        }
 
 
         /// <summary>
