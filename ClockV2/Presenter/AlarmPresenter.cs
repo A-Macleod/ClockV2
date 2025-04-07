@@ -10,14 +10,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace ClockV2
 {
-
     public class AlarmPresenter
     {
+
         private readonly AlarmView _view;
         private readonly AlarmModel _model;
+        private Timer _counter;
+        private int headTime;
 
         public AlarmPresenter(AlarmView _view, AlarmModel _model)
         {
@@ -79,6 +82,7 @@ namespace ClockV2
                 _model.AddAlarm(alarmName, AlarmTimeInSeconds);
                 ShowAlarms();
                 
+                
             }
             catch (Exception ex)
             {
@@ -107,7 +111,8 @@ namespace ClockV2
             try
             {
                 _model.StartAlarm();
-                
+                HeadCountdownTime();    // Get the number for the countdown display and create a timer
+
             }
             catch (Exception ex)
             {
@@ -118,36 +123,59 @@ namespace ClockV2
 
 
 
-        //   TESTING MAYBE REMOVE UNLESS WE CAN GET EVENT HANDLER TO WORK 
         public void HeadCountdownTime()
         {
-            int time = _model.HeadCountdownTime();
-            _view.HeadCountdownTime(time);
-        }
+            headTime = _model.HeadCountdownTime();          
 
+            _counter = new System.Windows.Forms.Timer();
 
+            _counter.Interval = 1000;
 
-        //// https://learn.microsoft.com/en-us/dotnet/api/system.timers.timer?redirectedfrom=msdn&view=netframework-4.8
-        public void ViewAlarmCounter(int AlarmTimeInSeconds)
-        {
+            _counter.Tick += CountdownToUI_Tick;
 
-            int counter = AlarmTimeInSeconds;
-
-
-            Timer Timer = new System.Windows.Forms.Timer();
-            Timer.Interval = 1000;
-            Timer.Tick += CountdownToUI;
-
-        }
-
-        public void CountdownToUI(object sender, EventArgs e)
-        {
+            _counter.Start();
             
         }
 
 
+        private void CountdownToUI_Tick(object sender, EventArgs e)
+        {
+            int initialValue = headTime;
+            headTime--;
+
+            _view.ViewCountdownTime(headTime);
+
+            if (headTime <= 0)
+            {
+                _counter.Stop();
+                _counter.Dispose();
+            }
+
+        }
+
+        //private void CountdownToUI_Tick(object sender, EventArgs e)
+        //{
+        //    //int initialTime = _model.HeadCountdownTime();
+        //    //int time = initialTime;
+        //    time--;
+
+        //    if (time >= 0)
+        //    {
+        //        time--;
+        //        _view.ViewCountdownTime(time);
+                
+        //    }
+        //    else
+        //    {
+        //        _counter.Stop();
+        //        _counter.Dispose();
+        //    }     
+            
+        //}
 
 
+
+        //// https://learn.microsoft.com/en-us/dotnet/api/system.timers.timer?redirectedfrom=msdn&view=netframework-4.8
         //public void AlarmTimer(int AlarmTimeInSeconds)
         //{
 

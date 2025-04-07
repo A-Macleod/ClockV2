@@ -38,14 +38,14 @@ namespace ClockV2
         private void Button_Add_Click(object sender, EventArgs e)
         {
             string alarmName = textBox_AlarmName.Text.ToString();
-            string priorityHour = numericUpDown_Hours.Value.ToString();      // convert numericUpDown to string from decimal
+            string priorityHour = numericUpDown_Hours.Value.ToString(); 
             string priorityMinute = numericUpDown_Minutes.Value.ToString();
             string priortiySecond = numericUpDown_Seconds.Value.ToString();
 
             _presenter.AddAlarm(alarmName, priorityHour, priorityMinute, priortiySecond);
 
 
-            _presenter.HeadCountdownTime(); // MAYBE REMOVE IF WE CANT GET EVENT HANDLER TO CALL BACK TIME
+            //_presenter.HeadCountdownTime(); // MAYBE REMOVE IF WE CANT GET EVENT HANDLER TO CALL BACK TIME
 
 
             ClearAlarmNameAndHoursSecondsInputs();
@@ -104,7 +104,7 @@ namespace ClockV2
 
 
         // TESTING MAYBE REMOVE IF WE CAN NOT GET EVENT HANDLER TO CALL BACK TIME
-        public void HeadCountdownTime(int countdownTime)
+        public void ViewCountdownTime(int countdownTime)
         {
 
             label6.Text = countdownTime.ToString();

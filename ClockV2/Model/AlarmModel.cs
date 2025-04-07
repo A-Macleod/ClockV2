@@ -31,6 +31,16 @@ namespace ClockV2
 
 
 
+        public int HeadCountdownTime()
+        {
+            var countdownTime = _alarms.Head().AlarmTime;
+
+            return countdownTime;
+
+        }
+
+
+
         public void AddAlarm(string alarmName, int AlarmTimeInSeconds)
         {
 
@@ -125,13 +135,7 @@ namespace ClockV2
 
 
 
-        public int HeadCountdownTime()
-        {
-            var countdownTime = _alarms.Head().AlarmTime;
 
-            return countdownTime;
-            
-        }
 
 
 
