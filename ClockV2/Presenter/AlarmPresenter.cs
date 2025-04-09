@@ -33,8 +33,15 @@ namespace ClockV2
 
         public void ShowAlarms()
         {
-            string alarms = _model.ShowAlarms();
-            _view.ShowAlarms(alarms);
+            try
+            {
+                string alarms = _model.ShowAlarms();
+                _view.ShowAlarms(alarms);
+            }
+            catch (Exception ex)
+            {
+                _view.ShowAlarms("The Queue is Empty");
+            }     
         }
 
 
@@ -83,7 +90,6 @@ namespace ClockV2
                 ShowAlarms();
                 HeadTime();
 
-
             }
             catch (Exception ex)
             {
@@ -96,13 +102,37 @@ namespace ClockV2
         {
             try
             {
+                _counter.Stop(); // stop the counter on the UI then remove the alarm
                 _model.RemoveAlarm();
                 ShowAlarms();
                 HeadTime();
             }
             catch (Exception ex)
-            {             
+            {               
                 _view.ShowAlarms(ex.Message);
+            }
+        }
+
+
+
+        public void HeadTime()
+        {
+            try
+            {
+                int headAlarmTime = _model.HeadCountdownTime();
+
+                if (headAlarmTime == null)
+                {
+
+                    _view.ViewCountdownNull(headAlarmTime.ToString());
+                }
+
+                _view.ViewCountdownTime(headAlarmTime);
+
+            }
+            catch (Exception ex)
+            {
+                _view.ViewCountdownNull(ex.Message);
             }
         }
 
@@ -124,36 +154,10 @@ namespace ClockV2
 
 
 
-        public void HeadTime()
-        {
-
-            try
-            {
-                int headAlarmTime = _model.HeadCountdownTime();
-
-                if (headAlarmTime == null)
-                {
-
-                    _view.ViewCountdownNull(headAlarmTime.ToString());
-                }
-
-                _view.ViewCountdownTime(headAlarmTime);
-
-            }
-            catch (Exception ex)
-            {               
-                _view.ViewCountdownNull(ex.Message);
-            }
-
-            
-        }
-
-
-
 
         public void HeadCountdownTime()
         {
-            headTime = _model.HeadCountdownTime();          
+            //headTime = _model.HeadCountdownTime();          
 
             _counter = new System.Windows.Forms.Timer();
             _counter.Interval = 1000;
@@ -166,17 +170,33 @@ namespace ClockV2
 
         private void CountdownToUI_Tick(object sender, EventArgs e)
         {
-            int initialValue = headTime;
 
-            headTime--;
 
-            _view.ViewCountdownTime(headTime);
-
-            if (headTime <= 0)
+            try
             {
-                _counter.Stop();
-                _counter.Dispose();
+                //int initialValue = headTime;
+                //headTime--;
+
+                // return the head time each tick instead of counting down, might stop duplicates
+                headTime = _model.HeadCountdownTime();
+                _view.ViewCountdownTime(headTime);
+
+                if (headTime <= 0)
+                {
+                    _counter.Stop();
+                    _counter.Dispose();
+                    RemoveAlarm();
+
+                }
+
             }
+            catch (Exception ex)
+            {
+                _view.ViewCountdownNull(ex.Message);
+            }
+
+
+
 
         }
 

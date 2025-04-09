@@ -36,7 +36,6 @@ namespace ClockV2
             var countdownTime = _alarms.Head().AlarmTime;
 
             return countdownTime;
-
         }
 
 
@@ -61,7 +60,7 @@ namespace ClockV2
         public void RemoveAlarm()
         {
             _alarms.Head().StopCountdown();
-            _alarms.Remove();   
+            _alarms.Remove(); 
         }
 
 
@@ -86,49 +85,47 @@ namespace ClockV2
 
             if (_alarms.Head().AlarmTime == 0)     // If the timer has all ready been run and that alarm is at zero, delete it and then start the next
             {
-
+                
                 RemoveAlarm();
 
-
             }
-            else
-            {
-                //ShowAlarms(); // Update the UI
-                _alarms.Head().StartCountdown(_alarms.Head().AlarmTime);    // Start the countdown for the length of the heads time
 
-            }
+            _alarms.Head().StartCountdown(_alarms.Head().AlarmTime);    // Start the countdown for the length of the heads time
+
+
+
 
 
             //////
             // DEBUGGING 
             //////
 
-            _alarms.Head().StartCountdown(_alarms.Head().AlarmTime);    // Start the countdown for the length of the heads time
+            //_alarms.Head().StartCountdown(_alarms.Head().AlarmTime);    // Start the countdown for the length of the heads time
 
-            string head = _alarms.Head().ToString();
-            Console.WriteLine($"Head Name: {head}");    // Show Head of Queue Name
+            //string head = _alarms.Head().ToString();
+            //Console.WriteLine($"Head Name: {head}");    // Show Head of Queue Name
 
-            Console.WriteLine("=======");
+            //Console.WriteLine("=======");
 
-            int time = _alarms.Head().AlarmTime;
-            Console.WriteLine($"Head Time: {time}");    // Show Head of Queue Time
+            //int time = _alarms.Head().AlarmTime;
+            //Console.WriteLine($"Head Time: {time}");    // Show Head of Queue Time
 
-            Console.WriteLine("=======");
+            //Console.WriteLine("=======");
 
-            string queue = _alarms.ToString();
-            Console.WriteLine(queue);                   // Print the Queue
+            //string queue = _alarms.ToString();
+            //Console.WriteLine(queue);                   // Print the Queue
 
-            Console.WriteLine("=======");
+            //Console.WriteLine("=======");
 
-            Console.WriteLine("Started Countdown:" + _alarms.Head());   // Start Countdown on Head
-            _alarms.Head().StartCountdown(time);
+            //Console.WriteLine("Started Countdown:" + _alarms.Head());   // Start Countdown on Head
+            //_alarms.Head().StartCountdown(time);
 
-            Console.WriteLine("=======");
+            //Console.WriteLine("=======");
 
-            var remainingAfterTimerHasTicked = _alarms.Head().AlarmTime;
-            Console.WriteLine($"Remanining After Tick: {remainingAfterTimerHasTicked}");    //  Remaining Time on Alarm. after Alarm has sounded on Alarm Object
+            //var remainingAfterTimerHasTicked = _alarms.Head().AlarmTime;
+            //Console.WriteLine($"Remanining After Tick: {remainingAfterTimerHasTicked}");    //  Remaining Time on Alarm. after Alarm has sounded on Alarm Object
 
-            Console.WriteLine("== END ==");
+            //Console.WriteLine("== END ==");
 
         }
 
