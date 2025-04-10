@@ -3,6 +3,7 @@ using PriorityQueue;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Security.Claims;
 using System.Text;
 using System.Threading;
@@ -17,9 +18,8 @@ namespace ClockV2
     /// </summary>
     public class AlarmModel
     {
-        private SortedArrayPriorityQueue<Alarm> _alarms;
-        
 
+        private SortedArrayPriorityQueue<Alarm> _alarms;
 
         /// <summary>
         /// Constructor, so that when the Model is created, there is a SAPQ ready to use
@@ -46,23 +46,27 @@ namespace ClockV2
             //TimeSpan timeToAdd = new TimeSpan(hours, minutes, seconds);         // The amount of time to add to current time
             //TimeSpan alarmTime = currentTime.Add(timeToAdd);                    // add the currentTime to the timeToAdd
 
-             var newAlarm = new Alarm(alarmName, AlarmTimeInSeconds);
+            var newAlarm = new Alarm(alarmName, AlarmTimeInSeconds);
+
             _alarms.Add(newAlarm, AlarmTimeInSeconds);
 
         }
 
 
+
         public void RemoveAlarm()
         {
-            _alarms.Head().StopCountdown(); // stops alarm, unsubscribes from eventhandler and disposes of alarm
+            _alarms.Head().StopCountdownAndDispose(); // stops alarm, unsubscribes from eventhandler and disposes of alarm
             _alarms.Remove();               // removes head of the alarm queue
         }
+
 
 
         public string ShowAlarms()
         {
             return _alarms.ToString();
         }
+
 
 
         public void StartAlarm()        
@@ -113,13 +117,6 @@ namespace ClockV2
             //Console.WriteLine("== END ==");
 
         }
-
-
-
-
-
-
-
 
 
 

@@ -17,7 +17,6 @@ namespace ClockV2
     /// </summary>
     public class Alarm
     {
-        
         public string AlarmName { get; set; }
         public int AlarmTime { get; set; }
         private int _initialAlarmTime { get; }
@@ -34,6 +33,7 @@ namespace ClockV2
         /// <param name="alarmTime">The total time of the alarm</param>
         public Alarm(string alarmName, int alarmTime)
         {
+
             AlarmName = alarmName;
             AlarmTime = alarmTime;
             _initialAlarmTime = AlarmTime;
@@ -53,15 +53,18 @@ namespace ClockV2
         }
 
 
+
         /// <summary>
-        /// Method to Stop the Timer of the Alarm object, unsubscribe from the eventhandler and then Dispose of the Timer
+        /// Method to Stop the Timer of the Alarm object, unsubscribe from the eventhandler and then Dispose of the Timer.
+        /// Use this before Removing Alarm
         /// </summary>
-        public void StopCountdown()
+        public void StopCountdownAndDispose()
         {
             Timer.Stop();
             Timer.Tick -= Timer_Tick_Countdown; // Unsubscribe from TickEvent
             Timer.Dispose();
         }
+
 
 
         public void ResetAlarm()
@@ -80,13 +83,22 @@ namespace ClockV2
         {
             AlarmTime--;
 
+            // AlarmTime
             if (AlarmTime <= 0)
             {
-                StopCountdown();
+                StopCountdownAndDispose();
                 MessageBox.Show($"Alarm : {AlarmName}\r\nis Ready!", "Alarm", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 //ResetAlarm();             
             }
+
         }
+
+
+        //public TimeSpan GetRemainingTime()
+        //{
+        //    return AlarmEndTime - DateTime.Now;
+        //}
 
 
 

@@ -21,7 +21,6 @@ namespace ClockV2
 
         private AlarmPresenter _presenter;
 
-        
 
         public AlarmView()
         {
@@ -42,6 +41,7 @@ namespace ClockV2
             string priorityMinute = numericUpDown_Minutes.Value.ToString();
             string priortiySecond = numericUpDown_Seconds.Value.ToString();
 
+            //_presenter.StopCountdown();
             _presenter.AddAlarm(alarmName, priorityHour, priorityMinute, priortiySecond);
 
 
@@ -60,10 +60,10 @@ namespace ClockV2
 
         private void Button_StartTimer_Click(object sender, EventArgs e)
         {
-            _presenter.StartAlarm();
             _presenter.ShowAlarms();
             _presenter.HeadTime();
-
+            _presenter.StartAlarm();
+            
         }
 
 
@@ -83,6 +83,20 @@ namespace ClockV2
 
 
 
+        public void DisableStartButton()
+        {
+            button_Start.Enabled = false;
+        }
+
+
+
+        public void EnableStartButton()
+        {
+            button_Start.Enabled = true;
+        }
+
+
+
         private void ClearAlarmNameAndHoursSecondsInputs()
         {
             textBox_AlarmName.Text = null;
@@ -93,10 +107,20 @@ namespace ClockV2
 
 
 
+        //public void UpdateTimeDisplay(TimeSpan time)
+        //{
+        //    label6.Text = time.TotalSeconds <= 0
+        //        ? "00:00"
+        //        : time.ToString(@"mm\ss");
+        //}
+
+
+
         public void ViewCountdownTime(int countdownTime)
         {
             label6.Text = countdownTime.ToString();
         }
+
 
 
         public void ViewCountdownNull(string noItem)
@@ -105,8 +129,10 @@ namespace ClockV2
         }
 
 
-
-
+        public void ViewCountdownStop(string errMsg)
+        {
+            label6.Text = errMsg;
+        }
 
 
         //// https://learn.microsoft.com/en-us/dotnet/api/system.timers.timer?redirectedfrom=MSDN&view=netframework-4.8

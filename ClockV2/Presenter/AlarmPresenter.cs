@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Reflection;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -22,10 +23,8 @@ namespace ClockV2
         private readonly AlarmModel _model;
         private Timer _counter;
         private int headTime;
-        private int currentHead;
 
-        //private SortedArrayPriorityQueue<Alarm> _alarms;   /////////// FOR TESTING ACCESSING ALARMMODEL FUNCTIONS
-        //private Alarm alarm;
+
 
         public AlarmPresenter(AlarmView _view, AlarmModel _model)
         {
@@ -33,8 +32,10 @@ namespace ClockV2
             this._model = _model;
 
             // Link the View to this Presenter
-            _view.SetPresenter(this);
+            _view.SetPresenter(this);       
         }
+
+
 
         public void ShowAlarms()
         {
@@ -48,6 +49,7 @@ namespace ClockV2
                 _view.ShowAlarms("The Queue is Empty");
             }     
         }
+
 
 
         public void AddAlarm(string alarmName, string priorityHour, string priorityMinute, string priortiySecond)
@@ -89,12 +91,13 @@ namespace ClockV2
                     return;
                 }
 
-                int AlarmTimeInSeconds = (hours * 3600) + (minutes * 60) + seconds; 
+                int AlarmTimeInSeconds = (hours * 3600) + (minutes * 60) + seconds;
 
+
+                //_model.StopCountdown();
                 _model.AddAlarm(alarmName, AlarmTimeInSeconds);
 
                 ShowAlarms();   // update the ui with the alarm
-
                 HeadTime();     // update the ui with the first alarm time to countdown from
 
             }
@@ -105,14 +108,21 @@ namespace ClockV2
         }
 
 
+
         public void RemoveAlarm()
         {
             try
             {
-                //_counter.Stop(); // stop the counter on the UI then remove the alarm THROWS EXCEPTION IF THE QUEUE IS EMPTY
+                if (_counter.Enabled)
+                {
+                    _counter.Stop(); 
+                    _view.EnableStartButton();
+                }
+                 
                 _model.RemoveAlarm();
                 ShowAlarms();
                 HeadTime();
+                           
             }
             catch (Exception ex)
             {               
@@ -160,7 +170,6 @@ namespace ClockV2
 
 
 
-
         public void HeadCountdownTime()
         {
             //headTime = _model.HeadCountdownTime();
@@ -169,10 +178,9 @@ namespace ClockV2
             _counter = new System.Windows.Forms.Timer();
             _counter.Interval = 1000;
             _counter.Tick += CountdownToUI_Tick;
-            _counter.Start();   
-            
-        }
+            _counter.Start();
 
+        }
 
 
         private void CountdownToUI_Tick(object sender, EventArgs e)
@@ -192,15 +200,24 @@ namespace ClockV2
                 _view.ViewCountdownTime(headMinusOne);
 
 
-                if (headTime <= 0)
+
+                if (_counter.Enabled == true)
                 {
-                    _counter.Stop();
-                    _counter.Tick -= CountdownToUI_Tick; // unsubscribe from the event
-                    _counter.Dispose();
-                    RemoveAlarm();
+                    if (headTime <= 0)
+                    {
+                        _counter.Stop();
+                        _counter.Tick -= CountdownToUI_Tick; // unsubscribe from the event
+                        _counter.Dispose();
+                        RemoveAlarm();
+                        _view.EnableStartButton();
+
+                    }
+                    else
+                    {
+                        _view.DisableStartButton();
+                    }
                 }
 
-   
 
             }
             catch (Exception ex)
@@ -219,14 +236,14 @@ namespace ClockV2
         //    {
         //        time--;
         //        _view.ViewCountdownTime(time);
-                
+
         //    }
         //    else
         //    {
         //        _counter.Stop();
         //        _counter.Dispose();
         //    }     
-            
+
         //}
 
 
