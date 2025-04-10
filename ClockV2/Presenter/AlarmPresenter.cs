@@ -4,6 +4,7 @@ using PriorityQueue;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -21,6 +22,10 @@ namespace ClockV2
         private readonly AlarmModel _model;
         private Timer _counter;
         private int headTime;
+        private int currentHead;
+
+        //private SortedArrayPriorityQueue<Alarm> _alarms;   /////////// FOR TESTING ACCESSING ALARMMODEL FUNCTIONS
+        //private Alarm alarm;
 
         public AlarmPresenter(AlarmView _view, AlarmModel _model)
         {
@@ -87,8 +92,10 @@ namespace ClockV2
                 int AlarmTimeInSeconds = (hours * 3600) + (minutes * 60) + seconds; 
 
                 _model.AddAlarm(alarmName, AlarmTimeInSeconds);
-                ShowAlarms();
-                HeadTime();
+
+                ShowAlarms();   // update the ui with the alarm
+
+                HeadTime();     // update the ui with the first alarm time to countdown from
 
             }
             catch (Exception ex)
@@ -102,7 +109,7 @@ namespace ClockV2
         {
             try
             {
-                _counter.Stop(); // stop the counter on the UI then remove the alarm
+                //_counter.Stop(); // stop the counter on the UI then remove the alarm THROWS EXCEPTION IF THE QUEUE IS EMPTY
                 _model.RemoveAlarm();
                 ShowAlarms();
                 HeadTime();
@@ -120,14 +127,13 @@ namespace ClockV2
             try
             {
                 int headAlarmTime = _model.HeadCountdownTime();
+                _view.ViewCountdownTime(headAlarmTime);
 
                 if (headAlarmTime == null)
                 {
 
                     _view.ViewCountdownNull(headAlarmTime.ToString());
                 }
-
-                _view.ViewCountdownTime(headAlarmTime);
 
             }
             catch (Exception ex)
@@ -143,7 +149,7 @@ namespace ClockV2
             try
             {
                 _model.StartAlarm();
-                HeadCountdownTime();    // Get the number for the countdown display and create a timer
+                HeadCountdownTime();    // Get the number for the countdown display and create a timed event
 
             }
             catch (Exception ex)
@@ -157,47 +163,50 @@ namespace ClockV2
 
         public void HeadCountdownTime()
         {
-            //headTime = _model.HeadCountdownTime();          
+            //headTime = _model.HeadCountdownTime();
+            //currentHead = headTime;
 
             _counter = new System.Windows.Forms.Timer();
             _counter.Interval = 1000;
             _counter.Tick += CountdownToUI_Tick;
-
-            _counter.Start();            
+            _counter.Start();   
+            
         }
 
 
 
         private void CountdownToUI_Tick(object sender, EventArgs e)
         {
-
-
             try
             {
-                //int initialValue = headTime;
+                //headTime = _model.HeadCountdownTime();
                 //headTime--;
+                //_view.ViewCountdownTime(headTime);
 
-                // return the head time each tick instead of counting down, might stop duplicates
+                // return the head time each tick instead
                 headTime = _model.HeadCountdownTime();
-                _view.ViewCountdownTime(headTime);
+
+                // fixed the problem with the Counter being 1 second behind, but the next alarm to show was 1 second less than it should be
+                int headMinusOne = headTime - 1;
+
+                _view.ViewCountdownTime(headMinusOne);
+
 
                 if (headTime <= 0)
                 {
                     _counter.Stop();
+                    _counter.Tick -= CountdownToUI_Tick; // unsubscribe from the event
                     _counter.Dispose();
                     RemoveAlarm();
-
                 }
+
+   
 
             }
             catch (Exception ex)
             {
                 _view.ViewCountdownNull(ex.Message);
             }
-
-
-
-
         }
 
         //private void CountdownToUI_Tick(object sender, EventArgs e)

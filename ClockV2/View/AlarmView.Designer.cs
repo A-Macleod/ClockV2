@@ -159,9 +159,9 @@
             // 
             // label_Output
             // 
-            this.label_Output.Location = new System.Drawing.Point(9, 192);
+            this.label_Output.Location = new System.Drawing.Point(12, 192);
             this.label_Output.Name = "label_Output";
-            this.label_Output.Size = new System.Drawing.Size(172, 110);
+            this.label_Output.Size = new System.Drawing.Size(166, 110);
             this.label_Output.TabIndex = 12;
             this.label_Output.Text = "label_Output";
             this.label_Output.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

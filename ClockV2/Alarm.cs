@@ -47,14 +47,14 @@ namespace ClockV2
         /// <summary>
         /// Method to Start the Timer of the Alarm object
         /// </summary>
-        public void StartCountdown(int time)
+        public void StartCountdown() //int time
         {
             Timer.Start();
         }
 
 
         /// <summary>
-        /// Method to Stop the Timer of the Alarm object and then Dispose of the Timer
+        /// Method to Stop the Timer of the Alarm object, unsubscribe from the eventhandler and then Dispose of the Timer
         /// </summary>
         public void StopCountdown()
         {
@@ -73,21 +73,18 @@ namespace ClockV2
         /// <summary>
         /// Eventhandler that CountsDown with each TimerTick. The AlarmTime is decremented and when
         /// it reaches zero a message box will be called displaying that the alarm has now sounded.
-        /// Resets the AlarmTime to its initial integer value upon reaching zero.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         public void Timer_Tick_Countdown(object sender, EventArgs e)
         {
-
             AlarmTime--;
-            
 
             if (AlarmTime <= 0)
             {
                 StopCountdown();
                 MessageBox.Show($"Alarm : {AlarmName}\r\nis Ready!", "Alarm", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //ResetAlarm();
+                //ResetAlarm();             
             }
         }
 
