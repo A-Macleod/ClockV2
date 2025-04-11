@@ -19,12 +19,20 @@ namespace ClockV2
     public partial class AlarmView : Form, IView
     {
 
+        // Completely Decoupled
+        public event EventHandler<(string alarmName, string priorityHour, string priorityMinute, string priortiySecond)> Button_Add_Alarm_Click;
+
         private AlarmPresenter _presenter;
+        public event FormClosedEventHandler FormClosed;
 
 
         public AlarmView()
         {
             InitializeComponent();
+
+            button_Add_Alarm.Click += Button_Add_Click;
+
+
         }
 
 
@@ -34,16 +42,16 @@ namespace ClockV2
         }
 
 
-
         public void ShowView()
         {
             this.Show();
         }
 
+        
 
-        public event FormClosedEventHandler FormClosed;
 
 
+        // Completely Decoupled
         private void Button_Add_Click(object sender, EventArgs e)
         {
             string alarmName = textBox_AlarmName.Text.ToString();
@@ -52,8 +60,11 @@ namespace ClockV2
             string priortiySecond = numericUpDown_Seconds.Value.ToString();
 
             //_presenter.StopCountdown();
-            _presenter.AddAlarm(alarmName, priorityHour, priorityMinute, priortiySecond);
+            //_presenter.AddAlarm(alarmName, priorityHour, priorityMinute, priortiySecond);
 
+
+            //ButtonAddAlarmClicked?  .Invoke(this, alarmName, priorityHour, priorityMinute, priortiySecond);
+            Button_Add_Alarm_Click?.Invoke(this, (alarmName, priorityHour, priorityMinute, priortiySecond));
 
             ClearAlarmNameAndHoursSecondsInputs();       
         }

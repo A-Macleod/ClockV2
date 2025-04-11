@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button_Add = new System.Windows.Forms.Button();
+            this.button_Add_Alarm = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.button_Remove = new System.Windows.Forms.Button();
             this.button_Edit = new System.Windows.Forms.Button();
@@ -49,15 +49,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Seconds)).BeginInit();
             this.SuspendLayout();
             // 
-            // button_Add
+            // button_Add_Alarm
             // 
-            this.button_Add.Location = new System.Drawing.Point(12, 128);
-            this.button_Add.Name = "button_Add";
-            this.button_Add.Size = new System.Drawing.Size(80, 25);
-            this.button_Add.TabIndex = 0;
-            this.button_Add.Text = "button_Add";
-            this.button_Add.UseVisualStyleBackColor = true;
-            this.button_Add.Click += new System.EventHandler(this.Button_Add_Click);
+            this.button_Add_Alarm.Location = new System.Drawing.Point(12, 128);
+            this.button_Add_Alarm.Name = "button_Add_Alarm";
+            this.button_Add_Alarm.Size = new System.Drawing.Size(80, 25);
+            this.button_Add_Alarm.TabIndex = 0;
+            this.button_Add_Alarm.Text = "button_Add";
+            this.button_Add_Alarm.UseVisualStyleBackColor = true;
+            this.button_Add_Alarm.Click += new System.EventHandler(this.Button_Add_Alarm_Click);
             // 
             // label1
             // 
@@ -223,7 +223,7 @@
             this.Controls.Add(this.textBox_AlarmName);
             this.Controls.Add(this.button_Edit);
             this.Controls.Add(this.button_Remove);
-            this.Controls.Add(this.button_Add);
+            this.Controls.Add(this.button_Add_Alarm);
             this.Name = "AlarmView";
             this.Text = "AlarmView";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Hours)).EndInit();
@@ -236,7 +236,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button_Add;
+        private System.Windows.Forms.Button button_Add_Alarm;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button_Remove;
         private System.Windows.Forms.Button button_Edit;

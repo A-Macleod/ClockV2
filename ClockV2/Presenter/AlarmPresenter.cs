@@ -3,6 +3,7 @@ using ClockV2.Model;
 using PriorityQueue;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design.Serialization;
 using System.Diagnostics;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
@@ -32,9 +33,18 @@ namespace ClockV2
             this._model = _model;
 
             // Link the View to this Presenter
-            _view.SetPresenter(this);       
+            _view.SetPresenter(this);
+
+            // Completely Decoupled
+            _view.Button_Add_Alarm_Click += OnButtonAddAlarmClicked;
         }
 
+
+        // Completely Decoupled
+        private void OnButtonAddAlarmClicked(object sender, (string alarmName, string priorityHour, string priorityMinute, string priortiySecond) e)
+        {
+            AddAlarm(e.alarmName, e.priorityHour, e.priorityMinute, e.priortiySecond);
+        }
 
 
         public void ShowAlarms()
@@ -44,7 +54,7 @@ namespace ClockV2
                 string alarms = _model.ShowAlarms();
                 _view.ShowAlarms(alarms);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 _view.ShowAlarms("The Queue is Empty");
             }     

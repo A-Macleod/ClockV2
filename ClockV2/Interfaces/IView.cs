@@ -7,11 +7,21 @@ using System.Windows.Forms;
 
 namespace ClockV2
 {
-    interface IView
+    public interface IView
     {
+        // Completely Decoupled
+        event EventHandler<(string alarmName, string priorityHour, string priorityMinute, string priortiySecond)> Button_Add_Alarm_Click;
 
-        void ShowView();
+
+
+
+
         event FormClosedEventHandler FormClosed;
+
+
+        void SetPresenter(AlarmPresenter _presenter);
+        void ShowView();
+
 
 
 
