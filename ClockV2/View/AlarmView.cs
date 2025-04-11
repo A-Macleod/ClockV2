@@ -21,19 +21,23 @@ namespace ClockV2
 
         // Completely Decoupled
         public event EventHandler<(string alarmName, string priorityHour, string priorityMinute, string priortiySecond)> Button_Add_Alarm_Click;
+        public event EventHandler Button_Remove_Alarm_Click;
 
         private AlarmPresenter _presenter;
         public event FormClosedEventHandler FormClosed;
 
-
+        /// <summary>
+        /// Constructor that instatiates the AlarmView and subscribes to the button eventhandlers
+        /// </summary>
         public AlarmView()
         {
             InitializeComponent();
 
             button_Add_Alarm.Click += Button_Add_Click;
-
+            button_Remove_Alarm.Click += Button_Remove_Click;
 
         }
+
 
 
         public void SetPresenter(AlarmPresenter _presenter)
@@ -46,9 +50,6 @@ namespace ClockV2
         {
             this.Show();
         }
-
-        
-
 
 
         // Completely Decoupled
@@ -69,13 +70,28 @@ namespace ClockV2
             ClearAlarmNameAndHoursSecondsInputs();       
         }
 
-
-
         private void Button_Remove_Click(object sender, EventArgs e)
         {
-            _presenter.RemoveAlarm();
-            _presenter.HeadTime();
+
+            Button_Remove_Alarm_Click?.Invoke(this, EventArgs.Empty);
+            //_presenter.RemoveAlarm();
+            //_presenter.HeadTime();
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -30,7 +30,7 @@
         {
             this.button_Add_Alarm = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.button_Remove = new System.Windows.Forms.Button();
+            this.button_Remove_Alarm = new System.Windows.Forms.Button();
             this.button_Edit = new System.Windows.Forms.Button();
             this.textBox_AlarmName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -57,7 +57,6 @@
             this.button_Add_Alarm.TabIndex = 0;
             this.button_Add_Alarm.Text = "button_Add";
             this.button_Add_Alarm.UseVisualStyleBackColor = true;
-            this.button_Add_Alarm.Click += new System.EventHandler(this.Button_Add_Alarm_Click);
             // 
             // label1
             // 
@@ -68,15 +67,15 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Alarm Name";
             // 
-            // button_Remove
+            // button_Remove_Alarm
             // 
-            this.button_Remove.Location = new System.Drawing.Point(98, 128);
-            this.button_Remove.Name = "button_Remove";
-            this.button_Remove.Size = new System.Drawing.Size(80, 25);
-            this.button_Remove.TabIndex = 1;
-            this.button_Remove.Text = "button_Remove";
-            this.button_Remove.UseVisualStyleBackColor = true;
-            this.button_Remove.Click += new System.EventHandler(this.Button_Remove_Click);
+            this.button_Remove_Alarm.Location = new System.Drawing.Point(98, 128);
+            this.button_Remove_Alarm.Name = "button_Remove_Alarm";
+            this.button_Remove_Alarm.Size = new System.Drawing.Size(80, 25);
+            this.button_Remove_Alarm.TabIndex = 1;
+            this.button_Remove_Alarm.Text = "button_Remove";
+            this.button_Remove_Alarm.UseVisualStyleBackColor = true;
+            this.button_Remove_Alarm.Click += new System.EventHandler(this.Button_Remove_Click);
             // 
             // button_Edit
             // 
@@ -222,7 +221,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox_AlarmName);
             this.Controls.Add(this.button_Edit);
-            this.Controls.Add(this.button_Remove);
+            this.Controls.Add(this.button_Remove_Alarm);
             this.Controls.Add(this.button_Add_Alarm);
             this.Name = "AlarmView";
             this.Text = "AlarmView";
@@ -238,7 +237,7 @@
 
         private System.Windows.Forms.Button button_Add_Alarm;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button_Remove;
+        private System.Windows.Forms.Button button_Remove_Alarm;
         private System.Windows.Forms.Button button_Edit;
         private System.Windows.Forms.TextBox textBox_AlarmName;
         private System.Windows.Forms.Label label2;

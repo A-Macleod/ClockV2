@@ -37,6 +37,7 @@ namespace ClockV2
 
             // Completely Decoupled
             _view.Button_Add_Alarm_Click += OnButtonAddAlarmClicked;
+            _view.Button_Remove_Alarm_Click += OnButtonRemoveAlarmClicked;
         }
 
 
@@ -45,6 +46,30 @@ namespace ClockV2
         {
             AddAlarm(e.alarmName, e.priorityHour, e.priorityMinute, e.priortiySecond);
         }
+
+        private void OnButtonRemoveAlarmClicked(object sender, EventArgs e)
+        {
+            RemoveAlarm();
+            HeadTime();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         public void ShowAlarms()
