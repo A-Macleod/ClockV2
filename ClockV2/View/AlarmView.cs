@@ -34,6 +34,16 @@ namespace ClockV2
         }
 
 
+
+        public void ShowView()
+        {
+            this.Show();
+        }
+
+
+        public event FormClosedEventHandler FormClosed;
+
+
         private void Button_Add_Click(object sender, EventArgs e)
         {
             string alarmName = textBox_AlarmName.Text.ToString();

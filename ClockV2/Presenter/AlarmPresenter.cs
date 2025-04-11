@@ -19,14 +19,14 @@ namespace ClockV2
     public class AlarmPresenter
     {
 
-        private readonly AlarmView _view;
+        private readonly IView _view;
         private readonly AlarmModel _model;
         private Timer _counter;
         private int headTime;
 
 
 
-        public AlarmPresenter(AlarmView _view, AlarmModel _model)
+        public AlarmPresenter(IView _view, AlarmModel _model)
         {
             this._view = _view;
             this._model = _model;
