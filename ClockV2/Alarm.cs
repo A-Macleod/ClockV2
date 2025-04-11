@@ -64,7 +64,6 @@ namespace ClockV2
         /// </summary>
         public void StopCountdownAndDispose()
         {
-            Timer.Stop();
             Timer.Tick -= Timer_Tick_Countdown; // Unsubscribe from TickEvent
             Timer.Dispose();
         }

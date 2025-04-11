@@ -24,9 +24,12 @@ namespace ClockV2
         public event EventHandler<(string alarmName, string priorityHour, string priorityMinute, string priortiySecond)> Button_Add_Alarm_Click;
         public event EventHandler Button_Remove_Alarm_Click;
         public event EventHandler Button_Start_Timer_Click;
+       
+        public event FormClosedEventHandler FormClosed;
 
         private AlarmPresenter _presenter;
-        public event FormClosedEventHandler FormClosed;
+
+
 
         /// <summary>
         /// Constructor that instatiates the AlarmView and subscribes to the button eventhandlers
@@ -43,6 +46,42 @@ namespace ClockV2
 
 
 
+        // Completely Decoupled
+        private void Button_Add_Click(object sender, EventArgs e)
+        {
+            string alarmName = textBox_AlarmName.Text.ToString();
+            string priorityHour = numericUpDown_Hours.Value.ToString();
+            string priorityMinute = numericUpDown_Minutes.Value.ToString();
+            string priortiySecond = numericUpDown_Seconds.Value.ToString();
+
+            //_presenter.StopCountdown();
+            //_presenter.AddAlarm(alarmName, priorityHour, priorityMinute, priortiySecond);
+
+            Button_Add_Alarm_Click?.Invoke(this, (alarmName, priorityHour, priorityMinute, priortiySecond));
+
+            ClearAlarmNameAndHoursSecondsInputs();
+        }
+
+
+        private void Button_Remove_Click(object sender, EventArgs e)
+        {
+
+            Button_Remove_Alarm_Click?.Invoke(this, EventArgs.Empty);
+            //_presenter.RemoveAlarm();
+            //_presenter.HeadTime();
+        }
+
+
+        private void Button_StartTimer_Click(object sender, EventArgs e)
+        {
+            Button_Start_Timer_Click?.Invoke(this, EventArgs.Empty);
+            //_presenter.ShowAlarms();
+            //_presenter.HeadTime();
+            //_presenter.StartAlarm();
+
+        }
+
+
         public void SetPresenter(AlarmPresenter _presenter)
         {
             this._presenter = _presenter;
@@ -55,48 +94,10 @@ namespace ClockV2
         }
 
 
-        // Completely Decoupled
-        private void Button_Add_Click(object sender, EventArgs e)
-        {
-            string alarmName = textBox_AlarmName.Text.ToString();
-            string priorityHour = numericUpDown_Hours.Value.ToString(); 
-            string priorityMinute = numericUpDown_Minutes.Value.ToString();
-            string priortiySecond = numericUpDown_Seconds.Value.ToString();
-
-            //_presenter.StopCountdown();
-            //_presenter.AddAlarm(alarmName, priorityHour, priorityMinute, priortiySecond);
-
-
-            //ButtonAddAlarmClicked?  .Invoke(this, alarmName, priorityHour, priorityMinute, priortiySecond);
-            Button_Add_Alarm_Click?.Invoke(this, (alarmName, priorityHour, priorityMinute, priortiySecond));
-
-            ClearAlarmNameAndHoursSecondsInputs();       
-        }
-
-        private void Button_Remove_Click(object sender, EventArgs e)
-        {
-
-            Button_Remove_Alarm_Click?.Invoke(this, EventArgs.Empty);
-            //_presenter.RemoveAlarm();
-            //_presenter.HeadTime();
-        }
-
-        private void Button_StartTimer_Click(object sender, EventArgs e)
-        {
-            Button_Start_Timer_Click?.Invoke(this, EventArgs.Empty);
-            //_presenter.ShowAlarms();
-            //_presenter.HeadTime();
-            //_presenter.StartAlarm();
-            
-        }
-
-
-
         public void ShowAlarms(string alarms)
         {
             label_Output.Text = alarms;  
         }
-
 
 
         public void ShowError(string message)
@@ -106,6 +107,11 @@ namespace ClockV2
         }
 
 
+        public void EnableStartButton()
+        {
+            button_Start_Alarm.Enabled = true;
+        }
+
 
         public void DisableStartButton()
         {
@@ -113,22 +119,13 @@ namespace ClockV2
         }
 
 
-
-        public void EnableStartButton()
-        {
-            button_Start_Alarm.Enabled = true;
-        }
-
-
-
-        private void ClearAlarmNameAndHoursSecondsInputs()
+        public void ClearAlarmNameAndHoursSecondsInputs()
         {
             textBox_AlarmName.Text = null;
             numericUpDown_Hours.Text = "0";
             numericUpDown_Minutes.Text = "0";
             numericUpDown_Seconds.Text = "0";
         }
-
 
 
         //public void UpdateTimeDisplay(TimeSpan time)
@@ -139,12 +136,10 @@ namespace ClockV2
         //}
 
 
-
         public void ViewCountdownTime(int countdownTime)
         {
             label6.Text = countdownTime.ToString();
         }
-
 
 
         public void ViewCountdownNull(string noItem)
