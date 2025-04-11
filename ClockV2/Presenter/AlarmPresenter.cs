@@ -38,6 +38,7 @@ namespace ClockV2
             // Completely Decoupled
             _view.Button_Add_Alarm_Click += OnButtonAddAlarmClicked;
             _view.Button_Remove_Alarm_Click += OnButtonRemoveAlarmClicked;
+            _view.Button_Start_Timer_Click += OnButtonStartTimerClicked;
         }
 
 
@@ -53,7 +54,12 @@ namespace ClockV2
             HeadTime();
         }
 
-
+        private void OnButtonStartTimerClicked(object sender, EventArgs e)
+        {
+            ShowAlarms();
+            HeadTime();
+            StartAlarm();
+        }
 
 
 

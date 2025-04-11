@@ -38,7 +38,7 @@
             this.numericUpDown_Minutes = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.button_Start = new System.Windows.Forms.Button();
+            this.button_Start_Alarm = new System.Windows.Forms.Button();
             this.label_Output = new System.Windows.Forms.Label();
             this.numericUpDown_Seconds = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
@@ -146,15 +146,15 @@
             this.label4.TabIndex = 9;
             this.label4.Text = "M:";
             // 
-            // button_Start
+            // button_Start_Alarm
             // 
-            this.button_Start.Location = new System.Drawing.Point(278, 128);
-            this.button_Start.Name = "button_Start";
-            this.button_Start.Size = new System.Drawing.Size(80, 25);
-            this.button_Start.TabIndex = 11;
-            this.button_Start.Text = "button_Start";
-            this.button_Start.UseVisualStyleBackColor = true;
-            this.button_Start.Click += new System.EventHandler(this.Button_StartTimer_Click);
+            this.button_Start_Alarm.Location = new System.Drawing.Point(278, 128);
+            this.button_Start_Alarm.Name = "button_Start_Alarm";
+            this.button_Start_Alarm.Size = new System.Drawing.Size(80, 25);
+            this.button_Start_Alarm.TabIndex = 11;
+            this.button_Start_Alarm.Text = "button_Start";
+            this.button_Start_Alarm.UseVisualStyleBackColor = true;
+            this.button_Start_Alarm.Click += new System.EventHandler(this.Button_StartTimer_Click);
             // 
             // label_Output
             // 
@@ -212,7 +212,7 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.numericUpDown_Seconds);
             this.Controls.Add(this.label_Output);
-            this.Controls.Add(this.button_Start);
+            this.Controls.Add(this.button_Start_Alarm);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.numericUpDown_Minutes);
@@ -245,7 +245,7 @@
         private System.Windows.Forms.NumericUpDown numericUpDown_Minutes;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button button_Start;
+        private System.Windows.Forms.Button button_Start_Alarm;
         private System.Windows.Forms.Label label_Output;
         private System.Windows.Forms.NumericUpDown numericUpDown_Seconds;
         private System.Windows.Forms.Label label5;

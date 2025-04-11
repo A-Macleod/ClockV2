@@ -12,7 +12,7 @@ namespace ClockV2
         // Completely Decoupled
         event EventHandler<(string alarmName, string priorityHour, string priorityMinute, string priortiySecond)> Button_Add_Alarm_Click;       // passing in tuple string value
         event EventHandler Button_Remove_Alarm_Click;
-
+        event EventHandler Button_Start_Timer_Click;
 
 
 

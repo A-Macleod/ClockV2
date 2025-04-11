@@ -13,6 +13,7 @@ using System.Timers;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
+using System.Runtime.CompilerServices;
 
 namespace ClockV2
 {
@@ -22,6 +23,7 @@ namespace ClockV2
         // Completely Decoupled
         public event EventHandler<(string alarmName, string priorityHour, string priorityMinute, string priortiySecond)> Button_Add_Alarm_Click;
         public event EventHandler Button_Remove_Alarm_Click;
+        public event EventHandler Button_Start_Timer_Click;
 
         private AlarmPresenter _presenter;
         public event FormClosedEventHandler FormClosed;
@@ -35,6 +37,7 @@ namespace ClockV2
 
             button_Add_Alarm.Click += Button_Add_Click;
             button_Remove_Alarm.Click += Button_Remove_Click;
+            button_Start_Alarm.Click += Button_StartTimer_Click;
 
         }
 
@@ -78,28 +81,12 @@ namespace ClockV2
             //_presenter.HeadTime();
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         private void Button_StartTimer_Click(object sender, EventArgs e)
         {
-            _presenter.ShowAlarms();
-            _presenter.HeadTime();
-            _presenter.StartAlarm();
+            Button_Start_Timer_Click?.Invoke(this, EventArgs.Empty);
+            //_presenter.ShowAlarms();
+            //_presenter.HeadTime();
+            //_presenter.StartAlarm();
             
         }
 
@@ -122,14 +109,14 @@ namespace ClockV2
 
         public void DisableStartButton()
         {
-            button_Start.Enabled = false;
+            button_Start_Alarm.Enabled = false;
         }
 
 
 
         public void EnableStartButton()
         {
-            button_Start.Enabled = true;
+            button_Start_Alarm.Enabled = true;
         }
 
 
