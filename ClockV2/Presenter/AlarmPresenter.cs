@@ -93,8 +93,6 @@ namespace ClockV2
 
                 int AlarmTimeInSeconds = (hours * 3600) + (minutes * 60) + seconds;
 
-
-                //_model.StopCountdown();
                 _model.AddAlarm(alarmName, AlarmTimeInSeconds);
 
                 ShowAlarms();   // update the ui with the alarm
@@ -169,7 +167,7 @@ namespace ClockV2
         }
 
 
-
+        // https://learn.microsoft.com/en-us/dotnet/api/system.timers.timer?redirectedfrom=msdn&view=netframework-4.8
         public void HeadCountdownTime()
         {
             //headTime = _model.HeadCountdownTime();
@@ -183,6 +181,7 @@ namespace ClockV2
         }
 
 
+
         private void CountdownToUI_Tick(object sender, EventArgs e)
         {
             try
@@ -191,15 +190,11 @@ namespace ClockV2
                 //headTime--;
                 //_view.ViewCountdownTime(headTime);
 
+
                 // return the head time each tick instead
                 headTime = _model.HeadCountdownTime();
-
-                // fixed the problem with the Counter being 1 second behind, but the next alarm to show was 1 second less than it should be
                 int headMinusOne = headTime - 1;
-
                 _view.ViewCountdownTime(headMinusOne);
-
-
 
                 if (_counter.Enabled == true)
                 {
@@ -225,71 +220,6 @@ namespace ClockV2
                 _view.ViewCountdownNull(ex.Message);
             }
         }
-
-        //private void CountdownToUI_Tick(object sender, EventArgs e)
-        //{
-        //    //int initialTime = _model.HeadCountdownTime();
-        //    //int time = initialTime;
-        //    time--;
-
-        //    if (time >= 0)
-        //    {
-        //        time--;
-        //        _view.ViewCountdownTime(time);
-
-        //    }
-        //    else
-        //    {
-        //        _counter.Stop();
-        //        _counter.Dispose();
-        //    }     
-
-        //}
-
-
-
-        //// https://learn.microsoft.com/en-us/dotnet/api/system.timers.timer?redirectedfrom=msdn&view=netframework-4.8
-        //public void AlarmTimer(int AlarmTimeInSeconds)
-        //{
-
-        //    int counter = AlarmTimeInSeconds;
-
-        //    Timer countdownTimer = new Timer();
-        //    countdownTimer.Interval = 1000; // 1 second
-        //    countdownTimer.Tick += CountdownTimer_Tick;
-
-        //    countdownTimer.Start();
-
-        //    _model.AlarmCountdownTimer(AlarmTimeInSeconds);
-        //    _view.Countdown(AlarmTimeInSeconds);
-        //}
-
-
-
-        //private void CountdownTimer_Tick(object sender, EventArgs e)
-        //{
-
-        //    if (counter >= 0)
-        //    {
-
-        //        _view.Countdown(counter);
-        //        counter--;
-        //    }
-        //    //throw new NotImplementedException();
-        //    else
-        //    {
-        //        // remove the item from the queue 
-
-        //        countdownTimer.Stop();
-        //        countdownTimer.Dispose();
-        //        return;
-        //    }
-        //}
-
-
-
-
-
 
 
     }

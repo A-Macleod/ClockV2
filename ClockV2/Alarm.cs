@@ -17,10 +17,14 @@ namespace ClockV2
     /// </summary>
     public class Alarm
     {
+
         public string AlarmName { get; set; }
         public int AlarmTime { get; set; }
         private int _initialAlarmTime { get; }
         public System.Windows.Forms.Timer Timer;
+
+
+
 
         //private SortedArrayPriorityQueue<Alarm> _alarms;   /////////// FOR TESTING ACCESSING ALARMMODEL FUNCTIONS
 
