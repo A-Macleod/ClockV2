@@ -18,7 +18,7 @@ namespace ClockV2
     public class Alarm
     {
 
-        private int _initialAlarmTime { get; }
+        private int _initialAlarmTime { get; }  // For resetting the alarm, we are not using anymore
         private DateTime _alarmDueTime;
         
         public string AlarmName { get; set; }
@@ -27,8 +27,8 @@ namespace ClockV2
         public System.Windows.Forms.Timer Timer;
 
 
-        public EventHandler Alarm_Countdown_Tick;
-        public EventHandler Alarm_Triggered;
+        public EventHandler<string> Alarm_Triggered;                // Popup Event and to Remove the Alarm
+        public EventHandler<TimeSpan> Alarm_Countdown_Tick; // Update UI with time remaining on Countdown & When it reaches zero
 
 
         //private SortedArrayPriorityQueue<Alarm> _alarms;   /////////// FOR TESTING ACCESSING ALARMMODEL FUNCTIONS
@@ -50,7 +50,7 @@ namespace ClockV2
 
             //_initialAlarmTime = AlarmTime; For resetting the alarm which we are not using 
 
-            _alarmDueTime = DateTime.Now.AddSeconds(AlarmTime); // Adding the Alarm time to the current time, this is when we want the alarm to go off after we start it
+            _alarmDueTime = DateTime.Now.AddSeconds(AlarmTime); // Adding the Alarm time to the current time, this is when we want the alarm to go off after we start timer
 
             
 
@@ -79,13 +79,20 @@ namespace ClockV2
             if (remainingTimeLeft <= TimeSpan.Zero)
             {
                 // stop timer and dispose
-                // call eventhandler in presenter to show the time has reaches zero (TimeSpan.Zero)
-                // call eventhandler in the presenter to pop-up alarm complete
-                // call eventhandler in the presenter to delete the alarm
+                StopCountdownAndDispose();
+
+                // [1] call eventhandler in presenter to show the time has reaches zero (TimeSpan.Zero)
+                Alarm_Countdown_Tick?.Invoke(this, TimeSpan.Zero);
+
+
+                // [2] call eventhandler in the presenter to pop-up alarm complete
+                // [2] call eventhandler in the presenter to delete the alarm
+                Alarm_Triggered?.Invoke(this, AlarmName);
             }
             else
             {
-                // call eventhandler in presenter to update the time in UI/View (remainingTimeLeft)
+                // [1] call eventhandler in presenter to update the time in UI/View (remainingTimeLeft)
+                Alarm_Countdown_Tick?.Invoke(this, remainingTimeLeft);
             }
 
 
@@ -94,15 +101,15 @@ namespace ClockV2
 
 
 
-                AlarmTime--;
+            //    AlarmTime--;
 
-            if (AlarmTime <= 0)
-            {
-                StopCountdownAndDispose();
-                MessageBox.Show($"Alarm : {AlarmName}\r\nis Ready!", "Alarm", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //if (AlarmTime <= 0)
+            //{
+            //    StopCountdownAndDispose();
+            //    MessageBox.Show($"Alarm : {AlarmName}\r\nis Ready!", "Alarm", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                //ResetAlarm();             
-            }
+            //    //ResetAlarm();             
+            //}
         }
 
         /// <summary>

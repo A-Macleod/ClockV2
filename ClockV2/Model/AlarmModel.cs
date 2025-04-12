@@ -21,6 +21,10 @@ namespace ClockV2
 
         private SortedArrayPriorityQueue<Alarm> _alarms;
 
+        public event EventHandler<Alarm> AlarmCreatedInModel;   // Pass this newAlarm to the presenter for use
+
+
+
         /// <summary>
         /// Constructor, so that when the Model is created, there is a SAPQ ready to use
         /// </summary>
@@ -50,14 +54,16 @@ namespace ClockV2
 
             _alarms.Add(newAlarm, AlarmTimeInSeconds);
 
+            AlarmCreatedInModel?.Invoke(this, newAlarm); // Event to pass this to the Presenter
+
         }
 
 
 
         public void RemoveAlarm()
         {
-            _alarms.Head().StopCountdownAndDispose(); // stops alarm, unsubscribes from eventhandler and disposes of alarm
-            _alarms.Remove();               // removes head of the alarm queue
+            _alarms.Head().StopCountdownAndDispose();   // stops alarm, unsubscribes from eventhandler and disposes of alarm
+            _alarms.Remove();                           // removes head of the alarm queue
         }
 
 
@@ -72,6 +78,14 @@ namespace ClockV2
         public void StartAlarm()        
         {
 
+            //var head = _alarms.Head();
+            //head.Alarm_Countdown_Tick += OnAlarmCountdownTick;
+
+
+            _alarms.Head().StartCountdown();    // Start the countdown for the length of the heads time
+            
+
+
             //if (_alarms.Head().AlarmTime == 0)     // if the timer has all ready been run and that alarm is at zero, delete it and then start the next
             //{
 
@@ -80,10 +94,6 @@ namespace ClockV2
             //}
 
             //_alarms.Head().StartCountdown(_alarms.Head().AlarmTime);    // Start the countdown for the length of the heads time
-
-            _alarms.Head().StartCountdown();    // Start the countdown for the length of the heads time
-
-
 
             //////
             // DEBUGGING 
