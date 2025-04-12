@@ -83,7 +83,7 @@ namespace ClockV2
         {
             AlarmTime--;
 
-            // AlarmTime
+            
             if (AlarmTime <= 0)
             {
                 StopCountdownAndDispose();

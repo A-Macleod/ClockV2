@@ -118,7 +118,7 @@ namespace ClockV2
                     _counter.Stop(); 
                     _view.EnableStartButton();
                 }
-                 
+                
                 _model.RemoveAlarm();
                 ShowAlarms();
                 HeadTime();
@@ -191,7 +191,8 @@ namespace ClockV2
                 //headTime--;
                 //_view.ViewCountdownTime(headTime);
 
-                // return the head time each tick instead
+
+                // return the head time each tick instead       // SOMETHING WRONG HERE
                 headTime = _model.HeadCountdownTime();
 
                 // fixed the problem with the Counter being 1 second behind, but the next alarm to show was 1 second less than it should be
@@ -199,9 +200,7 @@ namespace ClockV2
 
                 _view.ViewCountdownTime(headMinusOne);
 
-
-
-                if (_counter.Enabled == true)
+                if (_counter.Enabled)
                 {
                     if (headTime <= 0)
                     {
@@ -280,11 +279,90 @@ namespace ClockV2
         //    {
         //        // remove the item from the queue 
 
+        //public void AlarmTimer(int AlarmTimeInSeconds)
+        //{
+
+        //    int counter = AlarmTimeInSeconds;
+
+        //    Timer countdownTimer = new Timer();
+        //    countdownTimer.Interval = 1000; // 1 second
+        //    countdownTimer.Tick += CountdownTimer_Tick;
+
+        //    countdownTimer.Start();
+
+        //    //_model.AlarmCountdownTimer(AlarmTimeInSeconds);
+        //    //_view.Countdown(AlarmTimeInSeconds);
+        //}
+
+
+
+        //private void CountdownTimer_Tick(object sender, EventArgs e)
+        //{
+
+        //    if (counter >= 0)
+        //    {
+
+        //        _view.Countdown(counter);
+        //        counter--;
+        //    }
+        //    //throw new NotImplementedException();
+        //    else
+        //    {
+        //        // remove the item from the queue 
+
         //        countdownTimer.Stop();
         //        countdownTimer.Dispose();
         //        return;
         //    }
         //}
+
+
+
+        //public void AlarmTimer(int AlarmTimeInSeconds)
+        //{
+
+        //    int counter = AlarmTimeInSeconds;
+
+        //    Timer countdownTimer = new Timer();
+        //    countdownTimer.Interval = 1000; // 1 second
+        //    countdownTimer.Tick += CountdownTimer_Tick;
+
+        //    countdownTimer.Start();
+
+        //    //_model.AlarmCountdownTimer(AlarmTimeInSeconds);
+        //    //_view.Countdown(AlarmTimeInSeconds);
+        //}
+
+
+
+        //private void CountdownTimer_Tick(object sender, EventArgs e)
+        //{
+
+        //    if (counter >= 0)
+        //    {
+
+        //        _view.Countdown(counter);
+        //        counter--;
+        //    }
+        //    //throw new NotImplementedException();
+        //    else
+        //    {
+        //        // remove the item from the queue 
+
+        //        countdownTimer.Stop();
+        //        countdownTimer.Dispose();
+        //        return;
+        //    }
+        //}
+
+
+
+        public void StartAlarm()
+        {
+            try
+            {
+                _model.StartAlarm();
+                StartCounter();    // Get the number for the countdown display and create a timed event
 
 
 
