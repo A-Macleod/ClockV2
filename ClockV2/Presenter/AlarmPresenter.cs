@@ -26,7 +26,7 @@ namespace ClockV2
         private new System.Windows.Forms.Timer _counter;
         private int headTime;
 
-        //private Alarm _alarm;
+        //private Alarm newAlarm;
         //public event EventHandler Alarm_Countdown_Tick;
 
 
@@ -66,14 +66,15 @@ namespace ClockV2
         private void OnButtonRemoveAlarmClicked(object sender, EventArgs e)
         {
             RemoveAlarm();
-            HeadTime();
+            HeadCountdownTime();
         }
 
 
         private void OnButtonStartTimerClicked(object sender, EventArgs e)
         {
+            
             ShowAlarms();
-            HeadTime();
+            HeadCountdownTime();
             StartAlarm();
         }
 
@@ -93,9 +94,11 @@ namespace ClockV2
         }
 
 
+
         private void OnAlarmTriggered(object sender, string AlarmName)
         {
             _view.ShowAlarmCompleteMessageBox(AlarmName);
+            RemoveAlarm();
         }
 
 
@@ -148,7 +151,7 @@ namespace ClockV2
                 _model.AddAlarm(alarmName, AlarmTimeInSeconds);
 
                 ShowAlarms();   // update the ui with the alarm
-                HeadTime();     // update the ui with the first alarm time to countdown from
+                HeadCountdownTime();     // update the ui with the first alarm time to countdown from
 
                 
 
@@ -172,7 +175,7 @@ namespace ClockV2
                 
                 _model.RemoveAlarm();
                 ShowAlarms();
-                HeadTime();
+                HeadCountdownTime();
                            
             }
             catch (Exception ex)
@@ -216,17 +219,17 @@ namespace ClockV2
 
 
 
-        public void HeadTime()
+        public void HeadCountdownTime()
         {
             try
-            {
-                int headAlarmTime = _model.HeadCountdownTime();
-                _view.ViewCountdownTime(headAlarmTime);
+            {                
+                int headCountdownTime = _model.HeadCountdownTime();
+                _view.ViewCountdownTime(headCountdownTime);
 
-                if (headAlarmTime == null)
+                if (headCountdownTime == null)
                 {
 
-                    _view.ViewCountdownNull(headAlarmTime.ToString());
+                    _view.ViewCountdownNull(headCountdownTime.ToString());
                 }
 
             }
@@ -243,66 +246,58 @@ namespace ClockV2
 
 
         // https://learn.microsoft.com/en-us/dotnet/api/system.timers.timer?redirectedfrom=msdn&view=netframework-4.8
-        public void StartCounter()
-        {
-            //headTime = _model.HeadCountdownTime();
-            //currentHead = headTime;
+        //public void StartCounter()
+        //{
+        //    //headTime = _model.HeadCountdownTime();
+        //    //currentHead = headTime;
 
-            //_counter = new System.Windows.Forms.Timer();
-            //_counter.Interval = 1000;
-            //_counter.Tick += CountdownToUI_Tick;
-            _counter.Start();
+        //    //_counter = new System.Windows.Forms.Timer();
+        //    //_counter.Interval = 1000;
+        //    //_counter.Tick += CountdownToUI_Tick;
+        //    _counter.Start();
 
-        }
-
-
-
-        private void CountdownToUI_Tick(object sender, EventArgs e)
-        {
-            try
-            {
-                //headTime = _model.HeadCountdownTime();
-                //headTime--;
-                //_view.ViewCountdownTime(headTime);
+        //}
 
 
-                // return the head time each tick instead       // SOMETHING WRONG HERE
-                headTime = _model.HeadCountdownTime();
-                int headMinusOne = headTime - 1;
-                _view.ViewCountdownTime(headMinusOne);
 
-                if (_counter.Enabled)
-
-                if (_counter.Enabled == true)
-
-                if (_counter.Enabled == true)
-
-                if (_counter.Enabled == true)
-
-                if (_counter.Enabled == true)
-                {
-                    if (headTime <= 0)
-                    {
-                        _counter.Stop();
-                        //_counter.Tick -= CountdownToUI_Tick; // unsubscribe from the event
-                        //_counter.Dispose();
-                        RemoveAlarm();
-                        _view.EnableStartButton();
-
-                    }
-                    else
-                    {
-                        _view.DisableStartButton();
-                    }
-                }
+        //private void CountdownToUI_Tick(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        //headTime = _model.HeadCountdownTime();
+        //        //headTime--;
+        //        //_view.ViewCountdownTime(headTime);
 
 
-            }
-            catch (Exception ex)
-            {
-                _view.ViewCountdownNull(ex.Message);
-            }
-        }
+        //        // return the head time each tick instead       // SOMETHING WRONG HERE
+        //        headTime = _model.HeadCountdownTime();
+        //        int headMinusOne = headTime - 1;
+        //        _view.ViewCountdownTime(headMinusOne);
+
+
+                
+        //            if (headTime <= 0)
+        //            {
+        //                _counter.Stop();
+        //                //_counter.Tick -= CountdownToUI_Tick; // unsubscribe from the event
+        //                //_counter.Dispose();
+        //                RemoveAlarm();
+        //                _view.EnableStartButton();
+
+        //            }
+        //            else
+        //            {
+        //                _view.DisableStartButton();
+        //            }
+                
+
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _view.ViewCountdownNull(ex.Message);
+        //    }
+        //}
 
 
 

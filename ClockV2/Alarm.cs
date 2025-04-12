@@ -28,7 +28,7 @@ namespace ClockV2
 
 
         public EventHandler<string> Alarm_Triggered;                // Popup Event and to Remove the Alarm
-        public EventHandler<TimeSpan> Alarm_Countdown_Tick; // Update UI with time remaining on Countdown & When it reaches zero
+        public EventHandler<TimeSpan> Alarm_Countdown_Tick;         // Update UI with time remaining on Countdown & When it reaches zero
 
 
         //private SortedArrayPriorityQueue<Alarm> _alarms;   /////////// FOR TESTING ACCESSING ALARMMODEL FUNCTIONS
@@ -48,7 +48,7 @@ namespace ClockV2
             AlarmName = alarmName;
             AlarmTime = alarmCountdownTimeInSeconds;
 
-            //_initialAlarmTime = AlarmTime; For resetting the alarm which we are not using 
+            //_initialAlarmTime = AlarmTime; /For resetting the alarm which we are not using 
 
             _alarmDueTime = DateTime.Now.AddSeconds(AlarmTime); // Adding the Alarm time to the current time, this is when we want the alarm to go off after we start timer
 
@@ -72,33 +72,21 @@ namespace ClockV2
         {
             // https://zerotomastery.io/blog/c-sharp-timespan/
 
-
-            var remainingTimeLeft = _alarmDueTime - DateTime.Now;   // This is essentially counting down as our time ticks on by
+            var remainingTimeLeft = _alarmDueTime - DateTime.Now;   // Countdown - this starts the second the newAlarm is created, not good for Stopwatch like Alarms
 
 
             if (remainingTimeLeft <= TimeSpan.Zero)
             {
-                // stop timer and dispose
                 StopCountdownAndDispose();
 
-                // [1] call eventhandler in presenter to show the time has reaches zero (TimeSpan.Zero)
-                Alarm_Countdown_Tick?.Invoke(this, TimeSpan.Zero);
+                Alarm_Countdown_Tick?.Invoke(this, TimeSpan.Zero);  // Time has reached zero
 
-
-                // [2] call eventhandler in the presenter to pop-up alarm complete
-                // [2] call eventhandler in the presenter to delete the alarm
-                Alarm_Triggered?.Invoke(this, AlarmName);
+                Alarm_Triggered?.Invoke(this, AlarmName);   // MessageBox alarm complete, Remove Alarm
             }
             else
             {
-                // [1] call eventhandler in presenter to update the time in UI/View (remainingTimeLeft)
                 Alarm_Countdown_Tick?.Invoke(this, remainingTimeLeft);
             }
-
-
-
-
-
 
 
             //    AlarmTime--;
@@ -117,6 +105,7 @@ namespace ClockV2
         /// </summary>
         public void StartCountdown() //int time
         {
+            _alarmDueTime = DateTime.Now.AddSeconds(AlarmTime); // Adding the Alarm time to the current time, this is when we want the alarm to go off after we start timer
             Timer.Start();
         }
 

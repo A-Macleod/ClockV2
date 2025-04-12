@@ -68,7 +68,7 @@ namespace ClockV2
 
             Button_Remove_Alarm_Click?.Invoke(this, EventArgs.Empty);
             //_presenter.RemoveAlarm();
-            //_presenter.HeadTime();
+            //_presenter.HeadCountdownTime();
         }
 
 
@@ -76,7 +76,7 @@ namespace ClockV2
         {
             Button_Start_Timer_Click?.Invoke(this, EventArgs.Empty);
             //_presenter.ShowAlarms();
-            //_presenter.HeadTime();
+            //_presenter.HeadCountdownTime();
             //_presenter.StartAlarm();
 
         }
