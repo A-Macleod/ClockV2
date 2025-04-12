@@ -17,10 +17,14 @@ namespace ClockV2
     /// </summary>
     public class Alarm
     {
+
         public string AlarmName { get; set; }
         public int AlarmTime { get; set; }
         private int _initialAlarmTime { get; }
         public System.Windows.Forms.Timer Timer;
+
+
+
 
         //private SortedArrayPriorityQueue<Alarm> _alarms;   /////////// FOR TESTING ACCESSING ALARMMODEL FUNCTIONS
 
@@ -60,7 +64,6 @@ namespace ClockV2
         /// </summary>
         public void StopCountdownAndDispose()
         {
-            Timer.Stop();
             Timer.Tick -= Timer_Tick_Countdown; // Unsubscribe from TickEvent
             Timer.Dispose();
         }

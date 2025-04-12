@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button_Add = new System.Windows.Forms.Button();
+            this.button_Add_Alarm = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.button_Remove = new System.Windows.Forms.Button();
+            this.button_Remove_Alarm = new System.Windows.Forms.Button();
             this.button_Edit = new System.Windows.Forms.Button();
             this.textBox_AlarmName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -38,7 +38,7 @@
             this.numericUpDown_Minutes = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.button_Start = new System.Windows.Forms.Button();
+            this.button_Start_Alarm = new System.Windows.Forms.Button();
             this.label_Output = new System.Windows.Forms.Label();
             this.numericUpDown_Seconds = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
@@ -49,15 +49,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Seconds)).BeginInit();
             this.SuspendLayout();
             // 
-            // button_Add
+            // button_Add_Alarm
             // 
-            this.button_Add.Location = new System.Drawing.Point(12, 128);
-            this.button_Add.Name = "button_Add";
-            this.button_Add.Size = new System.Drawing.Size(80, 25);
-            this.button_Add.TabIndex = 0;
-            this.button_Add.Text = "button_Add";
-            this.button_Add.UseVisualStyleBackColor = true;
-            this.button_Add.Click += new System.EventHandler(this.Button_Add_Click);
+            this.button_Add_Alarm.Location = new System.Drawing.Point(12, 128);
+            this.button_Add_Alarm.Name = "button_Add_Alarm";
+            this.button_Add_Alarm.Size = new System.Drawing.Size(80, 25);
+            this.button_Add_Alarm.TabIndex = 0;
+            this.button_Add_Alarm.Text = "button_Add";
+            this.button_Add_Alarm.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -68,15 +67,15 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Alarm Name";
             // 
-            // button_Remove
+            // button_Remove_Alarm
             // 
-            this.button_Remove.Location = new System.Drawing.Point(98, 128);
-            this.button_Remove.Name = "button_Remove";
-            this.button_Remove.Size = new System.Drawing.Size(80, 25);
-            this.button_Remove.TabIndex = 1;
-            this.button_Remove.Text = "button_Remove";
-            this.button_Remove.UseVisualStyleBackColor = true;
-            this.button_Remove.Click += new System.EventHandler(this.Button_Remove_Click);
+            this.button_Remove_Alarm.Location = new System.Drawing.Point(98, 128);
+            this.button_Remove_Alarm.Name = "button_Remove_Alarm";
+            this.button_Remove_Alarm.Size = new System.Drawing.Size(80, 25);
+            this.button_Remove_Alarm.TabIndex = 1;
+            this.button_Remove_Alarm.Text = "button_Remove";
+            this.button_Remove_Alarm.UseVisualStyleBackColor = true;
+            this.button_Remove_Alarm.Click += new System.EventHandler(this.Button_Remove_Click);
             // 
             // button_Edit
             // 
@@ -147,15 +146,15 @@
             this.label4.TabIndex = 9;
             this.label4.Text = "M:";
             // 
-            // button_Start
+            // button_Start_Alarm
             // 
-            this.button_Start.Location = new System.Drawing.Point(278, 128);
-            this.button_Start.Name = "button_Start";
-            this.button_Start.Size = new System.Drawing.Size(80, 25);
-            this.button_Start.TabIndex = 11;
-            this.button_Start.Text = "button_Start";
-            this.button_Start.UseVisualStyleBackColor = true;
-            this.button_Start.Click += new System.EventHandler(this.Button_StartTimer_Click);
+            this.button_Start_Alarm.Location = new System.Drawing.Point(278, 128);
+            this.button_Start_Alarm.Name = "button_Start_Alarm";
+            this.button_Start_Alarm.Size = new System.Drawing.Size(80, 25);
+            this.button_Start_Alarm.TabIndex = 11;
+            this.button_Start_Alarm.Text = "button_Start";
+            this.button_Start_Alarm.UseVisualStyleBackColor = true;
+            this.button_Start_Alarm.Click += new System.EventHandler(this.Button_StartTimer_Click);
             // 
             // label_Output
             // 
@@ -213,7 +212,7 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.numericUpDown_Seconds);
             this.Controls.Add(this.label_Output);
-            this.Controls.Add(this.button_Start);
+            this.Controls.Add(this.button_Start_Alarm);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.numericUpDown_Minutes);
@@ -222,8 +221,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox_AlarmName);
             this.Controls.Add(this.button_Edit);
-            this.Controls.Add(this.button_Remove);
-            this.Controls.Add(this.button_Add);
+            this.Controls.Add(this.button_Remove_Alarm);
+            this.Controls.Add(this.button_Add_Alarm);
             this.Name = "AlarmView";
             this.Text = "AlarmView";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Hours)).EndInit();
@@ -236,9 +235,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button_Add;
+        private System.Windows.Forms.Button button_Add_Alarm;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button_Remove;
+        private System.Windows.Forms.Button button_Remove_Alarm;
         private System.Windows.Forms.Button button_Edit;
         private System.Windows.Forms.TextBox textBox_AlarmName;
         private System.Windows.Forms.Label label2;
@@ -246,7 +245,7 @@
         private System.Windows.Forms.NumericUpDown numericUpDown_Minutes;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button button_Start;
+        private System.Windows.Forms.Button button_Start_Alarm;
         private System.Windows.Forms.Label label_Output;
         private System.Windows.Forms.NumericUpDown numericUpDown_Seconds;
         private System.Windows.Forms.Label label5;

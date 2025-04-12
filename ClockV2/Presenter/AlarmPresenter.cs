@@ -3,6 +3,7 @@ using ClockV2.Model;
 using PriorityQueue;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design.Serialization;
 using System.Diagnostics;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
@@ -19,37 +20,55 @@ namespace ClockV2
     public class AlarmPresenter
     {
 
-        private readonly AlarmView _view;
+        private readonly IView _view;
         private readonly AlarmModel _model;
-        private Timer _counter;
+        private new System.Windows.Forms.Timer _counter;
         private int headTime;
 
 
 
-        public AlarmPresenter(AlarmView _view, AlarmModel _model)
+        public AlarmPresenter(IView _view, AlarmModel _model)
         {
             this._view = _view;
             this._model = _model;
 
             // Link the View to this Presenter
-            _view.SetPresenter(this);       
+            _view.SetPresenter(this);
+
+            // Completely Decoupled
+            _view.Button_Add_Alarm_Click += OnButtonAddAlarmClicked;
+            _view.Button_Remove_Alarm_Click += OnButtonRemoveAlarmClicked;
+            _view.Button_Start_Timer_Click += OnButtonStartTimerClicked;
+
+
+            // Instantiate with _counter
+            _counter = new System.Windows.Forms.Timer();
+            _counter.Interval = 1000;
+            _counter.Tick += CountdownToUI_Tick;
         }
 
 
 
-        public void ShowAlarms()
+        // Completely Decoupled
+        private void OnButtonAddAlarmClicked(object sender, (string alarmName, string priorityHour, string priorityMinute, string priortiySecond) e)
         {
-            try
-            {
-                string alarms = _model.ShowAlarms();
-                _view.ShowAlarms(alarms);
-            }
-            catch (Exception ex)
-            {
-                _view.ShowAlarms("The Queue is Empty");
-            }     
+            AddAlarm(e.alarmName, e.priorityHour, e.priorityMinute, e.priortiySecond);
         }
 
+
+        private void OnButtonRemoveAlarmClicked(object sender, EventArgs e)
+        {
+            RemoveAlarm();
+            HeadTime();
+        }
+
+
+        private void OnButtonStartTimerClicked(object sender, EventArgs e)
+        {
+            ShowAlarms();
+            HeadTime();
+            StartAlarm();
+        }
 
 
         public void AddAlarm(string alarmName, string priorityHour, string priorityMinute, string priortiySecond)
@@ -93,8 +112,6 @@ namespace ClockV2
 
                 int AlarmTimeInSeconds = (hours * 3600) + (minutes * 60) + seconds;
 
-
-                //_model.StopCountdown();
                 _model.AddAlarm(alarmName, AlarmTimeInSeconds);
 
                 ShowAlarms();   // update the ui with the alarm
@@ -106,7 +123,6 @@ namespace ClockV2
                 _view.ShowError(ex.Message);
             }
         }
-
 
 
         public void RemoveAlarm()
@@ -131,6 +147,19 @@ namespace ClockV2
         }
 
 
+        public void ShowAlarms()
+        {
+            try
+            {
+                string alarms = _model.ShowAlarms();
+                _view.ShowAlarms(alarms);
+            }
+            catch (Exception)
+            {
+                _view.ShowAlarms("The Queue is Empty");
+            }
+        }
+
 
         public void HeadTime()
         {
@@ -153,34 +182,19 @@ namespace ClockV2
         }
 
 
-
-        public void StartAlarm()
-        {
-            try
-            {
-                _model.StartAlarm();
-                HeadCountdownTime();    // Get the number for the countdown display and create a timed event
-
-            }
-            catch (Exception ex)
-            {
-                _view.ShowAlarms(ex.Message);
-            }           
-        }
-
-
-
-        public void HeadCountdownTime()
+        // https://learn.microsoft.com/en-us/dotnet/api/system.timers.timer?redirectedfrom=msdn&view=netframework-4.8
+        public void StartCounter()
         {
             //headTime = _model.HeadCountdownTime();
             //currentHead = headTime;
 
-            _counter = new System.Windows.Forms.Timer();
-            _counter.Interval = 1000;
-            _counter.Tick += CountdownToUI_Tick;
+            //_counter = new System.Windows.Forms.Timer();
+            //_counter.Interval = 1000;
+            //_counter.Tick += CountdownToUI_Tick;
             _counter.Start();
 
         }
+
 
 
         private void CountdownToUI_Tick(object sender, EventArgs e)
@@ -194,19 +208,24 @@ namespace ClockV2
 
                 // return the head time each tick instead       // SOMETHING WRONG HERE
                 headTime = _model.HeadCountdownTime();
-
-                // fixed the problem with the Counter being 1 second behind, but the next alarm to show was 1 second less than it should be
                 int headMinusOne = headTime - 1;
-
                 _view.ViewCountdownTime(headMinusOne);
 
                 if (_counter.Enabled)
+
+                if (_counter.Enabled == true)
+
+                if (_counter.Enabled == true)
+
+                if (_counter.Enabled == true)
+
+                if (_counter.Enabled == true)
                 {
                     if (headTime <= 0)
                     {
                         _counter.Stop();
-                        _counter.Tick -= CountdownToUI_Tick; // unsubscribe from the event
-                        _counter.Dispose();
+                        //_counter.Tick -= CountdownToUI_Tick; // unsubscribe from the event
+                        //_counter.Dispose();
                         RemoveAlarm();
                         _view.EnableStartButton();
 
@@ -349,13 +368,20 @@ namespace ClockV2
         //    {
         //        // remove the item from the queue 
 
-        //        countdownTimer.Stop();
-        //        countdownTimer.Dispose();
-        //        return;
-        //    }
-        //}
+        public void StartAlarm()
+        {
+            try
+            {
+                _model.StartAlarm();
+                StartCounter();    // Get the number for the countdown display and create a timed event
 
 
+            }
+            catch (Exception ex)
+            {
+                _view.ShowAlarms(ex.Message);
+            }           
+        }
 
         public void StartAlarm()
         {
