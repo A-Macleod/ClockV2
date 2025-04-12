@@ -19,7 +19,7 @@ namespace ClockV2
     {
 
         private int _initialAlarmTime { get; }
-        private DateTime _currentDateTime;
+        private DateTime _alarmDueTime;
         
         public string AlarmName { get; set; }
         public int AlarmTime { get; set; }
@@ -27,8 +27,8 @@ namespace ClockV2
         public System.Windows.Forms.Timer Timer;
 
 
-        public EventHandler Alarm_Countdown_Reached_Zero;
-        public EventHandler Alarm_Time_Remove_Alarm;
+        public EventHandler Alarm_Countdown_Tick;
+        public EventHandler Alarm_Triggered;
 
 
         //private SortedArrayPriorityQueue<Alarm> _alarms;   /////////// FOR TESTING ACCESSING ALARMMODEL FUNCTIONS
@@ -48,11 +48,14 @@ namespace ClockV2
             AlarmName = alarmName;
             AlarmTime = alarmCountdownTimeInSeconds;
 
-            _initialAlarmTime = AlarmTime;
+            //_initialAlarmTime = AlarmTime; For resetting the alarm which we are not using 
+
+            _alarmDueTime = DateTime.Now.AddSeconds(AlarmTime); // Adding the Alarm time to the current time, this is when we want the alarm to go off after we start it
+
+            
 
             Timer = new System.Windows.Forms.Timer();
             Timer.Interval = 1000;
-
             Timer.Tick += Timer_Tick_Countdown;
             
         }
@@ -67,13 +70,31 @@ namespace ClockV2
         /// <param name="e"></param>
         public void Timer_Tick_Countdown(object sender, EventArgs e)
         {
-
-            _currentDateTime = DateTime.Now;
-
-
-            AlarmTime--;
+            // https://zerotomastery.io/blog/c-sharp-timespan/
 
 
+            var remainingTimeLeft = _alarmDueTime - DateTime.Now;   // This is essentially counting down as our time ticks on by
+
+
+            if (remainingTimeLeft <= TimeSpan.Zero)
+            {
+                // stop timer and dispose
+                // call eventhandler in presenter to show the time has reaches zero (TimeSpan.Zero)
+                // call eventhandler in the presenter to pop-up alarm complete
+                // call eventhandler in the presenter to delete the alarm
+            }
+            else
+            {
+                // call eventhandler in presenter to update the time in UI/View (remainingTimeLeft)
+            }
+
+
+
+
+
+
+
+                AlarmTime--;
 
             if (AlarmTime <= 0)
             {
