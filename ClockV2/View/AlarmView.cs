@@ -67,6 +67,9 @@ namespace ClockV2
         {
 
             Button_Remove_Alarm_Click?.Invoke(this, EventArgs.Empty);
+
+            Console.WriteLine("=== ALARM VIEW REMOVE ===");
+
             //_presenter.RemoveAlarm();
             //_presenter.HeadCountdownTime();
         }

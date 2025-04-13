@@ -45,16 +45,27 @@ namespace ClockV2
 
         public void AddAlarm(string alarmName, int AlarmTimeInSeconds)
         {
-            //int AlarmTimeInSeconds = (hours * 3600) + (minutes * 60) + seconds; // converting to seconds
-            //TimeSpan currentTime = DateTime.Now.TimeOfDay;                      // current time without date
-            //TimeSpan timeToAdd = new TimeSpan(hours, minutes, seconds);         // The amount of time to add to current time
-            //TimeSpan alarmTime = currentTime.Add(timeToAdd);                    // add the currentTime to the timeToAdd
+
+            // Priority is the seconds from Tomorrows Midnight 00:00 - the DateTime.now
+            // This way the Alarms with the highest priority are the ones that are created the earliest in the day and thus served first
+
+
+            DateTime timeNow = DateTime.Now;                    // current time 13/04/2025 15:00
+            DateTime midnight = DateTime.Now.Date.AddDays(1);   // this will be for Tomorrows midnight, as midnight is the beginning of the day, 14/04/2025 00:00
+
+            TimeSpan timeDifferenceMidnightToNow = midnight - timeNow;  
+            int TimeDifferneceInSeconds = (int)timeDifferenceMidnightToNow.TotalSeconds;    // 9H x 3600 Seconds = 32400s
+
+            //Console.WriteLine("Time Now:  " + timeNow);
+            //Console.WriteLine("Midnight: " + midnight);
+            //Console.WriteLine("Time Difference in Seconds: " + TimeDifferneceInSeconds);
+
 
             var newAlarm = new Alarm(alarmName, AlarmTimeInSeconds);
+            _alarms.Add(newAlarm, TimeDifferneceInSeconds);     // using the Timespan as the priority, the earlier the alarm is made the higher the priority
 
-            _alarms.Add(newAlarm, AlarmTimeInSeconds);
 
-            AlarmCreatedInModel?.Invoke(this, newAlarm); // Event to pass this to the Presenter
+            AlarmCreatedInModel?.Invoke(this, newAlarm);        // pass this newAlarm to the Presenter
 
         }
 

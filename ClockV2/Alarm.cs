@@ -79,7 +79,7 @@ namespace ClockV2
             {
                 StopCountdownAndDispose();
 
-                Alarm_Countdown_Tick?.Invoke(this, TimeSpan.Zero);  // Time has reached zero
+                Alarm_Countdown_Tick?.Invoke(this, TimeSpan.Zero);  // Show the time has reached zero
 
                 Alarm_Triggered?.Invoke(this, AlarmName);   // MessageBox alarm complete, Remove Alarm
             }
@@ -124,13 +124,10 @@ namespace ClockV2
 
 
 
-        public void ResetAlarm()
-        {
-            AlarmTime = _initialAlarmTime;
-        }
-
-
-
+        //public void ResetAlarm()
+        //{
+        //    AlarmTime = _initialAlarmTime;
+        //}
 
 
         //public TimeSpan GetRemainingTime()

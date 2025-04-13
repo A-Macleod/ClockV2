@@ -66,6 +66,7 @@ namespace ClockV2
         private void OnButtonRemoveAlarmClicked(object sender, EventArgs e)
         {
             RemoveAlarm();
+            Console.WriteLine("===== Item Removed ===="); // Getting called twice somehow
             HeadCountdownTime();
         }
 
