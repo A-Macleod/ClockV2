@@ -71,7 +71,7 @@ namespace ClockV2
 
 
 
-        public void RemoveAlarm()
+        public void ModelRemoveAlarm()
         {
             _alarms.Head().StopCountdownAndDispose();   // stops alarm, unsubscribes from eventhandler and disposes of alarm
             _alarms.Remove();                           // removes head of the alarm queue

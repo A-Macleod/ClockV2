@@ -26,11 +26,6 @@ namespace ClockV2
         private new System.Windows.Forms.Timer _counter;
         private int headTime;
 
-        //private Alarm newAlarm;
-        //public event EventHandler Alarm_Countdown_Tick;
-
-
-
 
         public AlarmPresenter(IView _view, AlarmModel _model)
         {
@@ -46,6 +41,7 @@ namespace ClockV2
             _view.Button_Start_Timer_Click += OnButtonStartTimerClicked;
 
             _model.AlarmCreatedInModel += OnAlarmCreatedInModel;
+
 
 
             // Instantiate with _counter
@@ -66,7 +62,9 @@ namespace ClockV2
         private void OnButtonRemoveAlarmClicked(object sender, EventArgs e)
         {
             RemoveAlarm();
-            Console.WriteLine("===== Item Removed ===="); // Getting called twice somehow
+
+            Console.WriteLine("===== PRESENTER ITEM REMOVED ====="); // Getting called twice somehow
+
             HeadCountdownTime();
         }
 
@@ -151,10 +149,8 @@ namespace ClockV2
 
                 _model.AddAlarm(alarmName, AlarmTimeInSeconds);
 
-                ShowAlarms();   // update the ui with the alarm
-                HeadCountdownTime();     // update the ui with the first alarm time to countdown from
-
-                
+                ShowAlarms();           // update the ui with the alarm
+                HeadCountdownTime();    // update the ui with the first alarm time to countdown from
 
             }
             catch (Exception ex)
@@ -174,7 +170,7 @@ namespace ClockV2
                 //    _view.EnableStartButton();
                 //}
                 
-                _model.RemoveAlarm();
+                _model.ModelRemoveAlarm();
                 ShowAlarms();
                 HeadCountdownTime();
                            

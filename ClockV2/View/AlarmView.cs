@@ -37,10 +37,10 @@ namespace ClockV2
         public AlarmView()
         {
             InitializeComponent();
-
+            
             button_Add_Alarm.Click += Button_Add_Click;
-            button_Remove_Alarm.Click += Button_Remove_Click;
-            button_Start_Alarm.Click += Button_StartTimer_Click;
+            //button_Remove_Alarm.Click += Button_Remove_Click;     // Was removing Double the Items in the queue
+            //button_Start_Alarm.Click += Button_StartTimer_Click;
 
         }
 
@@ -57,7 +57,7 @@ namespace ClockV2
             //_presenter.StopCountdown();
             //_presenter.AddAlarm(alarmName, priorityHour, priorityMinute, priortiySecond);
 
-            Button_Add_Alarm_Click?.Invoke(this, (alarmName, priorityHour, priorityMinute, priortiySecond));
+            Button_Add_Alarm_Click?.Invoke(this, (alarmName, priorityHour, priorityMinute, priortiySecond));    // presenter
 
             ClearAlarmNameAndHoursSecondsInputs();
         }
@@ -66,9 +66,9 @@ namespace ClockV2
         private void Button_Remove_Click(object sender, EventArgs e)
         {
 
-            Button_Remove_Alarm_Click?.Invoke(this, EventArgs.Empty);
+            Button_Remove_Alarm_Click?.Invoke(this, EventArgs.Empty);   // presenter
 
-            Console.WriteLine("=== ALARM VIEW REMOVE ===");
+            Console.WriteLine("=== VIEW ALARM REMOVED ===");
 
             //_presenter.RemoveAlarm();
             //_presenter.HeadCountdownTime();
@@ -77,7 +77,7 @@ namespace ClockV2
 
         private void Button_StartTimer_Click(object sender, EventArgs e)
         {
-            Button_Start_Timer_Click?.Invoke(this, EventArgs.Empty);
+            Button_Start_Timer_Click?.Invoke(this, EventArgs.Empty);    // presenter
             //_presenter.ShowAlarms();
             //_presenter.HeadCountdownTime();
             //_presenter.StartAlarm();
@@ -99,8 +99,7 @@ namespace ClockV2
         
         public void ShowAlarmCompleteMessageBox(string AlarmName)
         {
-            MessageBox.Show($"Alarm : {AlarmName}\r\nis Ready!", "Alarm", MessageBoxButtons.OK, MessageBoxIcon.Information); // Figure out how to get the name 
-            //MessageBox.Show($"Alarm : is Ready!", "Alarm", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show($"Alarm : {AlarmName}\r\nis Ready!", "Alarm", MessageBoxButtons.OK, MessageBoxIcon.Information); 
         }
 
 
