@@ -25,7 +25,7 @@ namespace ClockV2
         public event EventHandler Button_Remove_Alarm_Click;
         public event EventHandler Button_Start_Timer_Click;
        
-        public event FormClosedEventHandler FormClosed;
+        //public event FormClosedEventHandler FormClosed;
 
         private AlarmPresenter _presenter;
 
