@@ -20,7 +20,7 @@ namespace ClockV2
     public partial class AlarmView : Form, IView
     {
 
-        // Completely Decoupled
+        // Completely Decoupled https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/events/
         public event EventHandler<(string alarmName, string priorityHour, string priorityMinute, string priortiySecond)> Button_Add_Alarm_Click;
         public event EventHandler Button_Remove_Alarm_Click;
         public event EventHandler Button_Start_Timer_Click;
@@ -44,7 +44,7 @@ namespace ClockV2
 
         }
 
-
+        
 
         // Completely Decoupled
         private void Button_Add_Click(object sender, EventArgs e)
@@ -68,7 +68,7 @@ namespace ClockV2
 
             Button_Remove_Alarm_Click?.Invoke(this, EventArgs.Empty);   // presenter
 
-            Console.WriteLine("=== VIEW ALARM REMOVED ===");
+            //Console.WriteLine("=== VIEW ALARM REMOVED ===");
 
             //_presenter.RemoveAlarm();
             //_presenter.HeadCountdownTime();

@@ -63,7 +63,7 @@ namespace ClockV2
         {
             RemoveAlarm();
 
-            Console.WriteLine("===== PRESENTER ITEM REMOVED ====="); // Getting called twice somehow
+            //Console.WriteLine("===== PRESENTER ITEM REMOVED ====="); // Getting called twice somehow
 
             HeadCountdownTime();
         }
@@ -99,10 +99,6 @@ namespace ClockV2
             _view.ShowAlarmCompleteMessageBox(AlarmName);
             RemoveAlarm();
         }
-
-
-
-
 
 
 
