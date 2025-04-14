@@ -24,7 +24,7 @@ namespace ClockV2
         void EnableStartButton();
         void DisableStartButton();
         void ClearAlarmNameAndHoursSecondsInputs();
-        void ViewCountdownTime(int countdownTime);
+        void ViewCountdownTime(TimeSpan headCountdownTime);
         void ViewCountdownNull(string noItem);
         void ViewCountdownEventTimeLeft(TimeSpan remainingTimeLeft);
 

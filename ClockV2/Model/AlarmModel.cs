@@ -35,10 +35,18 @@ namespace ClockV2
 
 
 
-        public int HeadCountdownTime()
+        public TimeSpan HeadCountdownTime()
         {           
             var countdownTime = _alarms.Head().AlarmTime;
-            return countdownTime;
+
+
+            // https://stackoverflow.com/questions/463642/how-can-i-convert-seconds-into-hourminutessecondsmilliseconds-time
+
+            TimeSpan countdownTimeTimeSpan = TimeSpan.FromSeconds(countdownTime);
+            //DateTime dateTime = DateTime.AddSeconds(countdownTime);
+
+
+            return countdownTimeTimeSpan;
         }
 
 
@@ -56,6 +64,7 @@ namespace ClockV2
             TimeSpan timeDifferenceMidnightToNow = midnight - timeNow;  
             int TimeDifferneceInSeconds = (int)timeDifferenceMidnightToNow.TotalSeconds;    // 9H x 3600 Seconds = 32400s
 
+            // Debug
             //Console.WriteLine("Time Now:  " + timeNow);
             //Console.WriteLine("Midnight: " + midnight);
             //Console.WriteLine("Time Difference in Seconds: " + TimeDifferneceInSeconds);

@@ -216,7 +216,7 @@ namespace ClockV2
         {
             try
             {                
-                int headCountdownTime = _model.HeadCountdownTime();
+                TimeSpan headCountdownTime = _model.HeadCountdownTime();
                 _view.ViewCountdownTime(headCountdownTime);
 
                 if (headCountdownTime == null)
@@ -291,17 +291,6 @@ namespace ClockV2
         //        _view.ViewCountdownNull(ex.Message);
         //    }
         //}
-
-
-
-
-
-
-
-
-
-
-
 
 
         //private void CountdownToUI_Tick(object sender, EventArgs e)

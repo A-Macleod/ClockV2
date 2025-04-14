@@ -137,9 +137,10 @@ namespace ClockV2
         }
 
 
-        public void ViewCountdownTime(int countdownTime)
+        public void ViewCountdownTime(TimeSpan headCountdownTime)
         {
-            label6.Text = countdownTime.ToString();
+            //label6.Text = headCountdownTime.ToString();
+            label6.Text = ($"{headCountdownTime.ToString("hh\\:mm\\:ss")}");
         }
 
 
