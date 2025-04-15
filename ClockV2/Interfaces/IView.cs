@@ -9,12 +9,15 @@ namespace ClockV2
 {
     public interface IView
     {
+        
         // Completely Decoupled
         event EventHandler<(string alarmName, string priorityHour, string priorityMinute, string priortiySecond)> Button_Add_Alarm_Click;
         event EventHandler Button_Remove_Alarm_Click;
         event EventHandler Button_Start_Timer_Click;
 
-        event FormClosedEventHandler FormClosed;    // in ClockView
+        //event FormClosedEventHandler FormClosing;    // in ClockView
+        event EventHandler ViewHidden;
+
 
         void SetPresenter(AlarmPresenter _presenter);
         void ShowView();

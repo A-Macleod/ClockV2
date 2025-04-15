@@ -18,6 +18,11 @@ namespace ClockV2
         private readonly ClockDrawingHelper drawingHelper = new ClockDrawingHelper();
         private DateTime currentTime;
 
+        private IView alarmView;
+        private AlarmModel alarmModel;
+        private AlarmPresenter alarmPresenter;
+
+
         public ClockView()
         {
             InitializeComponent();
@@ -53,15 +58,32 @@ namespace ClockV2
         {
             ButtonOpenForm2.Visible = false;    // hide the Button to prevent other forms being created
 
-            IView alarmView = new AlarmView();
-            var alarmModel = new AlarmModel();
-            var alarmPresenter = new AlarmPresenter(alarmView, alarmModel);
+            if (alarmView == null || ((Form)alarmView).IsDisposed);
+            {
+                alarmView = new AlarmView();
+                alarmModel = new AlarmModel();
+                alarmPresenter = new AlarmPresenter(alarmView, alarmModel);
 
-            alarmView.FormClosed += AlarmView_FormClosed;
+                alarmView.ViewHidden += AlarmView_ViewHidden;
+
+
+            }
+
+
+            //alarmView = new AlarmView();
+            //alarmModel = new AlarmModel();
+            //alarmPresenter = new AlarmPresenter(alarmView, alarmModel);
+
+            //alarmView.FormClosed += AlarmView_FormClosed;
             alarmView.ShowView();
         }
 
-        private void AlarmView_FormClosed(object sender, FormClosedEventArgs e)
+        private void AlarmView_FormClosing(object sender, FormClosedEventArgs e)
+        {
+            ButtonOpenForm2.Visible = true;
+        }
+
+        private void AlarmView_ViewHidden(object sender, EventArgs e)
         {
             ButtonOpenForm2.Visible = true;
         }

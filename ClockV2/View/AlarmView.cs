@@ -19,13 +19,16 @@ namespace ClockV2
 {
     public partial class AlarmView : Form, IView
     {
-
+        // https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-add-an-event-handler?view=netdesktop-9.0
+        // https://learn.microsoft.com/en-us/dotnet/desktop/winforms/event-handlers-overview-windows-forms?view=netframeworkdesktop-4.8
         // Completely Decoupled https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/events/
         public event EventHandler<(string alarmName, string priorityHour, string priorityMinute, string priortiySecond)> Button_Add_Alarm_Click;
         public event EventHandler Button_Remove_Alarm_Click;
         public event EventHandler Button_Start_Timer_Click;
-       
-        //public event FormClosedEventHandler FormClosed;
+
+        public event EventHandler ViewHidden;
+        // https://stackoverflow.com/questions/2021681/hide-form-instead-of-closing-when-close-button-clicked
+
 
         private AlarmPresenter _presenter;
 
@@ -42,6 +45,8 @@ namespace ClockV2
             //button_Remove_Alarm.Click += Button_Remove_Click;     // Was removing Double the Items in the queue
             //button_Start_Alarm.Click += Button_StartTimer_Click;
 
+
+            this.FormClosing += AlarmView_FormClosing;
         }
 
         
@@ -163,31 +168,23 @@ namespace ClockV2
 
 
         //// https://learn.microsoft.com/en-us/dotnet/api/system.timers.timer?redirectedfrom=MSDN&view=netframework-4.8
-        //public void startTimer(int AlarmTimeInSeconds)
-        //{
-        //    timeLeft = AlarmTimeInSeconds;
-        //    timer1.Start();
-        //}
-
-
-        //private void timer1_Tick_1(object sender, EventArgs e)
-        //{
-        //    if (timeLeft > 0)
-        //    {
-        //        timeLeft = timeLeft - 1;
-        //        label6.Text = timeLeft + " seconds";
-        //    }
-        //    else
-        //    {
-        //        timer1.Stop();
-        //        label6.Text = "Times up";
-        //        MessageBox.Show("Times Up!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //        // Maybe show the add alarm button
-        //    }
-        //}
 
 
 
+
+
+        //https://stackoverflow.com/questions/2021681/hide-form-instead-of-closing-when-close-button-clicked
+        private void AlarmView_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                Hide();
+                Console.WriteLine("HIDDEN !!!");
+
+                ViewHidden?.Invoke(this, EventArgs.Empty);
+            }
+        }
 
 
 
