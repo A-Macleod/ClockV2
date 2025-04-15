@@ -19,16 +19,10 @@ namespace ClockV2
 {
     public partial class AlarmView : Form, IView
     {
-        // https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-add-an-event-handler?view=netdesktop-9.0
-        // https://learn.microsoft.com/en-us/dotnet/desktop/winforms/event-handlers-overview-windows-forms?view=netframeworkdesktop-4.8
-        // Completely Decoupled https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/events/
+
         public event EventHandler<(string alarmName, string priorityHour, string priorityMinute, string priortiySecond)> Button_Add_Alarm_Click;
         public event EventHandler Button_Remove_Alarm_Click;
         public event EventHandler Button_Start_Timer_Click;
-
-        public event EventHandler ViewHidden;
-        // https://stackoverflow.com/questions/2021681/hide-form-instead-of-closing-when-close-button-clicked
-
 
         private AlarmPresenter _presenter;
 
@@ -45,8 +39,6 @@ namespace ClockV2
             //button_Remove_Alarm.Click += Button_Remove_Click;     // Was removing Double the Items in the queue
             //button_Start_Alarm.Click += Button_StartTimer_Click;
 
-
-            this.FormClosing += AlarmView_FormClosing;
         }
 
         
@@ -59,35 +51,25 @@ namespace ClockV2
             string priorityMinute = numericUpDown_Minutes.Value.ToString();
             string priortiySecond = numericUpDown_Seconds.Value.ToString();
 
-            //_presenter.StopCountdown();
-            //_presenter.AddAlarm(alarmName, priorityHour, priorityMinute, priortiySecond);
-
             Button_Add_Alarm_Click?.Invoke(this, (alarmName, priorityHour, priorityMinute, priortiySecond));    // presenter
 
             ClearAlarmNameAndHoursSecondsInputs();
         }
 
 
+
         private void Button_Remove_Click(object sender, EventArgs e)
         {
-
             Button_Remove_Alarm_Click?.Invoke(this, EventArgs.Empty);   // presenter
-
-            //Console.WriteLine("=== VIEW ALARM REMOVED ===");
-
-            //_presenter.RemoveAlarm();
-            //_presenter.HeadCountdownTime();
         }
+
 
 
         private void Button_StartTimer_Click(object sender, EventArgs e)
         {
             Button_Start_Timer_Click?.Invoke(this, EventArgs.Empty);    // presenter
-            //_presenter.ShowAlarms();
-            //_presenter.HeadCountdownTime();
-            //_presenter.StartAlarm();
-
         }
+
 
 
         public void SetPresenter(AlarmPresenter _presenter)
@@ -96,22 +78,26 @@ namespace ClockV2
         }
 
 
+
         public void ShowView()
         {
             this.Show();
         }
 
         
+
         public void ShowAlarmCompleteMessageBox(string AlarmName)
         {
             MessageBox.Show($"Alarm : {AlarmName}\r\nis Ready!", "Alarm", MessageBoxButtons.OK, MessageBoxIcon.Information); 
         }
 
 
+
         public void ShowAlarms(string alarms)
         {
             label_Output.Text = alarms;  
         }
+
 
 
         public void ShowError(string message)
@@ -121,16 +107,19 @@ namespace ClockV2
         }
 
 
+
         public void EnableStartButton()
         {
             button_Start_Alarm.Enabled = true;
         }
 
 
+
         public void DisableStartButton()
         {
             button_Start_Alarm.Enabled = false;
         }
+
 
 
         public void ClearAlarmNameAndHoursSecondsInputs()
@@ -142,11 +131,13 @@ namespace ClockV2
         }
 
 
+
         public void ViewCountdownTime(TimeSpan headCountdownTime)
         {
             //label6.Text = headCountdownTime.ToString();
             label6.Text = ($"{headCountdownTime.ToString("hh\\:mm\\:ss")}");
         }
+
 
 
         public void ViewCountdownNull(string noItem)
@@ -155,10 +146,12 @@ namespace ClockV2
         }
 
 
+
         public void ViewCountdownStop(string errMsg)
         {
             label6.Text = errMsg;
         }
+
 
 
         public void ViewCountdownEventTimeLeft(TimeSpan remainingTimeLeft)
@@ -167,34 +160,13 @@ namespace ClockV2
         }
 
 
-        //// https://learn.microsoft.com/en-us/dotnet/api/system.timers.timer?redirectedfrom=MSDN&view=netframework-4.8
 
 
-
-
-
-        //https://stackoverflow.com/questions/2021681/hide-form-instead-of-closing-when-close-button-clicked
-        private void AlarmView_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (e.CloseReason == CloseReason.UserClosing)
-            {
-                e.Cancel = true;
-                Hide();
-                Console.WriteLine("HIDDEN !!!");
-
-                ViewHidden?.Invoke(this, EventArgs.Empty);
-            }
-        }
-
-
-
-
-
-
-
-
-
-
+        // https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-add-an-event-handler?view=netdesktop-9.0
+        // https://learn.microsoft.com/en-us/dotnet/desktop/winforms/event-handlers-overview-windows-forms?view=netframeworkdesktop-4.8
+        // Completely Decoupled https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/events/
+        // https://learn.microsoft.com/en-us/dotnet/api/system.timers.timer?redirectedfrom=MSDN&view=netframework-4.8
+        // https://stackoverflow.com/questions/2021681/hide-form-instead-of-closing-when-close-button-clicked
 
     }
 }

@@ -35,16 +35,12 @@ namespace ClockV2
 
 
 
+        // https://stackoverflow.com/questions/463642/how-can-i-convert-seconds-into-hourminutessecondsmilliseconds-time
         public TimeSpan HeadCountdownTime()
         {           
             var countdownTime = _alarms.Head().AlarmTime;
 
-
-            // https://stackoverflow.com/questions/463642/how-can-i-convert-seconds-into-hourminutessecondsmilliseconds-time
-
             TimeSpan countdownTimeTimeSpan = TimeSpan.FromSeconds(countdownTime);
-            //DateTime dateTime = DateTime.AddSeconds(countdownTime);
-
 
             return countdownTimeTimeSpan;
         }
@@ -82,8 +78,8 @@ namespace ClockV2
 
         public void ModelRemoveAlarm()
         {
-            _alarms.Head().StopCountdownAndDispose();   // stops alarm, unsubscribes from eventhandler and disposes of alarm
-            _alarms.Remove();                           // removes head of the alarm queue
+            _alarms.Head().StopCountdownAndDispose();   
+            _alarms.Remove();                        
         }
 
 
@@ -97,60 +93,8 @@ namespace ClockV2
 
         public void StartAlarm()        
         {
-
-            //var head = _alarms.Head();
-            //head.Alarm_Countdown_Tick += OnAlarmCountdownTick;
-
-
             _alarms.Head().StartCountdown();    // Start the countdown for the length of the heads time
-            
-
-
-            //if (_alarms.Head().AlarmTime == 0)     // if the timer has all ready been run and that alarm is at zero, delete it and then start the next
-            //{
-
-            //    RemoveAlarm();
-
-            //}
-
-            //_alarms.Head().StartCountdown(_alarms.Head().AlarmTime);    // Start the countdown for the length of the heads time
-
-            //////
-            // DEBUGGING 
-            //////
-
-            //_alarms.Head().StartCountdown(_alarms.Head().AlarmTime);    // Start the countdown for the length of the heads time
-
-            //string head = _alarms.Head().ToString();
-            //Console.WriteLine($"Head Name: {head}");    // Show Head of Queue Name
-
-            //Console.WriteLine("=======");
-
-            //int time = _alarms.Head().AlarmTime;
-            //Console.WriteLine($"Head Time: {time}");    // Show Head of Queue Time
-
-            //Console.WriteLine("=======");
-
-            //string queue = _alarms.ToString();
-            //Console.WriteLine(queue);                   // Print the Queue
-
-            //Console.WriteLine("=======");
-
-            //Console.WriteLine("Started Countdown:" + _alarms.Head());   // Start Countdown on Head
-            //_alarms.Head().StartCountdown(time);
-
-            //Console.WriteLine("=======");
-
-            //var remainingAfterTimerHasTicked = _alarms.Head().AlarmTime;
-            //Console.WriteLine($"Remanining After Tick: {remainingAfterTimerHasTicked}");    //  Remaining Time on Alarm. after Alarm has sounded on Alarm Object
-
-            //Console.WriteLine("== END ==");
-
         }
-
-
-
-
 
     }
 }

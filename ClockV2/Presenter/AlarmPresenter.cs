@@ -23,8 +23,6 @@ namespace ClockV2
         private readonly IView _view;
         private readonly AlarmModel _model;
 
-        private new System.Windows.Forms.Timer _counter;
-        private int headTime;
 
 
         public AlarmPresenter(IView _view, AlarmModel _model)
@@ -42,12 +40,6 @@ namespace ClockV2
 
             _model.AlarmCreatedInModel += OnAlarmCreatedInModel;
 
-
-
-            // Instantiate with _counter
-            //_counter = new System.Windows.Forms.Timer();
-            //_counter.Interval = 1000;
-            //_counter.Tick += CountdownToUI_Tick;
         }
 
 
@@ -59,14 +51,13 @@ namespace ClockV2
         }
 
 
+
         private void OnButtonRemoveAlarmClicked(object sender, EventArgs e)
         {
             RemoveAlarm();
-
-            //Console.WriteLine("===== PRESENTER ITEM REMOVED ====="); // Getting called twice somehow
-
             HeadCountdownTime();
         }
+
 
 
         private void OnButtonStartTimerClicked(object sender, EventArgs e)
@@ -156,26 +147,21 @@ namespace ClockV2
         }
 
 
+
         public void RemoveAlarm()
         {
             try
             {
-                //if (_counter.Enabled)
-                //{
-                //    _counter.Stop(); 
-                //    _view.EnableStartButton();
-                //}
-                
                 _model.ModelRemoveAlarm();
                 ShowAlarms();
-                HeadCountdownTime();
-                           
+                HeadCountdownTime();                        
             }
             catch (Exception ex)
             {               
                 _view.ShowAlarms(ex.Message);
             }
         }
+
 
 
         public void ShowAlarms()
@@ -197,12 +183,7 @@ namespace ClockV2
         {
             try
             {
-                
                 _model.StartAlarm();
-                
-                //StartCounter();    // Get the number for the countdown display and create a timed event
-
-
             }
             catch (Exception ex)
             {
@@ -224,202 +205,12 @@ namespace ClockV2
 
                     _view.ViewCountdownNull(headCountdownTime.ToString());
                 }
-
             }
             catch (Exception ex)
             {
                 _view.ViewCountdownNull(ex.Message);
             }
         }
-
-
-
-
-
-
-
-        // https://learn.microsoft.com/en-us/dotnet/api/system.timers.timer?redirectedfrom=msdn&view=netframework-4.8
-        //public void StartCounter()
-        //{
-        //    //headTime = _model.HeadCountdownTime();
-        //    //currentHead = headTime;
-
-        //    //_counter = new System.Windows.Forms.Timer();
-        //    //_counter.Interval = 1000;
-        //    //_counter.Tick += CountdownToUI_Tick;
-        //    _counter.Start();
-
-        //}
-
-
-
-        //private void CountdownToUI_Tick(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        //headTime = _model.HeadCountdownTime();
-        //        //headTime--;
-        //        //_view.ViewCountdownTime(headTime);
-
-
-        //        // return the head time each tick instead       // SOMETHING WRONG HERE
-        //        headTime = _model.HeadCountdownTime();
-        //        int headMinusOne = headTime - 1;
-        //        _view.ViewCountdownTime(headMinusOne);
-
-
-                
-        //            if (headTime <= 0)
-        //            {
-        //                _counter.Stop();
-        //                //_counter.Tick -= CountdownToUI_Tick; // unsubscribe from the event
-        //                //_counter.Dispose();
-        //                RemoveAlarm();
-        //                _view.EnableStartButton();
-
-        //            }
-        //            else
-        //            {
-        //                _view.DisableStartButton();
-        //            }
-                
-
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _view.ViewCountdownNull(ex.Message);
-        //    }
-        //}
-
-
-        //private void CountdownToUI_Tick(object sender, EventArgs e)
-        //{
-        //    //int initialTime = _model.HeadCountdownTime();
-        //    //int time = initialTime;
-        //    time--;
-
-        //    if (time >= 0)
-        //    {
-        //        time--;
-        //        _view.ViewCountdownTime(time);
-
-        //    }
-        //    else
-        //    {
-        //        _counter.Stop();
-        //        _counter.Dispose();
-        //    }     
-
-        //}
-
-
-
-        //// https://learn.microsoft.com/en-us/dotnet/api/system.timers.timer?redirectedfrom=msdn&view=netframework-4.8
-        //public void AlarmTimer(int AlarmTimeInSeconds)
-        //{
-
-        //    int counter = AlarmTimeInSeconds;
-
-        //    Timer countdownTimer = new Timer();
-        //    countdownTimer.Interval = 1000; // 1 second
-        //    countdownTimer.Tick += CountdownTimer_Tick;
-
-        //    countdownTimer.Start();
-
-        //    _model.AlarmCountdownTimer(AlarmTimeInSeconds);
-        //    _view.Countdown(AlarmTimeInSeconds);
-        //}
-
-
-
-        //private void CountdownTimer_Tick(object sender, EventArgs e)
-        //{
-
-        //    if (counter >= 0)
-        //    {
-
-        //        _view.Countdown(counter);
-        //        counter--;
-        //    }
-        //    //throw new NotImplementedException();
-        //    else
-        //    {
-        //        // remove the item from the queue 
-
-        //public void AlarmTimer(int AlarmTimeInSeconds)
-        //{
-
-        //    int counter = AlarmTimeInSeconds;
-
-        //    Timer countdownTimer = new Timer();
-        //    countdownTimer.Interval = 1000; // 1 second
-        //    countdownTimer.Tick += CountdownTimer_Tick;
-
-        //    countdownTimer.Start();
-
-        //    //_model.AlarmCountdownTimer(AlarmTimeInSeconds);
-        //    //_view.Countdown(AlarmTimeInSeconds);
-        //}
-
-
-
-        //private void CountdownTimer_Tick(object sender, EventArgs e)
-        //{
-
-        //    if (counter >= 0)
-        //    {
-
-        //        _view.Countdown(counter);
-        //        counter--;
-        //    }
-        //    //throw new NotImplementedException();
-        //    else
-        //    {
-        //        // remove the item from the queue 
-
-        //        countdownTimer.Stop();
-        //        countdownTimer.Dispose();
-        //        return;
-        //    }
-        //}
-
-
-
-        //public void AlarmTimer(int AlarmTimeInSeconds)
-        //{
-
-        //    int counter = AlarmTimeInSeconds;
-
-        //    Timer countdownTimer = new Timer();
-        //    countdownTimer.Interval = 1000; // 1 second
-        //    countdownTimer.Tick += CountdownTimer_Tick;
-
-        //    countdownTimer.Start();
-
-        //    //_model.AlarmCountdownTimer(AlarmTimeInSeconds);
-        //    //_view.Countdown(AlarmTimeInSeconds);
-        //}
-
-
-
-        //private void CountdownTimer_Tick(object sender, EventArgs e)
-        //{
-
-        //    if (counter >= 0)
-        //    {
-
-        //        _view.Countdown(counter);
-        //        counter--;
-        //    }
-        //    //throw new NotImplementedException();
-        //    else
-        //    {
-        //        // remove the item from the queue 
-
-
-
-
 
 
     }

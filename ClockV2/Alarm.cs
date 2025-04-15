@@ -27,14 +27,10 @@ namespace ClockV2
         public System.Windows.Forms.Timer Timer;
 
 
-        public EventHandler<string> Alarm_Triggered;                // Popup Event and to Remove the Alarm
-        public EventHandler<TimeSpan> Alarm_Countdown_Tick;         // Update UI with time remaining on Countdown & When it reaches zero
+        public event EventHandler<string> Alarm_Triggered;                // Popup Event and to Remove the Alarm
+        public event EventHandler<TimeSpan> Alarm_Countdown_Tick;         // Update UI with time remaining on Countdown & When it reaches zero
 
 
-        //private SortedArrayPriorityQueue<Alarm> _alarms;   /////////// FOR TESTING ACCESSING ALARMMODEL FUNCTIONS
-        // https://stackoverflow.com/questions/30008530/timespan-countdown-timer
-        // https://geoffstratton.com/cnet-countdown-timer/
-        // https://zerotomastery.io/blog/c-sharp-timespan/ TIMESPAN EXPLANATION 
 
         /// <summary>
         /// Constructor, takes in name and time and creates the alarm object with a Timer, that has a 1 second interval.
@@ -70,13 +66,13 @@ namespace ClockV2
         /// <param name="e"></param>
         public void Timer_Tick_Countdown(object sender, EventArgs e)
         {
-            // https://zerotomastery.io/blog/c-sharp-timespan/
-
-            var remainingTimeLeft = _alarmDueTime - DateTime.Now;   // Countdown - this starts the second the newAlarm is created, not good for Stopwatch like Alarms
-
+            
+            var remainingTimeLeft = _alarmDueTime - DateTime.Now;   
 
             if (remainingTimeLeft <= TimeSpan.Zero)
             {
+                //ResetAlarm();  
+
                 StopCountdownAndDispose();
 
                 Alarm_Countdown_Tick?.Invoke(this, TimeSpan.Zero);  // Show the time has reached zero
@@ -86,19 +82,10 @@ namespace ClockV2
             else
             {
                 Alarm_Countdown_Tick?.Invoke(this, remainingTimeLeft);
-            }
-
-
-            //    AlarmTime--;
-
-            //if (AlarmTime <= 0)
-            //{
-            //    StopCountdownAndDispose();
-            //    MessageBox.Show($"Alarm : {AlarmName}\r\nis Ready!", "Alarm", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            //    //ResetAlarm();             
-            //}
+            }           
         }
+
+
 
         /// <summary>
         /// Method to Start the Timer of the Alarm object
@@ -124,19 +111,6 @@ namespace ClockV2
 
 
 
-        //public void ResetAlarm()
-        //{
-        //    AlarmTime = _initialAlarmTime;
-        //}
-
-
-        //public TimeSpan GetRemainingTime()
-        //{
-        //    return AlarmEndTime - DateTime.Now;
-        //}
-
-
-
         /// <summary>
         /// Method to override the SortedArrayPriorityQueue ToString Method and Return the AlarmName ToString
         /// </summary>
@@ -146,6 +120,24 @@ namespace ClockV2
             return AlarmName.ToString();
         }
 
+
+
+        //public void ResetAlarm()
+        //{
+        //    AlarmTime = _initialAlarmTime;
+        //}
+
+
+
+        //public TimeSpan GetRemainingTime()
+        //{
+        //    return AlarmEndTime - DateTime.Now;
+        //}
+
+
+        // https://stackoverflow.com/questions/30008530/timespan-countdown-timer
+        // https://geoffstratton.com/cnet-countdown-timer/
+        // https://zerotomastery.io/blog/c-sharp-timespan/ TIMESPAN EXPLANATION 
 
     }
 }

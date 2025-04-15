@@ -15,8 +15,7 @@ namespace ClockV2
         event EventHandler Button_Remove_Alarm_Click;
         event EventHandler Button_Start_Timer_Click;
 
-        //event FormClosedEventHandler FormClosing;    // in ClockView
-        event EventHandler ViewHidden;
+        event FormClosedEventHandler FormClosed;    // In ClockView, handles showing AlarmView creation button
 
 
         void SetPresenter(AlarmPresenter _presenter);
@@ -30,17 +29,6 @@ namespace ClockV2
         void ViewCountdownTime(TimeSpan headCountdownTime);
         void ViewCountdownNull(string noItem);
         void ViewCountdownEventTimeLeft(TimeSpan remainingTimeLeft);
-
-
-
-
-
-
-
-
-
-
-
 
     }
 }
