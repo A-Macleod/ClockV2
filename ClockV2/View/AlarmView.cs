@@ -43,7 +43,6 @@ namespace ClockV2
 
         
 
-        // Completely Decoupled
         private void Button_Add_Click(object sender, EventArgs e)
         {
             string alarmName = textBox_AlarmName.Text.ToString();
@@ -134,7 +133,6 @@ namespace ClockV2
 
         public void ViewCountdownTime(TimeSpan headCountdownTime)
         {
-            //label6.Text = headCountdownTime.ToString();
             label6.Text = ($"{headCountdownTime.ToString("hh\\:mm\\:ss")}");
         }
 
@@ -164,7 +162,7 @@ namespace ClockV2
 
         // https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-add-an-event-handler?view=netdesktop-9.0
         // https://learn.microsoft.com/en-us/dotnet/desktop/winforms/event-handlers-overview-windows-forms?view=netframeworkdesktop-4.8
-        // Completely Decoupled https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/events/
+        //  Decoupled https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/events/
         // https://learn.microsoft.com/en-us/dotnet/api/system.timers.timer?redirectedfrom=MSDN&view=netframework-4.8
         // https://stackoverflow.com/questions/2021681/hide-form-instead-of-closing-when-close-button-clicked
 
