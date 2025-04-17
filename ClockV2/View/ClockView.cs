@@ -97,15 +97,21 @@ namespace ClockV2
 
         public void ClockShowNextAlarmNameAndTime(string headAlarmName, TimeSpan headAlarmTime)
         {
-
-            // Convert the alarmTime to DateTime
             ClockViewNextAlarmLabel.Text = $"{headAlarmName} :  {headAlarmTime.ToString("hh\\:mm\\:ss")}";
         }
+
 
 
         public void ClockShowNoNextAlarm()
         {
             ClockViewNextAlarmLabel.Text = "No Alarm";
         }
+
+
+
+        public void ViewCountdownEventTimeLeft(TimeSpan remainingTimeLeft)
+        {            
+            ClockViewNextAlarmLabel.Text = $"{remainingTimeLeft.ToString("hh\\:mm\\:ss")}";
+        }  
     }
 }

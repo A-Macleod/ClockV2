@@ -66,15 +66,18 @@ namespace ClockV2
 
 
         private void OnButtonStartTimerClicked(object sender, EventArgs e)
-        {
-            
+        {        
             ShowAlarms();
             HeadCountdownTime();
             StartAlarm();
         }
 
 
-
+        /// <summary>
+        /// New Alarm passed from the Model to the subscribed eventhandler methods
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="newAlarm"></param>
         private void OnAlarmCreatedInModel(object sender, Alarm newAlarm)
         {
             newAlarm.Alarm_Countdown_Tick += OnAlarmCountdownTick;
@@ -86,6 +89,7 @@ namespace ClockV2
         private void OnAlarmCountdownTick(object sender, TimeSpan remainingTimeLeft)
         {
             _view.ViewCountdownEventTimeLeft(remainingTimeLeft);
+            _clockPresenter.ClockViewCountdownEventTimeLeft(remainingTimeLeft);
         }
 
 
@@ -162,8 +166,6 @@ namespace ClockV2
                 ShowAlarms();
                 HeadCountdownTime();
                 UpdateClockViewWithNextAlarm();
-
-
             }
             catch (Exception ex)
             {               
@@ -184,7 +186,7 @@ namespace ClockV2
                 TimeSpan clockPresenterHeadTime = _model.ShowHeadTimeTimeSpan();
                 _clockPresenter.AlarmPresenterNextAlarm(clockPresenterHeadName, clockPresenterHeadTime);    //  Sending the next alarm name and time to the clockView
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 _clockPresenter.AlarmPresenterNoAlarm();    //  Clear the ClockView next alarm Name and Time          
             }
@@ -227,7 +229,6 @@ namespace ClockV2
             {                
                 TimeSpan headCountdownTime = _model.HeadCountdownTime();
                 _view.ViewCountdownTime(headCountdownTime);
-
            
                 if (headCountdownTime == null)
                 {

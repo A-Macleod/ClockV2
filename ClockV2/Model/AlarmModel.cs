@@ -100,12 +100,9 @@ namespace ClockV2
 
         public TimeSpan ShowHeadTimeTimeSpan()
         {
-
-            
             var headTime = _alarms.Head().AlarmTime;
             TimeSpan headTimeTimeSpan = TimeSpan.FromSeconds(headTime);
             return headTimeTimeSpan;
-
         }
 
 

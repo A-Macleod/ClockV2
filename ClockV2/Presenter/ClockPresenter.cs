@@ -14,6 +14,8 @@ namespace ClockV2.Presenter
         private readonly ClockView view;
         private readonly Timer timer;
 
+        private AlarmModel AlarmModel;
+
         public ClockPresenter(ClockModel model, ClockView view)
         {
             this.model = model;
@@ -49,6 +51,14 @@ namespace ClockV2.Presenter
         public void AlarmPresenterNoAlarm()
         {
             view.Invoke(new Action(() => view.ClockShowNoNextAlarm()));
+        }
+
+
+
+        public void ClockViewCountdownEventTimeLeft(TimeSpan remainingTimeLeft)
+        {
+            
+            view.Invoke(new Action(() => view.ViewCountdownEventTimeLeft(remainingTimeLeft)));
         }
 
     }
