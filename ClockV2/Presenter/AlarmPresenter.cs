@@ -145,7 +145,7 @@ namespace ClockV2
 
                 _model.AddAlarm(alarmName, AlarmTimeInSeconds);
 
-                ShowAlarms();                   // Update the UI with the alarm
+                ShowAlarms();                   // Update the UI with the alarm, AlarmView debugging
                 HeadCountdownTime();            // Update the UI with the first alarm time to countdown from
                 UpdateClockViewWithNextAlarm(); // Update the ClockView next alarm details, name & countdown timespan
 

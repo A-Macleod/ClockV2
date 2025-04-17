@@ -162,7 +162,7 @@
             this.label_AlarmsOutput.Name = "label_AlarmsOutput";
             this.label_AlarmsOutput.Size = new System.Drawing.Size(166, 110);
             this.label_AlarmsOutput.TabIndex = 12;
-            this.label_AlarmsOutput.Text = "label_AlarmsOutput";
+            this.label_AlarmsOutput.Text = "Debug : Alarm Names";
             this.label_AlarmsOutput.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // numericUpDown_Seconds
@@ -197,9 +197,9 @@
             // 
             this.label_Countdown.Location = new System.Drawing.Point(196, 192);
             this.label_Countdown.Name = "label_Countdown";
-            this.label_Countdown.Size = new System.Drawing.Size(162, 110);
+            this.label_Countdown.Size = new System.Drawing.Size(166, 110);
             this.label_Countdown.TabIndex = 16;
-            this.label_Countdown.Text = "label_Countdown";
+            this.label_Countdown.Text = "Debug : Alarm Countdown";
             this.label_Countdown.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // AlarmView

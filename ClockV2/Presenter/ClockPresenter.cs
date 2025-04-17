@@ -14,8 +14,6 @@ namespace ClockV2.Presenter
         private readonly ClockView view;
         private readonly Timer timer;
 
-        private AlarmModel AlarmModel;
-
         public ClockPresenter(ClockModel model, ClockView view)
         {
             this.model = model;
