@@ -184,7 +184,8 @@ namespace ClockV2
             {
                 string clockPresenterHeadName = _model.ShowHeadName();
                 TimeSpan clockPresenterHeadTime = _model.ShowHeadTimeTimeSpan();
-                _clockPresenter.AlarmPresenterNextAlarm(clockPresenterHeadName, clockPresenterHeadTime);    //  Sending the next alarm name and time to the clockView
+                _clockPresenter.AlarmPresenterNextAlarmName(clockPresenterHeadName);    //  Sending the next alarm name and time to the clockView
+                _clockPresenter.AlarmPresenterNextAlarmTime(clockPresenterHeadTime);
             }
             catch (Exception)
             {

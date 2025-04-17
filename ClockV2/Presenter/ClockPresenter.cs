@@ -41,9 +41,16 @@ namespace ClockV2.Presenter
 
 
 
-        public void AlarmPresenterNextAlarm(string headAlarmName, TimeSpan headAlarmTime)
+        public void AlarmPresenterNextAlarmName(string headAlarmName)
         {
-            view.Invoke(new Action(() => view.ClockShowNextAlarmNameAndTime(headAlarmName, headAlarmTime)));
+            view.Invoke(new Action(() => view.ClockShowNextAlarmName(headAlarmName)));
+        }
+
+
+
+        public void AlarmPresenterNextAlarmTime(TimeSpan headAlarmTime)
+        {
+            view.Invoke(new Action(() => view.ClockShowNextAlarmTime(headAlarmTime)));
         }
 
 
