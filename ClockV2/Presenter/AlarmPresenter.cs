@@ -147,11 +147,15 @@ namespace ClockV2
 
 
                 // TESTING PASSING INFORMATION BACK TO CLOCK
-                string clockPresenterHeadName = _model.ShowHeadName();
-                _clockPresenter.CanYouSeeThisName(clockPresenterHeadName);
+                //string clockPresenterHeadName = _model.ShowHeadName();
+                //_clockPresenter.CanYouSeeThisName(clockPresenterHeadName);
 
-                int clockPresenterHeadTime = _model.ShowHeadTimeIntSeconds();
-                _clockPresenter.CanYouSeeThisIntTime(clockPresenterHeadTime);
+                //int clockPresenterHeadTime = _model.ShowHeadTimeIntSeconds();
+                //_clockPresenter.CanYouSeeThisIntTime(clockPresenterHeadTime);
+
+                string clockPresenterHeadName = _model.ShowHeadName();
+                TimeSpan clockPresenterHeadTime = _model.ShowHeadTimeTimeSpan();
+                _clockPresenter.AlarmPresenterNextAlarm(clockPresenterHeadName, clockPresenterHeadTime);
 
             }
             catch (Exception ex)

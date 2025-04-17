@@ -107,5 +107,13 @@ namespace ClockV2
 
         }
 
+
+        public void ClockShowNextAlarmNameAndTime(string headAlarmName, TimeSpan headAlarmTime)
+        {
+
+            // Convert the alarmTime to DateTime
+            ClockViewNextAlarmLabel.Text = $"{headAlarmName} :  {headAlarmTime.ToString("hh\\:mm\\:ss")}";
+        }
+
     }
 }

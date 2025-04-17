@@ -58,7 +58,6 @@
             this.ClockViewNextAlarmLabel.Name = "ClockViewNextAlarmLabel";
             this.ClockViewNextAlarmLabel.Size = new System.Drawing.Size(300, 54);
             this.ClockViewNextAlarmLabel.TabIndex = 3;
-            this.ClockViewNextAlarmLabel.Text = "Next Alarm :";
             this.ClockViewNextAlarmLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ClockView

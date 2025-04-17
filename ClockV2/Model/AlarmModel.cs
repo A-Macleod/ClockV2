@@ -98,9 +98,14 @@ namespace ClockV2
 
 
 
-        public int ShowHeadTimeIntSeconds()
+        public TimeSpan ShowHeadTimeTimeSpan()
         {
-            return _alarms.Head().AlarmTime;
+
+            
+            var headTime = _alarms.Head().AlarmTime;
+            TimeSpan headTimeTimeSpan = TimeSpan.FromSeconds(headTime);
+            return headTimeTimeSpan;
+
         }
 
 
