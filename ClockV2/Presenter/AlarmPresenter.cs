@@ -141,21 +141,9 @@ namespace ClockV2
 
                 _model.AddAlarm(alarmName, AlarmTimeInSeconds);
 
-                ShowAlarms();           // update the ui with the alarm
-                HeadCountdownTime();    // update the ui with the first alarm time to countdown from
-
-
-
-                // TESTING PASSING INFORMATION BACK TO CLOCK
-                //string clockPresenterHeadName = _model.ShowHeadName();
-                //_clockPresenter.CanYouSeeThisName(clockPresenterHeadName);
-
-                //int clockPresenterHeadTime = _model.ShowHeadTimeIntSeconds();
-                //_clockPresenter.CanYouSeeThisIntTime(clockPresenterHeadTime);
-
-                string clockPresenterHeadName = _model.ShowHeadName();
-                TimeSpan clockPresenterHeadTime = _model.ShowHeadTimeTimeSpan();
-                _clockPresenter.AlarmPresenterNextAlarm(clockPresenterHeadName, clockPresenterHeadTime);
+                ShowAlarms();                   // Update the UI with the alarm
+                HeadCountdownTime();            // Update the UI with the first alarm time to countdown from
+                UpdateClockViewWithNextAlarm(); // Update the ClockView next alarm details, name & countdown timespan
 
             }
             catch (Exception ex)
@@ -172,11 +160,33 @@ namespace ClockV2
             {
                 _model.ModelRemoveAlarm();
                 ShowAlarms();
-                HeadCountdownTime();                        
+                HeadCountdownTime();
+                UpdateClockViewWithNextAlarm();
+
+
             }
             catch (Exception ex)
             {               
                 _view.ShowAlarms(ex.Message);
+            }
+        }
+
+
+
+        /// <summary>
+        /// Try get the head name and time, if its null, tell the clock UI to show that in the label
+        /// </summary>
+        public void UpdateClockViewWithNextAlarm()
+        {
+            try
+            {
+                string clockPresenterHeadName = _model.ShowHeadName();
+                TimeSpan clockPresenterHeadTime = _model.ShowHeadTimeTimeSpan();
+                _clockPresenter.AlarmPresenterNextAlarm(clockPresenterHeadName, clockPresenterHeadTime);    //  Sending the next alarm name and time to the clockView
+            }
+            catch (Exception ex)
+            {
+                _clockPresenter.AlarmPresenterNoAlarm();    //  Clear the ClockView next alarm Name and Time          
             }
         }
 
@@ -218,8 +228,7 @@ namespace ClockV2
                 TimeSpan headCountdownTime = _model.HeadCountdownTime();
                 _view.ViewCountdownTime(headCountdownTime);
 
-                
-
+           
                 if (headCountdownTime == null)
                 {
 

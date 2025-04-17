@@ -95,19 +95,6 @@ namespace ClockV2
 
 
 
-        public void ClockShowAlarmName(string headAlarmName)
-        {
-            ClockViewNextAlarmLabel.Text = $"{headAlarmName}";
-        }
-
-
-
-        public void ClockShowAlarmTime(int headAlarmTime)
-        {
-
-        }
-
-
         public void ClockShowNextAlarmNameAndTime(string headAlarmName, TimeSpan headAlarmTime)
         {
 
@@ -115,5 +102,10 @@ namespace ClockV2
             ClockViewNextAlarmLabel.Text = $"{headAlarmName} :  {headAlarmTime.ToString("hh\\:mm\\:ss")}";
         }
 
+
+        public void ClockShowNoNextAlarm()
+        {
+            ClockViewNextAlarmLabel.Text = "No Alarm";
+        }
     }
 }
