@@ -94,7 +94,7 @@ namespace ClockV2
 
         public void ShowAlarms(string alarms)
         {
-            label_Output.Text = alarms;  
+            label_AlarmsOutput.Text = alarms;  
         }
 
 
@@ -130,31 +130,38 @@ namespace ClockV2
         }
 
 
-
+        /// <summary>
+        /// This just shows the time of the First Added Alarm, nothing else.
+        /// Makes it look pretty for the user and starting Countdown timer. 
+        /// </summary>
+        /// <param name="headCountdownTime"></param>
         public void ViewCountdownTime(TimeSpan headCountdownTime)
         {
-            label6.Text = ($"{headCountdownTime.ToString("hh\\:mm\\:ss")}");
+            label_Countdown.Text = ($"{headCountdownTime.ToString("hh\\:mm\\:ss")}");
         }
 
 
 
         public void ViewCountdownNull(string noItem)
         {
-            label6.Text = "No Time to Countdown";
+            label_Countdown.Text = "No Time to Countdown";
         }
 
 
 
         public void ViewCountdownStop(string errMsg)
         {
-            label6.Text = errMsg;
+            label_Countdown.Text = errMsg;
         }
 
 
-
+        /// <summary>
+        /// This is the actual Tick event for the Alarm Countdown 
+        /// </summary>
+        /// <param name="remainingTimeLeft"></param>
         public void ViewCountdownEventTimeLeft(TimeSpan remainingTimeLeft)
         {
-            label6.Text = ($"{ remainingTimeLeft.ToString("hh\\:mm\\:ss")}" );
+            label_Countdown.Text = ($"{ remainingTimeLeft.ToString("hh\\:mm\\:ss")}" );
         }
 
 

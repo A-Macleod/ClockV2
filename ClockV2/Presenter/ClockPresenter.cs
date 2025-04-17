@@ -37,5 +37,18 @@ namespace ClockV2.Presenter
             view.Invoke(new Action(() => view.UpdateClock(currentTime)));
         }
 
+        public void CanYouSeeThisName(string headAlarmName)
+        {
+            view.Invoke(new Action(() => view.ClockShowAlarmName(headAlarmName)));
+        }
+
+
+        public void CanYouSeeThisIntTime(int headAlarmTime)
+        {
+            view.Invoke(new Action(() => view.ClockShowAlarmTime(headAlarmTime)));
+        }
+
+
+
     }
 }

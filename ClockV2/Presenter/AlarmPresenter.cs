@@ -1,5 +1,6 @@
 ﻿
 using ClockV2.Model;
+using ClockV2.Presenter;
 using PriorityQueue;
 using System;
 using System.Collections.Generic;
@@ -23,9 +24,11 @@ namespace ClockV2
         private readonly IView _view;
         private readonly AlarmModel _model;
 
+        private readonly ClockPresenter _clockPresenter;
 
 
-        public AlarmPresenter(IView _view, AlarmModel _model)
+
+        public AlarmPresenter(IView _view, AlarmModel _model, ClockPresenter clockPresenter) // WE ADDED A REFERENCE TO THE CLOCKPRESENTER TO TEST INJECTION
         {
             this._view = _view;
             this._model = _model;
@@ -39,6 +42,8 @@ namespace ClockV2
             _view.Button_Start_Timer_Click += OnButtonStartTimerClicked;
 
             _model.AlarmCreatedInModel += OnAlarmCreatedInModel;
+
+            _clockPresenter = clockPresenter;
 
         }
 
@@ -139,6 +144,15 @@ namespace ClockV2
                 ShowAlarms();           // update the ui with the alarm
                 HeadCountdownTime();    // update the ui with the first alarm time to countdown from
 
+
+
+                // TESTING PASSING INFORMATION BACK TO CLOCK
+                string clockPresenterHeadName = _model.ShowHeadName();
+                _clockPresenter.CanYouSeeThisName(clockPresenterHeadName);
+
+                int clockPresenterHeadTime = _model.ShowHeadTimeIntSeconds();
+                _clockPresenter.CanYouSeeThisIntTime(clockPresenterHeadTime);
+
             }
             catch (Exception ex)
             {
@@ -199,6 +213,8 @@ namespace ClockV2
             {                
                 TimeSpan headCountdownTime = _model.HeadCountdownTime();
                 _view.ViewCountdownTime(headCountdownTime);
+
+                
 
                 if (headCountdownTime == null)
                 {

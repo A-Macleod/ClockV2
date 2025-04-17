@@ -39,11 +39,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.button_Start_Alarm = new System.Windows.Forms.Button();
-            this.label_Output = new System.Windows.Forms.Label();
+            this.label_AlarmsOutput = new System.Windows.Forms.Label();
             this.numericUpDown_Seconds = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.label_Output_Countdown = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.label_Countdown = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Hours)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Minutes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Seconds)).BeginInit();
@@ -156,14 +156,14 @@
             this.button_Start_Alarm.UseVisualStyleBackColor = true;
             this.button_Start_Alarm.Click += new System.EventHandler(this.Button_StartTimer_Click);
             // 
-            // label_Output
+            // label_AlarmsOutput
             // 
-            this.label_Output.Location = new System.Drawing.Point(12, 192);
-            this.label_Output.Name = "label_Output";
-            this.label_Output.Size = new System.Drawing.Size(166, 110);
-            this.label_Output.TabIndex = 12;
-            this.label_Output.Text = "label_Output";
-            this.label_Output.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label_AlarmsOutput.Location = new System.Drawing.Point(12, 192);
+            this.label_AlarmsOutput.Name = "label_AlarmsOutput";
+            this.label_AlarmsOutput.Size = new System.Drawing.Size(166, 110);
+            this.label_AlarmsOutput.TabIndex = 12;
+            this.label_AlarmsOutput.Text = "label_AlarmsOutput";
+            this.label_AlarmsOutput.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // numericUpDown_Seconds
             // 
@@ -193,25 +193,25 @@
             this.label_Output_Countdown.Size = new System.Drawing.Size(100, 23);
             this.label_Output_Countdown.TabIndex = 0;
             // 
-            // label6
+            // label_Countdown
             // 
-            this.label6.Location = new System.Drawing.Point(196, 192);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(162, 110);
-            this.label6.TabIndex = 16;
-            this.label6.Text = "label6";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label_Countdown.Location = new System.Drawing.Point(196, 192);
+            this.label_Countdown.Name = "label_Countdown";
+            this.label_Countdown.Size = new System.Drawing.Size(162, 110);
+            this.label_Countdown.TabIndex = 16;
+            this.label_Countdown.Text = "label_Countdown";
+            this.label_Countdown.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // AlarmView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(370, 311);
-            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label_Countdown);
             this.Controls.Add(this.label_Output_Countdown);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.numericUpDown_Seconds);
-            this.Controls.Add(this.label_Output);
+            this.Controls.Add(this.label_AlarmsOutput);
             this.Controls.Add(this.button_Start_Alarm);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -246,10 +246,10 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button_Start_Alarm;
-        private System.Windows.Forms.Label label_Output;
+        private System.Windows.Forms.Label label_AlarmsOutput;
         private System.Windows.Forms.NumericUpDown numericUpDown_Seconds;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label_Output_Countdown;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label_Countdown;
     }
 }

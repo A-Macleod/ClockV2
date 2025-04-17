@@ -91,6 +91,20 @@ namespace ClockV2
 
 
 
+        public string ShowHeadName()
+        {
+            return _alarms.Head().AlarmName;
+        }
+
+
+
+        public int ShowHeadTimeIntSeconds()
+        {
+            return _alarms.Head().AlarmTime;
+        }
+
+
+
         public void StartAlarm()        
         {
             _alarms.Head().StartCountdown();    // Start the countdown for the length of the heads time

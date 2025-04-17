@@ -72,7 +72,7 @@ namespace ClockV2
                 //  Should be done in the presenter
                 alarmView = new AlarmView();
                 var alarmModel = new AlarmModel();
-                var alarmPresenter = new AlarmPresenter(alarmView, alarmModel);
+                var alarmPresenter = new AlarmPresenter(alarmView, alarmModel, presenter);  // WE ADDED presenter TO TEST INJECTION FOR PASSING INFO BACK TO CLOCK
 
                 alarmView.FormClosing += OnAlarmViewFormClosing;
                 alarmView.ShowView();
@@ -92,5 +92,20 @@ namespace ClockV2
             e.Cancel = true;            //  Instead of Closing form, Hide form, so we can keep the state of the alarmView form
             ((Form)alarmView).Hide();   //  Casting to access form methods
         }
+
+
+
+        public void ClockShowAlarmName(string headAlarmName)
+        {
+            ClockViewNextAlarmLabel.Text = $"{headAlarmName}";
+        }
+
+
+
+        public void ClockShowAlarmTime(int headAlarmTime)
+        {
+
+        }
+
     }
 }
