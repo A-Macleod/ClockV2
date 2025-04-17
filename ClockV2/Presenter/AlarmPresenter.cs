@@ -149,6 +149,15 @@ namespace ClockV2
                 HeadCountdownTime();            // Update the UI with the first alarm time to countdown from
                 UpdateClockViewWithNextAlarm(); // Update the ClockView next alarm details, name & countdown timespan
 
+
+
+                // TESTING PASSING INFORMATION BACK TO CLOCK
+                string clockPresenterHeadName = _model.ShowHeadName();
+                _clockPresenter.CanYouSeeThisName(clockPresenterHeadName);
+
+                int clockPresenterHeadTime = _model.ShowHeadTimeIntSeconds();
+                _clockPresenter.CanYouSeeThisIntTime(clockPresenterHeadTime);
+
             }
             catch (Exception ex)
             {
