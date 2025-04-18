@@ -17,7 +17,8 @@ This repository is **Assessment 2** of the module **UG409765 - Software Construc
 <br>
 <br>
 <div align="center">
-<img src="https://github.com/user-attachments/assets/9dad2c5d-ad1d-47b4-9cc4-e123d0dcc5c6"/>
+<img src="https://github.com/user-attachments/assets/46366bce-69af-4346-aef0-3cb8985b7b97"/>
+<img src="https://github.com/user-attachments/assets/assets/70cee338-3c91-482c-8c27-397a1b7907b6"/>
 </div>
 
 
