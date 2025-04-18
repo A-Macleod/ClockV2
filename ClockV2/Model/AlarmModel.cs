@@ -14,19 +14,23 @@ using System.Windows.Forms;
 namespace ClockV2
 {
     /// <summary>
-    /// 
+    /// Class to represent the data and business logic layer for the Alarm in the MVP design pattern.
+    /// This class handles returning the Date and Time, for the AlarmView, as well as manipulating the 
+    /// Alarm objects inside the SortedArrayPriorityQueue. It does not interact with the 
+    /// AlarmView directly but instead is called from the AlarmPresenter that acts as the middleman to 
+    /// pass data between the AlarmModel and AlarmView.
     /// </summary>
     public class AlarmModel
     {
 
         private SortedArrayPriorityQueue<Alarm> _alarms;
 
-        public event EventHandler<Alarm> AlarmCreatedInModel;   // Pass this newAlarm to the presenter for use
-
+        public event EventHandler<Alarm> AlarmCreatedInModel;   // Pass newAlarms to the AlarmPresenter for use
 
 
         /// <summary>
-        /// Constructor, so that when the Model is created, there is a SAPQ ready to use
+        /// Constructor that takes in no arguments. When the AlarmModel is instantiated creates a new SortedArrayPriorityQueue
+        /// with 4 index positions, called _alarms, that is ready to use
         /// </summary>
         public AlarmModel()
         {
@@ -35,7 +39,10 @@ namespace ClockV2
 
 
 
-        // https://stackoverflow.com/questions/463642/how-can-i-convert-seconds-into-hourminutessecondsmilliseconds-time
+        /// <summary>
+        /// Method that returns the Alarm Time of Head of the SortedArrayPriorityQueue, converted to TimeSpan
+        /// </summary>
+        /// <returns>The TimeSpan of the Head Item Alarm Time</returns>
         public TimeSpan HeadCountdownTime()
         {           
             var countdownTime = _alarms.Head().AlarmTime;
@@ -43,39 +50,42 @@ namespace ClockV2
             TimeSpan countdownTimeTimeSpan = TimeSpan.FromSeconds(countdownTime);
 
             return countdownTimeTimeSpan;
+
+            // https://stackoverflow.com/questions/463642/how-can-i-convert-seconds-into-hourminutessecondsmilliseconds-time
         }
 
 
 
+        /// <summary>
+        /// Method to Add an Alarm to the SortedArrayPriorityQueue. Takes in an Alarm Name and Alarm Time in seconds and calculates the Priority of the Alarm,
+        /// based on the Time difference between Now and Tomorrow Midnight. Priority is the seconds from Tomorrows Midnight 00:00 minus the DateTime.now.
+        /// This way the Alarms with the highest priority are the ones that are created the earliest in the day and thus served first, as the time difference in
+        /// seconds is larger
+        /// </summary>
+        /// <param name="alarmName"></param>
+        /// <param name="AlarmTimeInSeconds"></param>
         public void AddAlarm(string alarmName, int AlarmTimeInSeconds)
         {
 
-            // Priority is the seconds from Tomorrows Midnight 00:00 - the DateTime.now
-            // This way the Alarms with the highest priority are the ones that are created the earliest in the day and thus served first
-
-
-            DateTime timeNow = DateTime.Now;                    // current time 13/04/2025 15:00
-            DateTime midnight = DateTime.Now.Date.AddDays(1);   // this will be for Tomorrows midnight, as midnight is the beginning of the day, 14/04/2025 00:00
+            DateTime timeNow = DateTime.Now;                    // Current time 13/04/2025 15:00
+            DateTime midnight = DateTime.Now.Date.AddDays(1);   // This will be for Tomorrows midnight, as midnight is the beginning of the day, 14/04/2025 00:00
 
             TimeSpan timeDifferenceMidnightToNow = midnight - timeNow;  
             int TimeDifferneceInSeconds = (int)timeDifferenceMidnightToNow.TotalSeconds;    // 9H x 3600 Seconds = 32400s
 
-            // Debug
-            //Console.WriteLine("Time Now:  " + timeNow);
-            //Console.WriteLine("Midnight: " + midnight);
-            //Console.WriteLine("Time Difference in Seconds: " + TimeDifferneceInSeconds);
-
-
             var newAlarm = new Alarm(alarmName, AlarmTimeInSeconds);
-            _alarms.Add(newAlarm, TimeDifferneceInSeconds);     // using the Timespan as the priority, the earlier the alarm is made the higher the priority
+            _alarms.Add(newAlarm, TimeDifferneceInSeconds);     
 
-
-            AlarmCreatedInModel?.Invoke(this, newAlarm);        // pass this newAlarm to the Presenter
+            AlarmCreatedInModel?.Invoke(this, newAlarm);        // Pass this newAlarm to the AlarmPresenter
 
         }
 
 
 
+        /// <summary>
+        /// Method to Stop the Head Alarm Countdown, unsubscribe to the Tick event and Dispose of the Alarm. 
+        /// Finally Removing the Head Alarm from the Head of the SortedArrayPriorityQueue
+        /// </summary>
         public void ModelRemoveAlarm()
         {
             _alarms.Head().StopCountdownAndDispose();   
@@ -84,6 +94,10 @@ namespace ClockV2
 
 
 
+        /// <summary>
+        /// Method to Return all Alarms and their Priority in the SortedArrayPriorityQueue
+        /// </summary>
+        /// <returns>The Alarms and Priorities in the SortedArrayPriorityQueue</returns>
         public string ShowAlarms()
         {
             return _alarms.ToString();
@@ -91,6 +105,10 @@ namespace ClockV2
 
 
 
+        /// <summary>
+        /// Method to Return the Head Items Name in the SortedArrayPriorityQueue
+        /// </summary>
+        /// <returns>The Head items Name</returns>
         public string ShowHeadName()
         {
             return _alarms.Head().AlarmName;
@@ -98,6 +116,10 @@ namespace ClockV2
 
 
 
+        /// <summary>
+        /// Method to Return the Head Items Time in the SortedArrayPriorityQueue
+        /// </summary>
+        /// <returns>The Head items Alarm Time, in TimeSpan format</returns>
         public TimeSpan ShowHeadTimeTimeSpan()
         {
             var headTime = _alarms.Head().AlarmTime;
@@ -107,6 +129,9 @@ namespace ClockV2
 
 
 
+        /// <summary>
+        /// Method to Start the Alarm Tick event on the Head Item in the SortedArrayPriorityQueue
+        /// </summary>
         public void StartAlarm()        
         {
             _alarms.Head().StartCountdown();    // Start the countdown for the length of the heads time

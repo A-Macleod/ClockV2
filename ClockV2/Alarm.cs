@@ -10,15 +10,17 @@ using System.Windows.Forms;
 namespace ClockV2
 {
     /// <summary>
-    /// A Class to represent an Alarm. With a Name, an Integer value representing Time (in seconds), and a Timer.
-    /// Each Alarm has a Timer class instantiated in its Constructor that handles a Tick Eventhandler. At each 1 second
-    /// interval the AlarmTime is decremented by 1 and when AlarmTime reaches zero a Dialog messagebox is called to alert
-    /// the user
+    /// Class to represent an Alarm. That takes in a Name and Integer value representing Time (in seconds).
+    /// Each Alarm has a Timer class instantiated in its Constructor that handles a Tick Eventhandler. The duetime for the
+    /// Alarm is determined by adding the current DateTime and Alarm Time together, which is done when the Timer is started. 
+    /// At each 1 second interval when the Timer is started, the remaninig time is calculated by the dueTime minus the current time. 
+    /// Which is then sent to the AlarmView and ClockView via Eventhandlers. When the dueTime reaches zero a MessageBox alert is displayed
+    /// to alert the user the Timer has reached zero.
     /// </summary>
     public class Alarm
     {
 
-        private int _initialAlarmTime { get; }  // For resetting the alarm, we are not using anymore
+        //private int _initialAlarmTime { get; }  // For resetting the Alarm, not using anymore
         private DateTime _alarmDueTime;
         
         public string AlarmName { get; set; }
@@ -27,47 +29,43 @@ namespace ClockV2
         public System.Windows.Forms.Timer Timer;
 
 
-        public event EventHandler<string> Alarm_Triggered;                // Popup Event and to Remove the Alarm
-        public event EventHandler<TimeSpan> Alarm_Countdown_Tick;         // Update UI with time remaining on Countdown & When it reaches zero
-
+        public event EventHandler<string> Alarm_Triggered;                // MessageBox Event and to Remove the Alarm
+        public event EventHandler<TimeSpan> Alarm_Countdown_Tick;         // Update UI with Time remaining on Countdown & When it reaches zero
 
 
         /// <summary>
-        /// Constructor, takes in name and time and creates the alarm object with a Timer, that has a 1 second interval.
-        /// At each interval the AlarmTimer_Tick eventhandler is called, which handles the alarm countdown. 
+        /// Constructor, takes in Name and Time and creates the Alarm object with a Timer, that has a 1 second interval.
+        /// At each interval the AlarmTimer_Tick eventhandler is called, which handles the Alarm countdown. 
         /// </summary>
-        /// <param name="alarmName">The name of the alarm</param>
-        /// <param name="alarmCountdownTimeInSeconds">The total time of the alarm countdown in seconds</param>
+        /// <param name="alarmName">The Name of the Alarm</param>
+        /// <param name="alarmCountdownTimeInSeconds">The total Time of the Alarm countdown in seconds</param>
         public Alarm(string alarmName, int alarmCountdownTimeInSeconds)
-        {
-
+        {           
             AlarmName = alarmName;
             AlarmTime = alarmCountdownTimeInSeconds;
-
-            //_initialAlarmTime = AlarmTime; /For resetting the alarm which we are not using 
-
-            _alarmDueTime = DateTime.Now.AddSeconds(AlarmTime); // Adding the Alarm time to the current time, this is when we want the alarm to go off after we start timer
-
             
+            //_alarmDueTime = DateTime.Now.AddSeconds(AlarmTime); // Adding Alarm Time to the current time
 
             Timer = new System.Windows.Forms.Timer();
             Timer.Interval = 1000;
             Timer.Tick += Timer_Tick_Countdown;
-            
+
+            //_initialAlarmTime = AlarmTime; // For resetting the alarm, not using anymore
         }
 
 
 
         /// <summary>
-        /// Eventhandler that CountsDown with each TimerTick. The AlarmTime is decremented and when
-        /// it reaches zero a message box will be called displaying that the alarm has now sounded.
+        /// Method Eventhandler that Countsdown with each Timer Tick. When the remainingTimeLeft reaches Zero stop and dispose of the Alarm
+        /// and trigger the MessageBox to alert the user. Each Tick triggers the event to update the AlarmView and ClockView with the remaining
+        /// Time left on the Alarm, acting as a Countdown time.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object that raised the event</param>
+        /// <param name="e">The argument information</param>
         public void Timer_Tick_Countdown(object sender, EventArgs e)
         {
             
-            var remainingTimeLeft = _alarmDueTime - DateTime.Now;   
+            var remainingTimeLeft = _alarmDueTime - DateTime.Now;   // When timer is started, acts as an accurate Countdown until the dueTime
 
             if (remainingTimeLeft <= TimeSpan.Zero)
             {
@@ -75,37 +73,37 @@ namespace ClockV2
 
                 StopCountdownAndDispose();
 
-                Alarm_Countdown_Tick?.Invoke(this, TimeSpan.Zero);  // Show the time has reached zero
+                Alarm_Countdown_Tick?.Invoke(this, TimeSpan.Zero);  // Show Time has reached zero. Subscribed in AlarmPresenter
 
-                Alarm_Triggered?.Invoke(this, AlarmName);   // MessageBox alarm complete, Remove Alarm
+                Alarm_Triggered?.Invoke(this, AlarmName);           // MessageBox Alarm complete, Remove Alarm. Subscribed in AlarmPresenter
             }
             else
             {
-                Alarm_Countdown_Tick?.Invoke(this, remainingTimeLeft);
+                Alarm_Countdown_Tick?.Invoke(this, remainingTimeLeft);  // Update the Countdown Time with each Tick event, Subscribed in AlarmPresenter
             }           
         }
 
 
 
         /// <summary>
-        /// Method to Start the Timer of the Alarm object
+        /// Method to Start the Timer of the Alarm object. The Alarm dueTime is calculated when the counter is started.
         /// </summary>
-        public void StartCountdown() //int time
+        public void StartCountdown()
         {
-            _alarmDueTime = DateTime.Now.AddSeconds(AlarmTime); // Adding the Alarm time to the current time, this is when we want the alarm to go off after we start timer
+            _alarmDueTime = DateTime.Now.AddSeconds(AlarmTime); // Adding the Alarm Time to Current Time, this is when we want the alarm to go off
             Timer.Start();
         }
 
 
 
         /// <summary>
-        /// Method to Stop the Timer of the Alarm object, unsubscribe from the eventhandler and then Dispose of the Timer.
-        /// Use this before Removing Alarm
+        /// Method to Stop the Timer of the Alarm object, unsubscribe from the Tick eventhandler and then Dispose of the Timer.
+        /// Use this before Removing Alarm. This helps prevents memory leaks
         /// </summary>
         public void StopCountdownAndDispose()
         {
             Timer.Stop();
-            Timer.Tick -= Timer_Tick_Countdown; // Unsubscribe from TickEvent, prevents memory leaks
+            Timer.Tick -= Timer_Tick_Countdown;
             Timer.Dispose();
         }
 
