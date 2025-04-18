@@ -14,12 +14,16 @@
 This repository is **Assessment 2** of the module **UG409765 - Software Construction** of the **BSc Computing** program at the **University of the Highlands and Islands (UHI)**. It serves as the foundation for the multi-alarm clock application, written in C#. The implementation of the analogue alarm clock Windows Form Application consists of a Sorted Array Priority Queue data structure to store alarms along with the alarm and clock logic constructed following the **Model-View-Presenter (MVP)** architecture. Including Nunit tests for each of the logic layers. The alarm View serves as the driver program to allow users to interact with the Priority Queue and create and dispose of alarms.
 
 
+
 <br>
 <br>
 <div align="center">
-<img src="https://github.com/user-attachments/assets/46366bce-69af-4346-aef0-3cb8985b7b97"/>
-<img src="https://github.com/user-attachments/assets/assets/70cee338-3c91-482c-8c27-397a1b7907b6"/>
+<img src="https://github.com/user-attachments/assets/86e2e9af-bb7d-4c16-a6a6-cedc61270a83"/>
 </div>
+<div align="center">
+<img src="https://github.com/user-attachments/assets/84685d13-263b-4945-8d47-513063f55402"/>
+</div>
+
 
 
 ---
