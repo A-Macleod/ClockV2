@@ -86,7 +86,7 @@ namespace ClockV2
 
 
         /// <summary>
-        /// Method to Start the Timer of the Alarm object. The Alarm dueTime is calculated when the counter is started.
+        /// Method to Start the Timer of the Alarm object. The Alarm dueTime is calculated when the Timer is started.
         /// </summary>
         public void StartCountdown()
         {

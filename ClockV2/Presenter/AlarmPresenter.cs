@@ -46,7 +46,7 @@ namespace ClockV2
             
             _view.SetPresenter(this);       // Link the View to this Presenter
 
-            _view.Button_Add_Alarm_Click += OnButtonAddAlarmClicked;        // Decoupled AlarmView Click Events
+            _view.Button_Add_Alarm_Click += OnButtonAddAlarmClicked;
             _view.Button_Remove_Alarm_Click += OnButtonRemoveAlarmClicked;
             _view.Button_Start_Timer_Click += OnButtonStartTimerClicked;
             

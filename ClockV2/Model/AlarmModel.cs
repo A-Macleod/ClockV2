@@ -23,7 +23,7 @@ namespace ClockV2
     public class AlarmModel
     {
 
-        private SortedArrayPriorityQueue<Alarm> _alarms;
+        private readonly SortedArrayPriorityQueue<Alarm> _alarms;
 
         public event EventHandler<Alarm> AlarmCreatedInModel;   // Pass newAlarms to the AlarmPresenter for use
 
@@ -67,11 +67,11 @@ namespace ClockV2
         public void AddAlarm(string alarmName, int AlarmTimeInSeconds)
         {
 
-            DateTime timeNow = DateTime.Now;                    // Current time 13/04/2025 15:00
-            DateTime midnight = DateTime.Now.Date.AddDays(1);   // This will be for Tomorrows midnight, as midnight is the beginning of the day, 14/04/2025 00:00
+            DateTime timeNow = DateTime.Now;                    
+            DateTime midnight = DateTime.Now.Date.AddDays(1);   // This will be for Tomorrows midnight, as midnight is the beginning of the day, 00:00
 
             TimeSpan timeDifferenceMidnightToNow = midnight - timeNow;  
-            int TimeDifferneceInSeconds = (int)timeDifferenceMidnightToNow.TotalSeconds;    // 9H x 3600 Seconds = 32400s
+            int TimeDifferneceInSeconds = (int)timeDifferenceMidnightToNow.TotalSeconds;    
 
             var newAlarm = new Alarm(alarmName, AlarmTimeInSeconds);
             _alarms.Add(newAlarm, TimeDifferneceInSeconds);     

@@ -15,7 +15,6 @@ namespace ClockV2.Model
     public class ClockModel
     {
 
-
         /// <summary>
         /// Method to return the current date and time in DateTime format
         /// </summary>
