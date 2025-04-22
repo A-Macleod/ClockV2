@@ -113,6 +113,22 @@ namespace ClockV2.Tests
 
 
         [Test]
+        [TestCase("TestName", "a", "b", "c")]
+        [TestCase("TestName", "!", "@", "#")]
+        [TestCase("TestName", "!£$", "%^&", "!*&")]
+        [TestCase("TestName", "abcd", "bcde", "cdef")]
+        public void AddAlarm_CorrectNameNumberNotValid_ShouldDisplayErrorMessageBox(string alarmName, string hours, string minutes, string seconds)
+        {
+            // Arrange & Act
+            _presenter.AddAlarm(alarmName, hours, minutes, seconds);
+
+            // Assert
+            _mockView.Verify(v => v.ShowError("Number not Valid"), Times.Once);
+        }
+
+
+
+        [Test]
         [TestCase("TestName", "0", "0", "0")]
         public void AddAlarm_CorrectNameInvalidAlarmTime_ShouldDisplayErrorMessageBox(string alarmName, string hours, string minutes, string seconds)
         {
@@ -122,6 +138,12 @@ namespace ClockV2.Tests
             // Assert
             _mockView.Verify(v => v.ShowError("Time not Valid"), Times.Once);
         }
+
+
+
+
+
+
 
 
 
