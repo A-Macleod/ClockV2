@@ -209,6 +209,31 @@ namespace ClockV2.Tests
 
 
 
+        [Test]
+        [TestCase("TestName0", "0", "0", "10")]
+        [TestCase("TestName1", "0", "10", "0")]
+        [TestCase("TestName2", "10", "0", "0")]
+        [TestCase("TestName3", "10", "10", "10")]
+        public void AddAlarm_CorrectNameCorrectTime_ShowAlarmsOutputsCorrectAlarmNameAndPriority(string alarmName, string hours, string minutes, string seconds)
+        {
+            // Arrange & Act
+
+            // Calculate Priority
+            DateTime timeNow = DateTime.Now;
+            DateTime midnight = DateTime.Now.Date.AddDays(1);   // This will be for Tomorrows midnight, as midnight is the beginning of the day, 00:00
+            TimeSpan timeDifferenceMidnightToNow = midnight - timeNow;
+            int TimeDifferneceInSeconds = (int)timeDifferenceMidnightToNow.TotalSeconds;
+
+            string alarmsNameAndPriority = $"[({alarmName}, {TimeDifferneceInSeconds})]";
+
+            _presenter.AddAlarm(alarmName, hours, minutes, seconds);
+
+            // Assert
+            _mockView.Verify(v => v.ShowAlarms(It.Is<string>(s => s.StartsWith(alarmsNameAndPriority))), Times.Once);
+        }
+
+
+
 
 
 
