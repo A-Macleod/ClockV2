@@ -147,16 +147,52 @@ namespace ClockV2.Tests
         [TestCase("TestName", "0", "10", "0")]
         [TestCase("TestName", "10", "0", "0")]
         [TestCase("TestName", "10", "10", "10")]
-        public void AddAlarm_CorrectNameCorectTime_ShouldUpdateAlarmsOutputAndCountdownLabelWithNewAlarm(string alarmName, string hours, string minutes, string seconds)
+        public void AddAlarm_CorrectNameCorectTime_ShouldCallShowAlarmsWithAStringValueThatUpdatesView(string alarmName, string hours, string minutes, string seconds)
         {
             // Arrange & Act
             _presenter.AddAlarm(alarmName, hours, minutes, seconds);
             
             // Assert
             _mockView.Verify(v => v.ShowAlarms(It.IsAny<string>()), Times.Once);
+        }
+
+
+
+        [Test]
+        [TestCase("TestName", "0", "0", "10")]
+        [TestCase("TestName", "0", "10", "0")]
+        [TestCase("TestName", "10", "0", "0")]
+        [TestCase("TestName", "10", "10", "10")]
+        public void AddAlarm_CorrectNameCorectTime_ShouldCallViewCountdownTimeWithATimeSpanValueThatUpdatesView(string alarmName, string hours, string minutes, string seconds)
+        {
+            // Arrange & Act
+            _presenter.AddAlarm(alarmName, hours, minutes, seconds);
+
+            // Assert
             _mockView.Verify(v => v.ViewCountdownTime(It.IsAny<TimeSpan>()), Times.Once);
         }
 
+
+
+        [Test]
+        [TestCase("TestName0", "0", "0", "10")]
+        [TestCase("TestName1", "0", "10", "0")]
+        [TestCase("TestName2", "10", "0", "0")]
+        [TestCase("TestName3", "10", "10", "10")]
+        public void AddAlarm_CorrectNameCorectTime_ShouldUpdateAlarmsOutputWithCorrectAlarmName(string alarmName, string hours, string minutes, string seconds)
+        {
+            // Arrange & Act
+            int expectedSeconds = (int.Parse(hours) * 3600) + (int.Parse(minutes) * 60) + int.Parse(seconds);
+            TimeSpan expectedTimeSpan = TimeSpan.FromSeconds(expectedSeconds);
+
+            _presenter.AddAlarm(alarmName, hours, minutes, seconds);
+
+
+            // Assert
+            //_mockView.Verify(v => v.ShowAlarms(It.IsAny<string>()), Times.Once);
+            //_mockView.Verify(v => v.ViewCountdownTime(It.IsAny<TimeSpan>()), Times.Once);
+            _mockView.Verify(v => v.ShowAlarms(It.Is<string>(s => s.Contains(alarmName))), Times.Once);
+        }
 
 
 
