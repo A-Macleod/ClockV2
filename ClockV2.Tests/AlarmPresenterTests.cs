@@ -88,10 +88,7 @@ namespace ClockV2.Tests
         [TestCase(null, null, null, null)]
         public void AddAlarm_EmptyNameField_ShouldDisplayErrorMessageBox(string alarmName, string hours, string minutes, string seconds)
         {
-            // Arrange
-
-
-            // Act
+            // Arrange & Act
             _presenter.AddAlarm(alarmName, hours, minutes, seconds);
 
             // Assert
@@ -100,15 +97,30 @@ namespace ClockV2.Tests
 
 
 
-
         [Test]
-        public void AddingAlarm_CorrectNameNoTime_ShouldDisplayErrorMessageBox()
+        [TestCase("TestName","","","")]
+        [TestCase("TestName", " ", " ", " ")]
+        [TestCase("TestName", null, null, null)]
+        public void AddingAlarm_CorrectNameNoTime_ShouldDisplayErrorMessageBox(string alarmName, string hours, string minutes, string seconds)
         {
-            // Arrange
-
-            // Act
+            // Arrange & Act
+            _presenter.AddAlarm(alarmName, hours, minutes, seconds);
 
             // Assert
+            _mockView.Verify(v => v.ShowError("Number not Valid"), Times.Once);
+        }
+
+
+
+        [Test]
+        [TestCase("TestName", "0", "0", "0")]
+        public void AddAlarm_CorrectNameInvalidAlarmTime_ShouldDisplayErrorMessageBox(string alarmName, string hours, string minutes, string seconds)
+        {
+            // Arrange & Act
+            _presenter.AddAlarm(alarmName, hours, minutes, seconds);
+
+            // Assert
+            _mockView.Verify(v => v.ShowError("Time not Valid"), Times.Once);
         }
 
 
