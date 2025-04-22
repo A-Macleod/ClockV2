@@ -28,7 +28,7 @@ namespace ClockV2.Tests
             _mockView = new Mock<IView>();
             _model = new AlarmModel();
             _presenter = new AlarmPresenter(_mockView.Object, _model, null); // Takes ClockPresenter as an argument
-            //_mockClockPresenter = new Mock<ClockPresenter>();
+            //_mockClockPresenter = new Mock<ClockPresenter>(null, null);
 
         }
 
@@ -83,11 +83,71 @@ namespace ClockV2.Tests
 
 
         [Test]
-        public void test1()
+        public void AddAlarm_EmptyFields_ShouldDisplayErrorMessageBox()
         {
+            // Arrange
+            string alarmName = "";
+            string hours = "";
+            string minutes = "";
+            string seconds = "";
 
+            // Act
+            _presenter.AddAlarm(alarmName, hours, minutes, seconds);
+
+            // Assert
+            _mockView.Verify(v => v.ShowError("Name not Valid"), Times.Once);
         }
 
+
+
+        [Test]
+        public void AddAlarm_EmptyFieldsNullName_ShouldDisplayErrorMessageBox()
+        {
+            // Arrange
+            string alarmName = null;
+            string hours = "0";
+            string minutes = "0";
+            string seconds = "0";
+
+            // Act
+            _presenter.AddAlarm(alarmName, hours, minutes, seconds);
+
+            // Assert
+            _mockView.Verify(v => v.ShowError("Name not Valid"), Times.Once);
+        }
+
+
+
+        [Test]
+        public void AddAlarm_EmptyFieldsNullNameNullTime_ShouldDisplayErrorMessageBox()
+        {
+            // Arrange
+            string alarmName = null;
+            string hours = null;
+            string minutes = null;
+            string seconds = null;
+
+            // Act
+            _presenter.AddAlarm(alarmName, hours, minutes, seconds);
+
+            // Assert
+            _mockView.Verify(v => v.ShowError("Name not Valid"), Times.Once);
+        }
+
+
+
+
+        [Test]
+        public void AddingAlarm_CorrectNameNoTime_ShouldDisplayErrorMessageBox()
+        {
+            // Arrange
+
+
+
+            // Act
+
+            // Assert
+        }
 
 
 
@@ -105,6 +165,7 @@ namespace ClockV2.Tests
         // Moq and Unit tests
         //https://grantwinney.com/its-possible-to-test-a-winforms-app-using-mvp/
         // https://www.codemag.com/Article/2305041/Using-Moq-A-Simple-Guide-to-Mocking-for-.NET
-
+        // https://dev.to/zrebhi/the-ultimate-guide-to-unit-testing-in-net-c-using-xunit-and-moq-without-the-boring-examples-28ad
+        // https://github.com/devlooped/moq/wiki/Quickstart
     }
 }
