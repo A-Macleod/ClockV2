@@ -50,7 +50,7 @@ namespace ClockV2
             _view.Button_Remove_Alarm_Click += OnButtonRemoveAlarmClicked;
             _view.Button_Start_Timer_Click += OnButtonStartTimerClicked;
             
-            _model.AlarmCreatedInModel += OnAlarmCreatedInModel;            // AlarmModel Event
+            _model.AlarmCreatedInModel += OnAlarmCreatedInModel;
 
             _clockPresenter = clockPresenter;
         }

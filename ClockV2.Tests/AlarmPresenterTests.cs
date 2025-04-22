@@ -85,6 +85,7 @@ namespace ClockV2.Tests
         [TestCase("","","","")]
         [TestCase(null,"","","")]
         [TestCase(null, "0", "0", "0")]
+        [TestCase(null, "1", "1", "1")]
         [TestCase(null, null, null, null)]
         public void AddAlarm_EmptyNameField_ShouldDisplayErrorMessageBox(string alarmName, string hours, string minutes, string seconds)
         {
@@ -101,7 +102,7 @@ namespace ClockV2.Tests
         [TestCase("TestName","","","")]
         [TestCase("TestName", " ", " ", " ")]
         [TestCase("TestName", null, null, null)]
-        public void AddingAlarm_CorrectNameNoTime_ShouldDisplayErrorMessageBox(string alarmName, string hours, string minutes, string seconds)
+        public void AddingAlarm_CorrectNameNullTime_ShouldDisplayErrorMessageBox(string alarmName, string hours, string minutes, string seconds)
         {
             // Arrange & Act
             _presenter.AddAlarm(alarmName, hours, minutes, seconds);
@@ -130,7 +131,7 @@ namespace ClockV2.Tests
 
         [Test]
         [TestCase("TestName", "0", "0", "0")]
-        public void AddAlarm_CorrectNameInvalidAlarmTime_ShouldDisplayErrorMessageBox(string alarmName, string hours, string minutes, string seconds)
+        public void AddAlarm_CorrectNameZeroAlarmTime_ShouldDisplayErrorMessageBox(string alarmName, string hours, string minutes, string seconds)
         {
             // Arrange & Act
             _presenter.AddAlarm(alarmName, hours, minutes, seconds);
@@ -141,6 +142,20 @@ namespace ClockV2.Tests
 
 
 
+        [Test]
+        [TestCase("TestName", "0", "0", "10")]
+        [TestCase("TestName", "0", "10", "0")]
+        [TestCase("TestName", "10", "0", "0")]
+        [TestCase("TestName", "10", "10", "10")]
+        public void AddAlarm_CorrectNameCorectTime_ShouldUpdateAlarmsOutputAndCountdownLabelWithNewAlarm(string alarmName, string hours, string minutes, string seconds)
+        {
+            // Arrange & Act
+            _presenter.AddAlarm(alarmName, hours, minutes, seconds);
+            
+            // Assert
+            _mockView.Verify(v => v.ShowAlarms(It.IsAny<string>()), Times.Once);
+            _mockView.Verify(v => v.ViewCountdownTime(It.IsAny<TimeSpan>()), Times.Once);
+        }
 
 
 
@@ -163,5 +178,6 @@ namespace ClockV2.Tests
         // https://www.codemag.com/Article/2305041/Using-Moq-A-Simple-Guide-to-Mocking-for-.NET
         // https://dev.to/zrebhi/the-ultimate-guide-to-unit-testing-in-net-c-using-xunit-and-moq-without-the-boring-examples-28ad
         // https://github.com/devlooped/moq/wiki/Quickstart
+        // https://gist.github.com/nthdeveloper/13ded7fdd9dabc80b973c49df081f987
     }
 }
