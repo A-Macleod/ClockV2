@@ -118,6 +118,9 @@ namespace ClockV2.Tests
         [TestCase("TestName", "!", "@", "#")]
         [TestCase("TestName", "!£$", "%^&", "!*&")]
         [TestCase("TestName", "abcd", "bcde", "cdef")]
+        [TestCase("TestName", "1", "0", "abc")]
+        [TestCase("TestName", "1", "abc", "0")]
+        [TestCase("TestName", "abc", "1", "0")]
         public void AddAlarm_CorrectNameNumberNotValid_ShouldDisplayErrorMessageBox(string alarmName, string hours, string minutes, string seconds)
         {
             // Arrange & Act
