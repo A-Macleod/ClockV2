@@ -285,7 +285,6 @@ namespace ClockV2.Tests
 
 
 
-        // Remove Alarm, test UnderflowException
         [Test]
         public void RemoveAlarm_WhenQueueEmpty_ShowsTheQueueIsEmptyErrorMessageBoxInAlarmsOutput()
         {
@@ -296,6 +295,59 @@ namespace ClockV2.Tests
             _mockView.Verify(v => v.ShowAlarms("The Queue is Empty"), Times.Once);
         }
 
+
+
+        [Test]
+        public void RemoveAlarm_AddingAlarm_RemoveTheAlarmAtTheHeadOfTheQueueAssertsTheViewIsUpdated()
+        {
+            // Arrange
+            _presenter.AddAlarm("TestName0", "0", "0", "10");
+
+            // Act
+            _presenter.RemoveAlarm();
+
+            // Assert
+            _mockView.Verify(v => v.ShowAlarms(It.Is<string>(s => !s.Contains("TestName0"))));
+            _mockView.Verify(v => v.ShowAlarms(It.Is<string>(s => s.Contains("The Queue is Empty"))), Times.Once);
+            _mockView.Verify(v => v.ViewCountdownNull(It.Is<string>(s => s.Contains("No Time to Countdown"))), Times.Once);
+        }
+
+
+
+        [Test]
+        public void RemoveAlarm_AfterAddingAlarm_RemovesTheCorrectAlarmAtTheHeadOfTheQueue()
+        {
+            _presenter.AddAlarm("TestName0", "0", "0", "10"); // Head
+            _presenter.AddAlarm("TestName1", "0", "10", "00");
+
+            _presenter.RemoveAlarm();  
+
+            _mockView.Verify(v => v.ShowAlarms(It.Is<string>(s => s.Contains("TestName1") && !s.Contains("TestName0"))), Times.Once);
+        }
+
+
+
+        [Test]
+        public void RemoveAlarm_AfterAddingAlarm_RemovesTheCorrectAlarmAtTheHeadOfTheQueue_FullQueue()
+        {
+            _presenter.AddAlarm("TestName0", "0", "0", "10"); // Head
+            _presenter.AddAlarm("TestName1", "0", "10", "00");
+            _presenter.AddAlarm("TestName2", "0", "20", "00");
+            _presenter.AddAlarm("TestName3", "0", "30", "00");
+
+            _presenter.RemoveAlarm();
+
+            // Calculate Priority
+            DateTime timeNow = DateTime.Now;
+            DateTime midnight = DateTime.Now.Date.AddDays(1);   // This will be for Tomorrows midnight, as midnight is the beginning of the day, 00:00
+            TimeSpan timeDifferenceMidnightToNow = midnight - timeNow;
+            int TimeDifferneceInSeconds = (int)timeDifferenceMidnightToNow.TotalSeconds;
+
+            string removedAlarmNameAndPriority = $"[(TestName0, {TimeDifferneceInSeconds})]";
+            string alarmsNameAndPriority = $"[(TestName1, {TimeDifferneceInSeconds}), (TestName2, {TimeDifferneceInSeconds}), (TestName3, {TimeDifferneceInSeconds})]";
+
+            _mockView.Verify(v => v.ShowAlarms(It.Is<string>(s => s.Contains(alarmsNameAndPriority) && !s.Contains(removedAlarmNameAndPriority))));
+        }
 
 
 

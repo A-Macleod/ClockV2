@@ -299,9 +299,9 @@ namespace ClockV2
                     _view.ViewCountdownNull(headCountdownTime.ToString());
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                _view.ViewCountdownNull(ex.Message);
+                _view.ViewCountdownNull("No Time to Countdown");
             }
         }
 
