@@ -298,6 +298,32 @@ namespace ClockV2.Tests
 
 
         [Test]
+        public void RemoveAlarm_OnAlarmRemoved_ShouldCallViewCountdownTimeWithNewTimeSpanForCountdownLabelInAlarmView()
+        {
+            _presenter.AddAlarm("TestName0", "0", "0", "10");
+            _presenter.AddAlarm("TestName1", "0", "10", "00");
+
+            _presenter.RemoveAlarm();
+
+            _mockView.Verify(v => v.ViewCountdownTime(It.IsAny<TimeSpan>()), Times.AtLeastOnce);
+        }
+
+
+
+        [Test]
+        public void RemoveAlarm_OnAlarmRemoved_ShouldCallShowAlarmsWithUpdatedAlarmsInAlarmView()
+        {
+            _presenter.AddAlarm("TestName0", "0", "0", "10");
+            _presenter.AddAlarm("TestName1", "0", "10", "00");
+
+            _presenter.RemoveAlarm();
+
+            _mockView.Verify(v => v.ShowAlarms(It.IsAny<string>()), Times.AtLeastOnce);
+        }
+
+
+
+        [Test]
         public void RemoveAlarm_AddingAlarm_RemoveTheAlarmAtTheHeadOfTheQueueAssertsTheViewIsUpdated()
         {
             // Arrange
