@@ -24,7 +24,7 @@ namespace ClockV2
     public partial class AlarmView : Form, IView
     {
 
-        public event EventHandler<(string alarmName, string priorityHour, string priorityMinute, string priortiySecond)> Button_Add_Alarm_Click;
+        public event EventHandler<(string alarmName, string hour, string minute, string second)> Button_Add_Alarm_Click;
         public event EventHandler Button_Remove_Alarm_Click;
         public event EventHandler Button_Start_Timer_Click;
 
@@ -53,11 +53,11 @@ namespace ClockV2
         private void Button_Add_Click(object sender, EventArgs e)
         {
             string alarmName = textBox_AlarmName.Text.ToString();
-            string priorityHour = numericUpDown_Hours.Value.ToString();
-            string priorityMinute = numericUpDown_Minutes.Value.ToString();
-            string priortiySecond = numericUpDown_Seconds.Value.ToString();
+            string hour = numericUpDown_Hours.Value.ToString();
+            string minute = numericUpDown_Minutes.Value.ToString();
+            string second = numericUpDown_Seconds.Value.ToString();
 
-            Button_Add_Alarm_Click?.Invoke(this, (alarmName, priorityHour, priorityMinute, priortiySecond));    // AlarmPresenter
+            Button_Add_Alarm_Click?.Invoke(this, (alarmName, hour, minute, second));    // AlarmPresenter
 
             ClearAlarmNameAndHoursSecondsInputs();
         }

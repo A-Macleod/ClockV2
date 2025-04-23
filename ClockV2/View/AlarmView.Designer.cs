@@ -73,7 +73,7 @@
             this.button_Remove_Alarm.Name = "button_Remove_Alarm";
             this.button_Remove_Alarm.Size = new System.Drawing.Size(84, 25);
             this.button_Remove_Alarm.TabIndex = 0;
-            this.button_Remove_Alarm.Text = "Remove Alarm";
+            this.button_Remove_Alarm.Text = "Stop Remove";
             this.button_Remove_Alarm.UseVisualStyleBackColor = true;
             this.button_Remove_Alarm.Click += new System.EventHandler(this.Button_Remove_Click);
             // 

@@ -146,10 +146,10 @@ namespace ClockV2
         /// Throws exception error message in dialog MessageBox
         /// </summary>
         /// <param name="alarmName">The Name of the Alarm</param>
-        /// <param name="priorityHour">The Hours from the numericupDown</param>
-        /// <param name="priorityMinute">The Minutes from the numericupDown</param>
-        /// <param name="priortiySecond">The Seconds from the numericupDown</param>
-        public void AddAlarm(string alarmName, string priorityHour, string priorityMinute, string priortiySecond)
+        /// <param name="hour">The Hours from the numericupDown</param>
+        /// <param name="minute">The Minutes from the numericupDown</param>
+        /// <param name="second">The Seconds from the numericupDown</param>
+        public void AddAlarm(string alarmName, string hour, string minute, string second)
         {
             int hours = 0;
             int minutes = 0;
@@ -163,20 +163,20 @@ namespace ClockV2
                     return;
                 }
 
-                if (!int.TryParse(priorityHour, out hours))
+                if (!int.TryParse(hour, out hours))
                 { 
                     _view.ShowError("Number not Valid");
                     return;
 
                 }
 
-                if (!int.TryParse(priorityMinute, out minutes))
+                if (!int.TryParse(minute, out minutes))
                 {
                     _view.ShowError("Number not Valid");
                     return;
                 }
 
-                if (!int.TryParse(priortiySecond, out seconds))
+                if (!int.TryParse(second, out seconds))
                 {
                     _view.ShowError("Number not Valid");
                     return;

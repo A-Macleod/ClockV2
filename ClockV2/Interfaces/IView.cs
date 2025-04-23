@@ -16,7 +16,7 @@ namespace ClockV2
         /// <summary>
         /// Event button click to send the Alarm Name and Time
         /// </summary>
-        event EventHandler<(string alarmName, string priorityHour, string priorityMinute, string priortiySecond)> Button_Add_Alarm_Click;
+        event EventHandler<(string alarmName, string hour, string minute, string second)> Button_Add_Alarm_Click;
 
 
 

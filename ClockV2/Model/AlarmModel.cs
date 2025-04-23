@@ -70,11 +70,11 @@ namespace ClockV2
             DateTime timeNow = DateTime.Now;                    
             DateTime midnight = DateTime.Now.Date.AddDays(1);   // This will be for Tomorrows midnight, as midnight is the beginning of the day, 00:00
             TimeSpan timeDifferenceMidnightToNow = midnight - timeNow;  
-            int TimeDifferneceInSeconds = (int)timeDifferenceMidnightToNow.TotalSeconds;    
+            int TimeDiffereneceInSecondsPriority = (int)timeDifferenceMidnightToNow.TotalSeconds;    
 
             // Create New Alarm and Add to Queue with Priority
             var newAlarm = new Alarm(alarmName, AlarmTimeInSeconds);
-            _alarms.Add(newAlarm, TimeDifferneceInSeconds);
+            _alarms.Add(newAlarm, TimeDiffereneceInSecondsPriority);
 
             // Pass this newAlarm to the AlarmPresenter
             AlarmCreatedInModel?.Invoke(this, newAlarm);        
