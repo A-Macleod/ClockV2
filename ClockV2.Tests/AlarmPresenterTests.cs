@@ -286,7 +286,15 @@ namespace ClockV2.Tests
 
 
         // Remove Alarm, test UnderflowException
+        [Test]
+        public void RemoveAlarm_WhenQueueEmpty_ShowsTheQueueIsEmptyErrorMessageBoxInAlarmsOutput()
+        {
+            // Arrange & Act
+            _presenter.RemoveAlarm();
 
+            // Assert
+            _mockView.Verify(v => v.ShowAlarms("The Queue is Empty"), Times.Once);
+        }
 
 
 
