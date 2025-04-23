@@ -260,7 +260,32 @@ namespace ClockV2.Tests
 
 
 
+        [Test]
+        public void AddAlarm_CorrectNameCorrectTime_AddingAlarmsAndFillingTheQueueDisplaysTheQueueIsFullErrorMessageBox()
+        {
+            // Arrange & Act
+            _presenter.AddAlarm("TestName0", "0", "0", "10");
+            _presenter.AddAlarm("TestName1", "0", "10", "0");
+            _presenter.AddAlarm("TestName2", "10", "0", "0");
+            _presenter.AddAlarm("TestName3", "10", "10", "10");
+            _presenter.AddAlarm("QueueIsFull", "23", "59", "59");
 
+            // Calculate Priority
+            DateTime timeNow = DateTime.Now;
+            DateTime midnight = DateTime.Now.Date.AddDays(1);   // This will be for Tomorrows midnight, as midnight is the beginning of the day, 00:00
+            TimeSpan timeDifferenceMidnightToNow = midnight - timeNow;
+            int TimeDifferneceInSeconds = (int)timeDifferenceMidnightToNow.TotalSeconds;
+
+            string alarmsNameAndPriority = $"[(TestName0, {TimeDifferneceInSeconds}), (TestName1, {TimeDifferneceInSeconds}), (TestName2, {TimeDifferneceInSeconds}), (TestName3, {TimeDifferneceInSeconds})]";
+
+            // Assert
+            _mockView.Verify(v => v.ShowAlarms(It.Is<string>(s => s.StartsWith(alarmsNameAndPriority))), Times.Once);
+            _mockView.Verify(v => v.ShowError("The Queue is Full"), Times.Once);
+        }
+
+
+
+        // Remove Alarm, test UnderflowException
 
 
 
