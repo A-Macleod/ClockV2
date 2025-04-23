@@ -102,7 +102,7 @@ namespace ClockV2.Tests
         [TestCase("TestName","","","")]
         [TestCase("TestName", " ", " ", " ")]
         [TestCase("TestName", null, null, null)]
-        public void AddingAlarm_CorrectNameNullTime_ShouldDisplayErrorMessageBox(string alarmName, string hours, string minutes, string seconds)
+        public void AddAlarm_CorrectNameNullTime_ShouldDisplayErrorMessageBox(string alarmName, string hours, string minutes, string seconds)
         {
             // Arrange & Act
             _presenter.AddAlarm(alarmName, hours, minutes, seconds);
@@ -376,6 +376,20 @@ namespace ClockV2.Tests
         }
 
 
+
+        [Test]
+        public void StartAlarm_OnButtonClick_UpdatesTheAlarmOutputWithAStringAndCountdownLabelWithATimeSpan()
+        {
+            // Arrange
+            _presenter.AddAlarm("TestName0", "0", "0", "10");
+
+            // Act
+            _mockView.Raise(v => v.Button_Start_Timer_Click += null, EventArgs.Empty);
+
+            // Assert
+            _mockView.Verify(v => v.ShowAlarms(It.IsAny<string>()), Times.AtLeastOnce);
+            _mockView.Verify(v => v.ViewCountdownTime(It.IsAny<TimeSpan>()), Times.AtLeastOnce);
+        }
 
 
 
