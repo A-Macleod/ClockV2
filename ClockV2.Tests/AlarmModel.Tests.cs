@@ -130,6 +130,43 @@ namespace ClockV2.Tests
 
 
 
+        [Test]
+        public void ShowAlarms_ShouldReturnAllAlarmsInQueueToString()
+        {
+            // Arrange
+            _model.AddAlarm("TestName0", 10);
+            _model.AddAlarm("TestName1", 20);
+            _model.AddAlarm("TestName2", 30);
+            _model.AddAlarm("TestName3", 40);
+
+
+            // Act
+            string alarms = _model.ShowAlarms();
+
+            // Assert
+            Assert.That(alarms.Contains("TestName0"));
+            Assert.That(alarms.Contains("TestName1"));
+            Assert.That(alarms.Contains("TestName2"));
+            Assert.That(alarms.Contains("TestName3"));
+        }
+
+
+
+        [Test]
+        public void ShowHeadName_ShouldReturnTheCorrectNameOfTheHeadAlarmInQueue()
+        {
+            // Arrange & Act
+            _model.AddAlarm("TestName0", 10); // Head 00:00:10
+            _model.AddAlarm("TestName1", 20);
+
+            var headName = _model.ShowHeadName();
+
+            // Assert
+            Assert.That(headName, Is.EqualTo("TestName0"), $"The Correct Head Name should be TestName0");
+        }
+
+
+
 
 
 
