@@ -8,6 +8,7 @@ using NUnit.Framework;
 using NUnit.Framework.Internal;
 using Moq;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace ClockV2.Tests
 {
@@ -33,6 +34,7 @@ namespace ClockV2.Tests
         }
 
 
+
         [TearDown]
         public void TearDown()
         {
@@ -42,44 +44,6 @@ namespace ClockV2.Tests
         }
 
 
-
-        //// string alarmName, string priorityHour, string priorityMinute, string priortiySecond
-        //[Test]
-        //public void OnAddAlarmClick_TestingNewAlarmIsShownInTheAlarmView()
-        //{
-        //    // ARRANGE
-        //    var clockModel = new ClockModel();
-        //    var clockView = new ClockView();
-        //    var clockPresenter = new ClockPresenter(clockModel, clockView);
-
-        //    var model = new AlarmModel();
-        //    var mockView = new Mock<IView>();
-        //    var presenter = new AlarmPresenter(mockView.Object, new AlarmModel(), clockPresenter);
-
-
-        //    // Calculate Priority
-        //    DateTime timeNow = DateTime.Now;
-        //    DateTime midnight = DateTime.Now.Date.AddDays(1);   // This will be for Tomorrows midnight, as midnight is the beginning of the day, 00:00
-        //    TimeSpan timeDifferenceMidnightToNow = midnight - timeNow;
-        //    int TimeDifferneceInSeconds = (int)timeDifferenceMidnightToNow.TotalSeconds;
-
-
-        //    // ACT
-        //    mockView.Raise(v => v.Button_Add_Alarm_Click += null, "Name", "1", "1", "1");
-
-
-        //    // ASSERT
-        //    // 1h = 3600  1m=60
-        //    //($"{headCountdownTime.ToString("hh\\:mm\\:ss")}");
-        //    mockView.Verify(v => v.ViewCountdownTime());
-
-        //    var alarms = model.ShowAlarms();
-
-        //    var result = $"[(Name, {TimeDifferneceInSeconds}])";
-        //    Assert.That(alarms.Count, Is.EqualTo(1));
-        //    //Assert.That(alarms[0], Is.EqualTo(result));
-
-        //}
 
         [Test]
         [TestCase("","","","")]
@@ -392,9 +356,7 @@ namespace ClockV2.Tests
         }
 
 
-        // Alerts the user with MessageBox when it reaches zero
 
-        // On Alarm Tick
 
 
 
