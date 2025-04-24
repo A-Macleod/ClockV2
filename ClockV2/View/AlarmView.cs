@@ -193,9 +193,9 @@ namespace ClockV2
         /// Method to display if there is a Head Alarm Time in the SortedArrayPriorityQueue
         /// </summary>
         /// <param name="noItem"></param>
-        public void ViewCountdownNull(string noItem)
+        public void ViewCountdownNull(string NoTimeToCountdownErrorMsg)
         {
-            label_Countdown.Text = "No Time to Countdown";
+            label_Countdown.Text = NoTimeToCountdownErrorMsg;
         }
 
 

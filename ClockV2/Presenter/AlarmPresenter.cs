@@ -293,11 +293,12 @@ namespace ClockV2
             {                
                 TimeSpan headCountdownTime = _model.HeadCountdownTime();
                 _view.ViewCountdownTime(headCountdownTime);
-           
-                if (headCountdownTime == null)
-                {
 
-                    _view.ViewCountdownNull(headCountdownTime.ToString());
+                //if (headCountdownTime == null)
+                if (headCountdownTime == TimeSpan.Zero)
+                {
+                    //_view.ViewCountdownNull(headCountdownTime.ToString());
+                    _view.ViewCountdownNull("No Time to Countdown");
                 }
             }
             catch (Exception)
