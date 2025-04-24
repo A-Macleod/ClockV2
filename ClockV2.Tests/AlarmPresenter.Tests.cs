@@ -24,7 +24,7 @@ namespace ClockV2.Tests
 
 
         [SetUp]
-        public void Setup()
+        public void SetUp()
         {
             _mockView = new Mock<IView>();
             _model = new AlarmModel();

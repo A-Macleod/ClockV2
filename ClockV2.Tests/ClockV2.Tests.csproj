@@ -120,7 +120,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AlarmPresenterTests.cs" />
+    <Compile Include="AlarmModel.Tests.cs" />
+    <Compile Include="AlarmPresenter.Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
