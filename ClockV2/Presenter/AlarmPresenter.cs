@@ -46,9 +46,9 @@ namespace ClockV2
             
             _view.SetPresenter(this);       // Link the View to this Presenter
 
-            _view.Button_Add_Alarm_Click += OnButtonAddAlarmClicked;
-            _view.Button_Remove_Alarm_Click += OnButtonRemoveAlarmClicked;
-            _view.Button_Start_Timer_Click += OnButtonStartTimerClicked;
+            _view.ButtonAddAlarmClickEvent += OnButtonAddAlarmClicked;
+            _view.ButtonRemoveAlarmClickEvent += OnButtonRemoveAlarmClicked;
+            _view.ButtonStartTimerClickEvent += OnButtonStartTimerClicked;
             
             _model.AlarmCreatedInModel += OnAlarmCreatedInModel;
 
@@ -63,9 +63,9 @@ namespace ClockV2
         /// </summary>
         /// <param name="sender">The object that raised the event</param>
         /// <param name="e">The argument information</param>
-        private void OnButtonAddAlarmClicked(object sender, (string alarmName, string priorityHour, string priorityMinute, string priortiySecond) e)
+        private void OnButtonAddAlarmClicked(object sender, (string alarmName, string hour, string minute, string second) e)
         {
-            AddAlarm(e.alarmName, e.priorityHour, e.priorityMinute, e.priortiySecond);
+            AddAlarm(e.alarmName, e.hour, e.minute, e.second);
         }
 
 

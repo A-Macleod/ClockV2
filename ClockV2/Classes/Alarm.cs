@@ -90,6 +90,8 @@ namespace ClockV2
         /// </summary>
         public void StartCountdown()
         {
+            if (Timer.Enabled) return;
+
             _alarmDueTime = DateTime.Now.AddSeconds(AlarmTime); // Adding the Alarm Time to Current Time, this is when we want the alarm to go off
             Timer.Start();
         }

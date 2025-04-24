@@ -16,21 +16,21 @@ namespace ClockV2
         /// <summary>
         /// Event button click to send the Alarm Name and Time
         /// </summary>
-        event EventHandler<(string alarmName, string hour, string minute, string second)> Button_Add_Alarm_Click;
+        event EventHandler<(string alarmName, string hour, string minute, string second)> ButtonAddAlarmClickEvent;
 
 
 
         /// <summary>
         /// Event button click to Remove an Alarm
         /// </summary>
-        event EventHandler Button_Remove_Alarm_Click;
+        event EventHandler ButtonRemoveAlarmClickEvent;
 
 
 
         /// <summary>
         /// Event button click to Start the Alarm Timer
         /// </summary>
-        event EventHandler Button_Start_Timer_Click;
+        event EventHandler ButtonStartTimerClickEvent;
 
 
 

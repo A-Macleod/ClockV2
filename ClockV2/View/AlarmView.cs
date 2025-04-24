@@ -24,9 +24,9 @@ namespace ClockV2
     public partial class AlarmView : Form, IView
     {
 
-        public event EventHandler<(string alarmName, string hour, string minute, string second)> Button_Add_Alarm_Click;
-        public event EventHandler Button_Remove_Alarm_Click;
-        public event EventHandler Button_Start_Timer_Click;
+        public event EventHandler<(string alarmName, string hour, string minute, string second)> ButtonAddAlarmClickEvent;
+        public event EventHandler ButtonRemoveAlarmClickEvent;
+        public event EventHandler ButtonStartTimerClickEvent;
 
         private AlarmPresenter _presenter;
 
@@ -38,7 +38,7 @@ namespace ClockV2
         {
             InitializeComponent();
             
-            button_Add_Alarm.Click += Button_Add_Click;
+            button_Add_Alarm.Click += ButtonAddClick;
 
         }
 
@@ -50,14 +50,14 @@ namespace ClockV2
         /// </summary>
         /// <param name="sender">The object that raised the event</param>
         /// <param name="e">The argument information</param>
-        private void Button_Add_Click(object sender, EventArgs e)
+        private void ButtonAddClick(object sender, EventArgs e)
         {
             string alarmName = textBox_AlarmName.Text.ToString();
             string hour = numericUpDown_Hours.Value.ToString();
             string minute = numericUpDown_Minutes.Value.ToString();
             string second = numericUpDown_Seconds.Value.ToString();
 
-            Button_Add_Alarm_Click?.Invoke(this, (alarmName, hour, minute, second));    // AlarmPresenter
+            ButtonAddAlarmClickEvent?.Invoke(this, (alarmName, hour, minute, second));    // AlarmPresenter
 
             ClearAlarmNameAndHoursSecondsInputs();
         }
@@ -70,9 +70,9 @@ namespace ClockV2
         /// </summary>
         /// <param name="sender">The object that raised the event</param>
         /// <param name="e">The argument information</param>
-        private void Button_Remove_Click(object sender, EventArgs e)
+        private void ButtonRemoveClick(object sender, EventArgs e)
         {
-            Button_Remove_Alarm_Click?.Invoke(this, EventArgs.Empty);   // AlarmPresenter
+            ButtonRemoveAlarmClickEvent?.Invoke(this, EventArgs.Empty);   // AlarmPresenter
         }
 
 
@@ -83,9 +83,9 @@ namespace ClockV2
         /// </summary>
         /// <param name="sender">The object that raised the event</param>
         /// <param name="e">The argument information</param>
-        private void Button_StartTimer_Click(object sender, EventArgs e)
+        private void ButtonStartTimerClick(object sender, EventArgs e)
         {
-            Button_Start_Timer_Click?.Invoke(this, EventArgs.Empty);    // presenter
+            ButtonStartTimerClickEvent?.Invoke(this, EventArgs.Empty);    // AlarmPresenter
         }
 
 

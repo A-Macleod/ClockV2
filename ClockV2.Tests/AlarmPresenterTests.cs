@@ -384,7 +384,7 @@ namespace ClockV2.Tests
             _presenter.AddAlarm("TestName0", "0", "0", "10");
 
             // Act
-            _mockView.Raise(v => v.Button_Start_Timer_Click += null, EventArgs.Empty);
+            _mockView.Raise(v => v.ButtonStartTimerClickEvent += null, EventArgs.Empty);
 
             // Assert
             _mockView.Verify(v => v.ShowAlarms(It.IsAny<string>()), Times.AtLeastOnce);

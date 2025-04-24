@@ -75,7 +75,7 @@
             this.button_Remove_Alarm.TabIndex = 0;
             this.button_Remove_Alarm.Text = "Stop Remove";
             this.button_Remove_Alarm.UseVisualStyleBackColor = true;
-            this.button_Remove_Alarm.Click += new System.EventHandler(this.Button_Remove_Click);
+            this.button_Remove_Alarm.Click += new System.EventHandler(this.ButtonRemoveClick);
             // 
             // button_Edit_Alarm
             // 
@@ -154,7 +154,7 @@
             this.button_Start_Alarm.TabIndex = 0;
             this.button_Start_Alarm.Text = "Start Timer";
             this.button_Start_Alarm.UseVisualStyleBackColor = true;
-            this.button_Start_Alarm.Click += new System.EventHandler(this.Button_StartTimer_Click);
+            this.button_Start_Alarm.Click += new System.EventHandler(this.ButtonStartTimerClick);
             // 
             // label_AlarmsOutput
             // 
