@@ -61,7 +61,7 @@ namespace ClockV2.Tests
         [TestCase("TestName0", 01)]     // 01 second
         [TestCase("TestName1", 59)]     // 59 seconds
         [TestCase("TestName2", 3540)]   // 59 minutes
-        [TestCase("TestName3", 86399)]  // 23 hours, 59 minutes, 59 seconds 
+        [TestCase("TestName3", 86399)]  // 23 hours, 59 minutes, 59 seconds. This is the limit on the UI 
         public void HeadCountdownTime_ReturnsHeadAlarmTimeInCorrectFormat_TimeSpan_TestCase(string testName, int testTimeInSeconds)
         {
             // Arrange
@@ -76,7 +76,37 @@ namespace ClockV2.Tests
 
 
 
+        [Test]
+        public void AddAlarm_AssertThatNewAlarmNameIsAddedToTheHeadOfTheQueue()
+        {
+            // Arrange & Act
+            _model.AddAlarm("TestName0", 10); // Head TestName0
+            _model.AddAlarm("TestName0", 20);
+            _model.AddAlarm("TestName0", 30);
+            _model.AddAlarm("TestName0", 40);
 
+            var headName = _model.ShowHeadName();
+
+            // Assert
+            Assert.That(headName, Is.EqualTo("TestName0"), $"The Correct Head Name should be TestName0");
+        }
+
+
+
+        [Test]
+        public void AddAlarm_AssertThatNewAlarmTimeSpanIsAddedToTheHeadOfTheQueue()
+        {
+            // Arrange & Act
+            _model.AddAlarm("TestName0", 10); // Head 00:00:10
+            _model.AddAlarm("TestName1", 20);
+            _model.AddAlarm("TestName2", 30);
+            _model.AddAlarm("TestName3", 40);
+            
+            var headTimeSpan = _model.ShowHeadTimeTimeSpan();
+
+            // Assert
+            Assert.That(headTimeSpan, Is.EqualTo(TimeSpan.FromSeconds(10)), $"The Correct Head TimeSpan should be 00:00:10");
+        }
 
 
 
