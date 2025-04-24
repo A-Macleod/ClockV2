@@ -167,6 +167,16 @@ namespace ClockV2.Tests
 
 
 
+        [Test]
+        public void ShowHeadTimeTimeSpan_AssertsShowHeadTimeTimeSpanOutputsTheCorrectTimeSpan()
+        {
+            _model.AddAlarm("TestName0", 120);
+            _model.AddAlarm("TestName1", 180);
+
+            var headTimeSpan = _model.ShowHeadTimeTimeSpan();
+
+            Assert.That(headTimeSpan, Is.EqualTo(TimeSpan.FromSeconds(120)), $"The Corerct Head TimeSpan should be 00:02:00") ;     
+        }
 
 
 
