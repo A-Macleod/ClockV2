@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Moq;
 using NUnit.Framework;
@@ -175,23 +176,8 @@ namespace ClockV2.Tests
 
             var headTimeSpan = _model.ShowHeadTimeTimeSpan();
 
-            Assert.That(headTimeSpan, Is.EqualTo(TimeSpan.FromSeconds(120)), $"The Corerct Head TimeSpan should be 00:02:00") ;     
+            Assert.That(headTimeSpan, Is.EqualTo(TimeSpan.FromSeconds(120)), $"The Correct Head TimeSpan should be 00:02:00") ;     
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     }
 }
