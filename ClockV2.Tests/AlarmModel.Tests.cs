@@ -110,6 +110,25 @@ namespace ClockV2.Tests
 
 
 
+        [Test]
+        public void AddAlarm_OnAlarmCreated_TriggersEventHandlerToPassAlarmToPresenter()
+        {
+            // Arrange
+            bool triggered = false;
+
+            _model.AlarmCreatedInModel += (s, alarm) =>
+            {
+                triggered = true;
+            };
+
+            // Act
+            _model.AddAlarm("TestAlarm0", 86399);
+
+            // Assert
+            Assert.That(triggered, Is.True);
+        }
+
+
 
 
 
