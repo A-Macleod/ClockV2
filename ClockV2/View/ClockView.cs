@@ -14,7 +14,7 @@ namespace ClockV2
 {
     /// <summary>
     /// Class to represent the ClockView (face of the clock) as it ticks, each second, in the MVP design pattern. 
-    /// The ClockView is responsible for displaying the information sent and by the ClockPresenter
+    /// The ClockView is responsible for displaying the information sent and updated by the ClockPresenter
     /// and AlarmPresenter. The ClockView does not directly interact with the ClockModel or AlarmModel. 
     /// </summary>
     public partial class ClockView : Form
@@ -165,7 +165,7 @@ namespace ClockV2
         /// <summary>
         /// Method to update the ClockView UI with the TimeSpan left on the Alarm that is Ticking. Displayed in :hh :mm :ss format  
         /// </summary>
-        /// <param name="remainingTimeLeft"></param>
+        /// <param name="remainingTimeLeft">The remaining time on the Alarm dueTime once Timer started</param>
         public void ViewCountdownEventTimeLeft(TimeSpan remainingTimeLeft)
         {
             ClockViewNextAlarmTimeLabel.Text = $"{remainingTimeLeft.ToString("hh\\:mm\\:ss")}";

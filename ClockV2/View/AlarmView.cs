@@ -181,7 +181,7 @@ namespace ClockV2
         /// Method to show the First Alarm Time added to the SortedArrayPriorityQueue. This just shows the time of the First Added Alarm, nothing else.
         /// It makes it look pretty for the user and the starting Countdown timer. The Alarm Time is displayed in a TimeSpan format as hh\\:mm\\:ss
         /// </summary>
-        /// <param name="headCountdownTime"></param>
+        /// <param name="headCountdownTime">The TimeSpan of the Head alarm time</param>
         public void ViewCountdownTime(TimeSpan headCountdownTime)
         {
             label_Countdown.Text = ($"{headCountdownTime.ToString("hh\\:mm\\:ss")}");
@@ -192,7 +192,7 @@ namespace ClockV2
         /// <summary>
         /// Method to display if there is a Head Alarm Time in the SortedArrayPriorityQueue
         /// </summary>
-        /// <param name="noItem"></param>
+        /// <param name="NoTimeToCountdownErrorMsg">The error message in string format</param>
         public void ViewCountdownNull(string NoTimeToCountdownErrorMsg)
         {
             label_Countdown.Text = NoTimeToCountdownErrorMsg;
@@ -213,7 +213,7 @@ namespace ClockV2
 
         /// <summary>
         /// Method that is called when the Tick Event ticks each second until stopped. This is the Tick event for the Alarm object Countdown. 
-        /// As the dueTime gets closer the remainingTimeLeft will decrease, thus displaying a "Countdown timer" as the method is called each second.
+        /// As the dueTime gets closer the remainingTimeLeft will decrease, thus displaying a "Countdown" as the method is called each second.
         /// The remainingTimeLeft is in a Timespan format of hh\\:mm\\:ss
         /// </summary>
         /// <param name="remainingTimeLeft">The time left before the dueTime of the Alarm</param>
@@ -227,7 +227,7 @@ namespace ClockV2
 
         // https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-add-an-event-handler?view=netdesktop-9.0
         // https://learn.microsoft.com/en-us/dotnet/desktop/winforms/event-handlers-overview-windows-forms?view=netframeworkdesktop-4.8
-        //  Decoupled https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/events/
+        // https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/events/ Decoupled 
         // https://learn.microsoft.com/en-us/dotnet/api/system.timers.timer?redirectedfrom=MSDN&view=netframework-4.8
         // https://stackoverflow.com/questions/2021681/hide-form-instead-of-closing-when-close-button-clicked
 

@@ -112,15 +112,15 @@ namespace ClockV2
         /// <summary>
         /// Method to display that there is no time to countdown, the queue is empty
         /// </summary>
-        /// <param name="noItem"></param>
-        void ViewCountdownNull(string noItem);
+        /// <param name="NoTimeToCountdownErrorMsg">The error message to display that there is no countdown</param>
+        void ViewCountdownNull(string NoTimeToCountdownErrorMsg);
 
 
 
         /// <summary>
         /// Display the countdown time, dueTime, for the Alarm Tick event
         /// </summary>
-        /// <param name="remainingTimeLeft"></param>
+        /// <param name="remainingTimeLeft">The countdown of the Alarm dueTime</param>
         void ViewCountdownEventTimeLeft(TimeSpan remainingTimeLeft);
 
     }

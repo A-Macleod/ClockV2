@@ -264,11 +264,13 @@ namespace ClockV2.Tests
         [Test]
         public void RemoveAlarm_OnAlarmRemoved_ShouldCallViewCountdownTimeWithNewTimeSpanForCountdownLabelInAlarmView()
         {
+            // Arrange & Act
             _presenter.AddAlarm("TestName0", "0", "0", "10");
             _presenter.AddAlarm("TestName1", "0", "10", "00");
 
             _presenter.RemoveAlarm();
 
+            // Assert
             _mockView.Verify(v => v.ViewCountdownTime(It.IsAny<TimeSpan>()), Times.AtLeastOnce);
         }
 
@@ -277,11 +279,13 @@ namespace ClockV2.Tests
         [Test]
         public void RemoveAlarm_OnAlarmRemoved_ShouldCallShowAlarmsWithUpdatedAlarmsInAlarmView()
         {
+            // Arrange & Act
             _presenter.AddAlarm("TestName0", "0", "0", "10");
             _presenter.AddAlarm("TestName1", "0", "10", "00");
 
             _presenter.RemoveAlarm();
 
+            // Assert
             _mockView.Verify(v => v.ShowAlarms(It.IsAny<string>()), Times.AtLeastOnce);
         }
 
@@ -307,11 +311,13 @@ namespace ClockV2.Tests
         [Test]
         public void RemoveAlarm_AfterAddingAlarm_RemovesTheCorrectAlarmAtTheHeadOfTheQueue()
         {
+            // Arrange & Act
             _presenter.AddAlarm("TestName0", "0", "0", "10"); // Head
             _presenter.AddAlarm("TestName1", "0", "10", "00");
 
             _presenter.RemoveAlarm();  
 
+            // Assert
             _mockView.Verify(v => v.ShowAlarms(It.Is<string>(s => s.Contains("TestName1") && !s.Contains("TestName0"))), Times.Once);
         }
 
@@ -320,6 +326,7 @@ namespace ClockV2.Tests
         [Test]
         public void RemoveAlarm_AfterAddingAlarm_RemovesTheCorrectAlarmAtTheHeadOfTheQueue_FullQueue()
         {
+            // Arrange & Act
             _presenter.AddAlarm("TestName0", "0", "0", "10"); // Head
             _presenter.AddAlarm("TestName1", "0", "10", "00");
             _presenter.AddAlarm("TestName2", "0", "20", "00");
@@ -336,6 +343,7 @@ namespace ClockV2.Tests
             string removedAlarmNameAndPriority = $"[(TestName0, {TimeDifferneceInSeconds})]";
             string alarmsNameAndPriority = $"[(TestName1, {TimeDifferneceInSeconds}), (TestName2, {TimeDifferneceInSeconds}), (TestName3, {TimeDifferneceInSeconds})]";
 
+            // Assert
             _mockView.Verify(v => v.ShowAlarms(It.Is<string>(s => s.Contains(alarmsNameAndPriority) && !s.Contains(removedAlarmNameAndPriority))));
         }
 

@@ -20,7 +20,7 @@ namespace ClockV2
     public class Alarm
     {
 
-        //private int _initialAlarmTime { get; }  // For resetting the Alarm, not using anymore
+        //private int _initialAlarmTime { get; }  // For resetting the alarm, not using anymore
         private DateTime _alarmDueTime;
         
         public string AlarmName { get; set; }
@@ -43,8 +43,6 @@ namespace ClockV2
         {           
             AlarmName = alarmName;
             AlarmTime = alarmCountdownTimeInSeconds;
-            
-            //_alarmDueTime = DateTime.Now.AddSeconds(AlarmTime); // Adding Alarm Time to the current time
 
             Timer = new System.Windows.Forms.Timer();
             Timer.Interval = 1000;
@@ -137,7 +135,7 @@ namespace ClockV2
 
         // https://stackoverflow.com/questions/30008530/timespan-countdown-timer
         // https://geoffstratton.com/cnet-countdown-timer/
-        // https://zerotomastery.io/blog/c-sharp-timespan/ TIMESPAN EXPLANATION 
+        // https://zerotomastery.io/blog/c-sharp-timespan/ timespan explanation 
 
     }
 }

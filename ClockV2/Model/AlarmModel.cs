@@ -40,7 +40,7 @@ namespace ClockV2
 
 
         /// <summary>
-        /// Method that returns the Alarm Time of Head of the SortedArrayPriorityQueue, converted to TimeSpan
+        /// Method that returns the Head Alarm Time of the SortedArrayPriorityQueue, converted to TimeSpan
         /// </summary>
         /// <returns>The TimeSpan of the Head Item Alarm Time</returns>
         public TimeSpan HeadCountdownTime()
@@ -62,8 +62,8 @@ namespace ClockV2
         /// This way the Alarms with the highest priority are the ones that are created the earliest in the day and thus served first, as the time difference in
         /// seconds is larger
         /// </summary>
-        /// <param name="alarmName"></param>
-        /// <param name="AlarmTimeInSeconds"></param>
+        /// <param name="alarmName">The name of the alarm</param>
+        /// <param name="AlarmTimeInSeconds">The time in seconds from when we want the alarm to sound</param>
         public void AddAlarm(string alarmName, int AlarmTimeInSeconds)
         {
             // Calculate Priority

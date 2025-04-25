@@ -79,7 +79,6 @@ namespace ClockV2
         private void OnButtonRemoveAlarmClicked(object sender, EventArgs e)
         {
             RemoveAlarm();
-            //HeadCountdownTime();
         }
 
 
@@ -294,10 +293,8 @@ namespace ClockV2
                 TimeSpan headCountdownTime = _model.HeadCountdownTime();
                 _view.ViewCountdownTime(headCountdownTime);
 
-                //if (headCountdownTime == null)
                 if (headCountdownTime == TimeSpan.Zero)
                 {
-                    //_view.ViewCountdownNull(headCountdownTime.ToString());
                     _view.ViewCountdownNull("No Time to Countdown");
                 }
             }
